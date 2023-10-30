@@ -1,0 +1,14 @@
+/node_modules/
+../.env
+../env
+.env
+
+**/migrations/*.py
+
+_migrations/*
+!_migrations/__init__.py
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+**/migrations/
+**/**/migrations
