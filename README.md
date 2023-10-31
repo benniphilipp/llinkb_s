@@ -35,6 +35,10 @@ https://support.bitly.com/hc/en-us/articles/115001195167
 # Django CMD
 python3 manage.py makemigrations && python3 manage.py migrate
 
+geotargeting
+
+migrations
+
 python3 manage.py runserver
 
 python3 manage.py runserver 0.0.0.0:8000

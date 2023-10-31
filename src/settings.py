@@ -47,12 +47,13 @@ INSTALLED_APPS = [
     'ckeditor',
 
     #apps
+    'geotargeting',
+    'linkinbio',
     'shortcode',
     'accounts',
     'analytics',
     'webclicktracker',
-    'linkinbio',
-    'geotargeting',
+    
     'products',
     'contentpages',
 ]
