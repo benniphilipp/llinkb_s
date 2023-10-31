@@ -3,3 +3,6 @@
 ../env
 .env
 db.sqlite3
+
+# Datenbankdatei
+db.sqlite3
