@@ -196,7 +196,7 @@ if ENVIRONMENT == 'local':
 
 if ENVIRONMENT == 'production':
     
-    ALLOWED_HOSTS=['llinkb.com', 'www.llinkb.com', 'localhost', '*']
+    ALLOWED_HOSTS = ['llinkb.com', 'www.llinkb.com', 'localhost']
     
     DATABASES = {
         'default': {
