@@ -4,5 +4,7 @@
 .env
 db.sqlite3
 env
+requirements.txt
+_____xdb.sqlite3
 # Datenbankdatei
 db.sqlite3
