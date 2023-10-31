@@ -194,6 +194,8 @@ if ENVIRONMENT == 'local':
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+
+## Produktions 
 if ENVIRONMENT == 'production':
     
     ALLOWED_HOSTS = ['llinkb.com', 'www.llinkb.com', 'localhost']
@@ -256,3 +258,6 @@ if ENVIRONMENT == 'production':
     EMAIL_PORT = 1025 
     EMAIL_USE_TLS = False
     EMAIL_USE_SSL = False
+    
+    STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
+    STRIPE_PUBLISHABLE_KEY = env('STRIPE_PUBLISHABLE_KEY')
