@@ -216,7 +216,7 @@ if ENVIRONMENT == 'production':
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'dj',
             'USER': 'djuser',
-            'PASSWORD': 'password!',
+            'PASSWORD': 'password',
             'HOST': 'localhost',
             'PORT': '',
         }
