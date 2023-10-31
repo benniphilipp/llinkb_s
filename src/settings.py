@@ -200,12 +200,23 @@ if ENVIRONMENT == 'production':
     
     ALLOWED_HOSTS = ['llinkb.com', 'www.llinkb.com', 'localhost']
     
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #         'NAME': 'myproject',
+    #         'USER': 'myprojectuser',
+    #         'PASSWORD': 'Benphi86!',
+    #         'HOST': 'localhost',
+    #         'PORT': '',
+    #     }
+    # }
+    
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'myproject',
-            'USER': 'myprojectuser',
-            'PASSWORD': 'Benphi86!',
+            'NAME': 'dj',
+            'USER': 'djuser',
+            'PASSWORD': 'password!',
             'HOST': 'localhost',
             'PORT': '',
         }
