@@ -40,7 +40,8 @@ class ShortcodeClass(models.Model):
     shortcode           = models.CharField(max_length=SHORTCODE_MAX, unique=True, blank=True)
     
     # LinkInBio Page
-    linkinbiopage        = models.ForeignKey('linkinbio.LinkInBio',on_delete=models.CASCADE)
+    # linkinbiopage        = models.ForeignKey('linkinbio.LinkInBio',on_delete=models.CASCADE)
+
     
     # Begrenzung von URLs
     limitation_active = models.BooleanField(default=False)
@@ -61,6 +62,7 @@ class ShortcodeClass(models.Model):
     # iOS-Targeting
     ios_on_off = models.BooleanField(default=False)
     ios = models.CharField(max_length=320, blank=True, null=True)
+    
     
     def __str__(self):
         return self.url_titel
