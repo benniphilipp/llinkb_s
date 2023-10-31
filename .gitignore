@@ -3,8 +3,18 @@
 ../env
 .env
 db.sqlite3
-env
+env/*
 requirements.txt
 _____xdb.sqlite3
 # Datenbankdatei
 db.sqlite3
+
+
+geotargeting __pycache__
+contentpages __pycache__
+analytics __pycache__
+accounts __pycache__
+linkinbio __pycache__
+products __pycache__
+shortcode __pycache__
+webclicktracker __pycache__
