@@ -1,3 +1,4 @@
+# .gitignore
 /node_modules/
 ../.env
 ../env
@@ -12,11 +13,85 @@ db.sqlite3
 
 __pycache__/
 
-geotargeting __pycache__
-contentpages __pycache__
-analytics __pycache__
-accounts __pycache__
-linkinbio __pycache__
-products __pycache__
-shortcode __pycache__
-webclicktracker __pycache__
+./geotargeting/__pycache__/
+./contentpages/__pycache__/
+./analytics/__pycache__/
+./accounts/__pycache__/
+./linkinbio/__pycache__/
+./products/__pycache__/
+./shortcode/__pycache__/
+./webclicktracker/__pycache__/
+./shortcode/views/__pycache__/
+./accounts/templatetags/__pycache__/
+
+./geotargeting/migrations/__pycache__/
+./contentpages/migrations/__pycache__/
+./analytics/migrations/__pycache__/
+./accounts/migrations/__pycache__/
+./linkinbio/migrations/__pycache__/
+./products/migrations/__pycache__/
+./shortcode/migrations/__pycache__/
+./webclicktracker/migrations/__pycache__/
+
+# git rm --cached -r geotargeting/__pycache__/
+# git rm --cached -r contentpages/__pycache__/
+# git rm --cached -r analytics/__pycache__/
+# git rm --cached -r accounts/__pycache__/
+# git rm --cached -r accounts/templatetags/__pycache__/
+# git rm --cached -r linkinbio/__pycache__/
+# git rm --cached -r products/__pycache__/
+# git rm --cached -r shortcode/__pycache__/
+# git rm --cached -r webclicktracker/__pycache__/
+
+# git rm --cached -r geotargeting/migrations/__pycache__/
+# git rm --cached -r contentpages/migrations/__pycache__/
+# git rm --cached -r analytics/migrations/__pycache__/
+# git rm --cached -r accounts/migrations/__pycache__/
+# git rm --cached -r products/migrations/__pycache__/
+# git rm --cached -r shortcode/migrations/__pycache__/
+# git rm --cached -r webclicktracker/migrations/__pycache__/
+# git rm --cached -r linkinbio/migrations/__pycache__/
+
+# git rm --cached -r shortcode/views/__pycache__/
+# __pycache__/
+
+# ./geotargeting/__pycache__/
+# ./contentpages/__pycache__/
+# ./analytics/__pycache__/
+# ./accounts/__pycache__/
+# ./linkinbio/__pycache__/
+# ./products/__pycache__/
+# ./shortcode/__pycache__/
+# ./webclicktracker/__pycache__/
+# ./shortcode/views/__pycache__/
+# ./accounts/templatetags/__pycache__/
+
+# git rm --cached -r geotargeting/__pycache__/
+# git rm --cached -r contentpages/__pycache__/
+# git rm --cached -r analytics/__pycache__/
+# git rm --cached -r accounts/__pycache__/
+# git rm --cached -r accounts/templatetags/__pycache__/
+# git rm --cached -r linkinbio/__pycache__/
+# git rm --cached -r products/__pycache__/
+# git rm --cached -r shortcode/__pycache__/
+# git rm --cached -r webclicktracker/__pycache__/
+
+# ./geotargeting/migrations/__pycache__/
+# ./contentpages/migrations/__pycache__/
+# ./analytics/migrations/__pycache__/
+# ./accounts/migrations/__pycache__/
+# ./linkinbio/migrations/__pycache__/
+# ./products/migrations/__pycache__/
+# ./shortcode/migrations/__pycache__/
+# ./webclicktracker/migrations/__pycache__/
+
+git rm --cached -r geotargeting/migrations/__pycache__/
+git rm --cached -r contentpages/migrations/__pycache__/
+git rm --cached -r analytics/migrations/__pycache__/
+git rm --cached -r accounts/migrations/__pycache__/
+git rm --cached -r products/migrations/__pycache__/
+git rm --cached -r shortcode/migrations/__pycache__/
+git rm --cached -r webclicktracker/migrations/__pycache__/
+git rm --cached -r linkinbio/migrations/__pycache__/
+
+git rm --cached -r shortcode/views/__pycache__/
