@@ -8,7 +8,6 @@ from django.conf.urls.static import static
 
 from accounts.views import URLRedirectView
 
-# from django.contrib.flatpages import views as flatpages_views Delete
 from django.views.i18n import set_language as django_set_language
 
 from products.views import stripe_webhook

@@ -32,10 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'translations',
-    # 'django.contrib.sites', Delete
-    # 'django.contrib.flatpages', Delete
-    
-    
+        
     #Party
     'rest_framework',
     'rest_framework.authtoken',
@@ -138,6 +135,10 @@ if ENVIRONMENT == 'local':
         ('de', _('German')),
         ('en', _('English')),
     ]
+    
+    LOCALE_PATHS = [
+        os.path.join(BASE_DIR, 'locale'),
+    ]
 
     MODELTRANSLATION_CUSTOM_FIELDS = ('subline')
 
@@ -145,11 +146,12 @@ if ENVIRONMENT == 'local':
 
     TIME_ZONE = 'Europe/Berlin'
 
-    LANGUAGE_CODE = 'de'
+    LANGUAGE_CODE = 'en'
 
     USE_I18N = True
 
     USE_TZ = True
+
 
     DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -217,6 +219,12 @@ if ENVIRONMENT == 'production':
     #     }
     # }
     
+    gettext = lambda s: s
+    LANGUAGES = [
+        ('de', _('German')),
+        ('en', _('English')),
+    ]
+    
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -234,9 +242,6 @@ if ENVIRONMENT == 'production':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
     TIME_ZONE = 'Europe/Berlin'
-
-    LANGUAGE_CODE = 'de-de'
-
     USE_I18N = True
 
     USE_TZ = True

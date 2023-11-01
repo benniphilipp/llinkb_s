@@ -335,11 +335,13 @@ def success_view(request):
     return render(request, 'accounts/activation_email.html') 
 
 
-
+from django.utils.translation import get_language
 
 # Class based view that extends from the built in login view to add a remember me functionality
 class CustomLoginView(LoginView):
     form_class = LoginForm
+    current_language = get_language()
+    print("Aktuelle Sprache:", current_language)
     
     def get_success_url(self):
         return reverse_lazy('analytics:analytics-view')
@@ -362,7 +364,7 @@ class CustomLoginView(LoginView):
 class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
     template_name = 'accounts/password_reset.html'
     email_template_name = 'accounts/password_reset_email.html'
-    subject_template_name = 'accounts/password_reset_subject.txt'
+    mail_subject = _('llinkb.com Passwort Zurücksetzen')
     success_message = "We've emailed you instructions for setting your password, " \
                       "if an account exists with the email you entered. You should receive them shortly." \
                       " If you don't receive an email, " \

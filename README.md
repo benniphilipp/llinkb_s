@@ -81,6 +81,7 @@ python manage.py clearcache
     git commit -m '_text'
     git push origin linkinbio
 
+
 # Überstzung
 - python manage.py makemessages -l de
 - python manage.py makemessages -l en

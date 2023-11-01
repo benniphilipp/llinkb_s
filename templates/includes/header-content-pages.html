@@ -40,26 +40,27 @@
         <a class="btn btn-outline-primary d-none d-sm-block me-2" href="{% url 'login' %}">{% trans 'Einloggen' %}</a>
     
         <div class="dropdown mt-3" id="language-switcher">
-            <form action="{% url 'set_language' %}" method="post">
-                {% csrf_token %}
-                <input name="next" type="hidden" value="{{ request.get_full_path }}">
-                
-                <div class="dropdown">
-                    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        {% get_current_language as current_language %}
-                        {{ current_language|language_name_local }}
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                        {% get_available_languages as LANGUAGES %}
-                        {% for language_code, language_name in LANGUAGES %}
-                            <li>
-                                <button class="dropdown-item" type="submit" name="language" value="{{ language_code }}">{{ language_name }}</button>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </form>
-        </div>
+          <form action="{% url 'set_language' %}" method="post">
+              {% csrf_token %}
+              <input name="next" type="hidden" value="{{ request.get_full_path }}">
+              
+              <div class="dropdown">
+                  <button class="btn btn-outline-primary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      {% get_current_language as current_language %}
+                      {{ current_language|language_name_local }}
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                      {% get_available_languages as LANGUAGES %}
+                      {% for language_code, language_name in LANGUAGES %}
+                          <li>
+                              <button class="dropdown-item" type="submit" name="language" value="{{ language_code }}">{{ language_name }}</button>
+                          </li>
+                      {% endfor %}
+                  </ul>
+              </div>
+          </form>
+      </div>
+
       </div>
   
     </header>
