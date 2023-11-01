@@ -193,6 +193,12 @@ if ENVIRONMENT == 'local':
 
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+    
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'localhost'
+    EMAIL_PORT = 1025 
+    EMAIL_USE_TLS = False
+    EMAIL_USE_SSL = False
 
 
 ## Produktions 
@@ -263,20 +269,14 @@ if ENVIRONMENT == 'production':
 
     SHORTCODE_MAX = 15
     SHORTCODE_MIN = 6
-
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'localhost'
-    EMAIL_PORT = 1025 
-    EMAIL_USE_TLS = False
-    EMAIL_USE_SSL = False
     
     STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
     STRIPE_PUBLISHABLE_KEY = env('STRIPE_PUBLISHABLE_KEY')
     
-    # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    # EMAIL_HOST = 'smtp.example.com'  # Der SMTP-Server Ihrer E-Mail-Provider
-    # EMAIL_PORT = 587  # Port des SMTP-Servers (kann variieren)
-    # EMAIL_USE_TLS = True  # Verwendung von TLS (kann variieren)
-    # EMAIL_HOST_USER = 'your_email@example.com'  # Ihre E-Mail-Adresse
-    # EMAIL_HOST_PASSWORD = 'your_email_password'  # Ihr E-Mail-Passwort
-    # DEFAULT_FROM_EMAIL = 'your_email@example.com'
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = env('EMAIL_HOST')
+    EMAIL_PORT = 587  # Port des SMTP-Servers (kann variieren)
+    EMAIL_USE_TLS = True  # Verwendung von TLS (kann variieren)
+    EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+    DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
