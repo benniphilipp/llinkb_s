@@ -130,12 +130,14 @@ if ENVIRONMENT == 'local':
         },
     ]
 
-    gettext = lambda s: s
+    LANGUAGE_CODE = 'en'
+    DEFAULT_CHARSET = 'utf-8'
+
     LANGUAGES = [
-        ('de', _('German')),
         ('en', _('English')),
+        ('de', _('German')),
     ]
-    
+
     LOCALE_PATHS = [
         os.path.join(BASE_DIR, 'locale'),
     ]
@@ -145,8 +147,6 @@ if ENVIRONMENT == 'local':
     CORS_ORIGIN_ALLOW_ALL = True   
 
     TIME_ZONE = 'Europe/Berlin'
-
-    LANGUAGE_CODE = 'en'
 
     USE_I18N = True
 
@@ -207,24 +207,19 @@ if ENVIRONMENT == 'local':
 if ENVIRONMENT == 'production':
     
     ALLOWED_HOSTS = ['llinkb.com', 'www.llinkb.com', 'localhost']
-    
-    # DATABASES = {
-    #     'default': {
-    #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #         'NAME': 'myproject',
-    #         'USER': 'myprojectuser',
-    #         'PASSWORD': 'Benphi86!',
-    #         'HOST': 'localhost',
-    #         'PORT': '',
-    #     }
-    # }
-    
-    gettext = lambda s: s
+        
+    LANGUAGE_CODE = 'en'
+    DEFAULT_CHARSET = 'utf-8'
+
     LANGUAGES = [
-        ('de', _('German')),
         ('en', _('English')),
+        ('de', _('German')),
     ]
-    
+
+    LOCALE_PATHS = [
+        os.path.join(BASE_DIR, 'locale'),
+    ]
+
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',

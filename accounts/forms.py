@@ -114,4 +114,4 @@ class LanguageForm(forms.Form):
         ('en', 'English'),
     ]
 
-    language = forms.ChoiceField(choices=LANGUAGE_CHOICES, required=False, label=_('Select Language'), widget=forms.Select(attrs={'class': 'form-control'}))
+    language = forms.ChoiceField(choices=LANGUAGE_CHOICES, required=False, label=_('Sprache auswählen'), widget=forms.Select(attrs={'class': 'form-control'}))

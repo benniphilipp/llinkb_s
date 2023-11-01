@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-01 16:33+0100\n"
+"POT-Creation-Date: 2023-11-01 19:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,16 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: accounts/forms.py:17 accounts/forms.py:45
-#: accounts/templates/accounts/login.html:45
 #: accounts/templates/accounts/password_reset.html:33
 #: accounts/templates/accounts/register.html:44
-msgid "email"
-msgstr "email"
+msgid "E-Mail-Adresse"
+msgstr ""
 
 #: accounts/forms.py:22 accounts/forms.py:50
 #: accounts/templates/accounts/login.html:53
 #: accounts/templates/accounts/register.html:52
-msgid "Password"
+msgid "Passwort"
 msgstr ""
 
 #: accounts/forms.py:29 accounts/templates/accounts/register.html:60
@@ -51,13 +50,13 @@ msgstr ""
 msgid "Superuser must have is_superuser=True."
 msgstr ""
 
-#: accounts/models.py:55 accounts/views.py:479 src/settings.py:136
-#: src/settings.py:221
+#: accounts/models.py:55 accounts/views.py:476 src/settings.py:136
+#: src/settings.py:213
 msgid "English"
 msgstr ""
 
-#: accounts/models.py:56 accounts/views.py:478 src/settings.py:135
-#: src/settings.py:220
+#: accounts/models.py:56 accounts/views.py:475 src/settings.py:137
+#: src/settings.py:214
 msgid "German"
 msgstr ""
 
@@ -98,12 +97,16 @@ msgid ""
 msgstr ""
 
 #: accounts/templates/accounts/login.html:8
-msgid "Hello, world!"
+msgid "Welcome"
 msgstr ""
 
 #: accounts/templates/accounts/login.html:25
 #: accounts/templates/accounts/login.html:71
 msgid "Login"
+msgstr ""
+
+#: accounts/templates/accounts/login.html:45
+msgid "email"
 msgstr ""
 
 #: accounts/templates/accounts/login.html:64
@@ -278,11 +281,11 @@ msgstr ""
 msgid "Adresse"
 msgstr ""
 
-#: accounts/views.py:311
+#: accounts/views.py:309
 msgid "Aktivieren Sie Ihr Benutzerkonto"
 msgstr ""
 
-#: accounts/views.py:312
+#: accounts/views.py:310
 msgid ""
 "Hallo,\n"
 "\n"
@@ -291,7 +294,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: accounts/views.py:367
+#: accounts/views.py:364
 msgid "llinkb.com Passwort Zurücksetzen"
 msgstr ""
 

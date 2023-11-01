@@ -36,8 +36,8 @@
       </a>
     
       <div class="col-md-4 d-flex flex-row align-items-center justify-content-end">
-        <a class="btn btn-primary me-2 d-none d-sm-block" href="{% url 'users-register' %}">{% trans 'Registrieren' %}</a>
-        <a class="btn btn-outline-primary d-none d-sm-block me-2" href="{% url 'login' %}">{% trans 'Einloggen' %}</a>
+        <a class="btn btn-primary me-2 d-none d-sm-block" href="{% url 'users-register' %}">{% trans "Registrieren" %}</a>
+        <a class="btn btn-outline-primary d-none d-sm-block me-2" href="{% url 'login' %}">{% trans "Einloggen" %}</a>
     
         <div class="dropdown mt-3" id="language-switcher">
           <form action="{% url 'set_language' %}" method="post">
@@ -53,7 +53,7 @@
                       {% get_available_languages as LANGUAGES %}
                       {% for language_code, language_name in LANGUAGES %}
                           <li>
-                              <button class="dropdown-item" type="submit" name="language" value="{{ language_code }}">{{ language_name }}</button>
+                            <button class="dropdown-item" type="submit" name="language" value="{{ language_code }}" {% if language_code == 'en' %}selected{% endif %}>{{ language_name }}</button>
                           </li>
                       {% endfor %}
                   </ul>

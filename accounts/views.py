@@ -269,12 +269,10 @@ def activate_account(request, token, uidb64):
         # Dekodieren Sie die UID aus uidb64
         user_id = force_text(urlsafe_base64_decode(uidb64))
         user = CustomUser.objects.get(pk=user_id)
-        print(user_id)
         # Überprüfen Sie, ob der Token gültig ist
         if not default_token_generator.check_token(user, token):
             raise ValueError("Ungültiger Aktivierungslink")
     except (BadSignature, SignatureExpired, CustomUser.DoesNotExist, ValueError):
-        print(uidb64)
         return HttpResponse("Ungültiger Aktivierungslink")
 
     # Aktivieren Sie den Benutzer
@@ -340,8 +338,7 @@ from django.utils.translation import get_language
 # Class based view that extends from the built in login view to add a remember me functionality
 class CustomLoginView(LoginView):
     form_class = LoginForm
-    current_language = get_language()
-    print("Aktuelle Sprache:", current_language)
+    activate('en')
     
     def get_success_url(self):
         return reverse_lazy('analytics:analytics-view')
@@ -425,7 +422,7 @@ class SaveClickData(APIView):
 def update_user_json(request, pk):
     
     obj = CustomUser.objects.get(pk=pk)
-    # print(obj)
+
     if request.is_ajax():
         # Aktualisiere die Benutzerdaten basierend auf den POST-Daten
         new_first_name = request.POST.get('first_name')
@@ -477,7 +474,8 @@ def update_language(request):
     LANGUAGE_CHOICES = [
         ('de', _('German')),
         ('en', _('English')),
-    ]       
+    ]  
+
 
     if request.method == 'POST' and request.is_ajax():
         form = LanguageForm(request.POST)
