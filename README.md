@@ -95,7 +95,7 @@ python -m smtpd -n -c DebuggingServer localhost:1025
 # Test Nutzer
 @name
 ben@mail.de
-&2NNe%qy^vIjtjy6
+&2NNe%qy^vIjtjy6 
 
 1ben@web.de
 &2NNe%qy^vIjtjy6

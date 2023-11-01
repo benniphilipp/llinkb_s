@@ -61,7 +61,7 @@ PARENT_HOST = "llinkb.com"
 ROOT_HOSTCONF = 'src.hosts'
 
 LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = 'accounts:login'
+LOGIN_URL = 'login'
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 
 AUTH_USER_MODEL = "accounts.CustomUser"

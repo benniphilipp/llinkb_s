@@ -1,0 +1,27 @@
+{% extends "blank.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block body %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-5">
+
+            <div class="card border-0 rounded-lg mt-0 mb-3 bg-white">
+                <div class="card-header justify-content-center bg-white border-0">
+                    <h3 class="font-weight-light my-4 text-center">{% trans 'Bestätigung' %}</h3>
+                </div>
+
+                <div class="card-body text-center">
+                    <p>{% trans 'Nur noch einen Schritt' %}</p>
+                    <p>{% trans 'Vielen Dank für Ihre Registrierung. Wir haben Ihnen eine Aktivierungs-E-Mail gesendet. Bitte überprüfen Sie Ihr E-Mail-Postfach und klicken Sie auf den Aktivierungslink, um Ihr Konto zu aktivieren.' %}</p>
+                    <a href="{% url 'login' %}">{% trans 'Anmelden' %}</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

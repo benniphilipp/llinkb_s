@@ -8,7 +8,7 @@ from django.conf.urls.static import static
 
 from accounts.views import URLRedirectView
 
-from django.contrib.flatpages import views as flatpages_views
+# from django.contrib.flatpages import views as flatpages_views Delete
 from django.views.i18n import set_language as django_set_language
 
 from products.views import stripe_webhook
@@ -21,8 +21,8 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    path("pages/", include("django.contrib.flatpages.urls")),
-    path('content/', include('contentpages.urls')),
+    # path("pages/", include("django.contrib.flatpages.urls")), Delete
+    # path('content/', include('contentpages.urls')), Delete
     path('shortcode/', include('shortcode.urls')),
     path('analytics/', include('analytics.urls')),
     path('webclicktracker/', include('webclicktracker.urls')),

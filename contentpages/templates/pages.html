@@ -1,4 +1,4 @@
-{% extends "content-pages.html" %}
+{% extends "blank.html" %}
 {% load static %}
 {% load i18n %}
 
@@ -6,8 +6,6 @@
 
 {% block body %}
 
-{% load flatpages %}
-{% get_flatpages as flatpages %}
 
 <div class="container-fluit main-pages">
 
@@ -81,8 +79,8 @@
                     <li class="mx-3 link-footer"><a href="/content/qr-codes/">{% trans 'QR-Codes' %}</a></li>
                     <li class="mx-3 link-footer"><a href="/content/link-in-bio/">{% trans 'Link in Bio' %}</a></li>
                     <li class="mx-3 link-footer"><a href="/products/">{% trans 'Preise' %}</a></li>
-                    <li class="mx-3 link-footer"><a href="{% url 'accounts:users-register' %}">{% trans 'Kostenlos registrieren' %}</a></li>
-                    <li class="mx-3 link-footer"><a href="{% url 'accounts:login' %}">{% trans 'Einloggen' %}</a></li>
+                    <li class="mx-3 link-footer"><a href="{% url 'users-register' %}">{% trans 'Kostenlos registrieren' %}</a></li>
+                    <li class="mx-3 link-footer"><a href="{% url 'login' %}">{% trans 'Einloggen' %}</a></li>
                 </ul>
             </div>
         </div>

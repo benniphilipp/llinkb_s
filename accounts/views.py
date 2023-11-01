@@ -1,3 +1,12 @@
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_text
+from django.core.mail import send_mail
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.urls import reverse
+from django.core.signing import BadSignature, SignatureExpired, loads
+
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -42,10 +51,11 @@ from .serializers import ClickDataSerializer, DataSerializer
 from django.utils import timezone
 from urllib.parse import parse_qs, urlparse
 
-
 from django.http import HttpResponse
 from django.utils import translation
 from django.conf import settings
+
+default_from_email = settings.DEFAULT_FROM_EMAIL
 
 def home(request):
     return render(request, 'index.html')
@@ -253,6 +263,26 @@ class UserProfileView(DetailView):
         context['form'] = LanguageForm(initial={'language': user_language})
         return context
 
+#Aktivierung
+def activate_account(request, token, uidb64):
+    try:
+        # Dekodieren Sie die UID aus uidb64
+        user_id = force_text(urlsafe_base64_decode(uidb64))
+        user = CustomUser.objects.get(pk=user_id)
+        print(user_id)
+        # Überprüfen Sie, ob der Token gültig ist
+        if not default_token_generator.check_token(user, token):
+            raise ValueError("Ungültiger Aktivierungslink")
+    except (BadSignature, SignatureExpired, CustomUser.DoesNotExist, ValueError):
+        print(uidb64)
+        return HttpResponse("Ungültiger Aktivierungslink")
+
+    # Aktivieren Sie den Benutzer
+    user.is_active = True
+    user.save()
+
+    return render(request, 'accounts/activation_account.html')
+
 
 # Regestieren
 class RegisterView(View):
@@ -266,13 +296,30 @@ class RegisterView(View):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
-
+        
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)  # Erstellen Sie den Benutzer, ohne ihn zu speichern
+            user.is_active = False  # Setzen Sie den Benutzer auf inaktiv
+            
+            user.save()
+            
+            # Generieren Sie einen Aktivierungstoken und senden Sie eine E-Mail
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            token = default_token_generator.make_token(user)
+            activation_link = reverse('activate_account', kwargs={'uidb64': uid, 'token': token})
+            current_site = get_current_site(request)
+            mail_subject = _('Aktivieren Sie Ihr Benutzerkonto')
+            message = _(f'Hallo,\n\n' \
+                'Vielen Dank für die Registrierung bei unserer Website. ' \
+                'Um Ihr Konto zu aktivieren, klicken Sie auf den folgenden Link:\n\n' \
+                f'{current_site.domain}{activation_link}\n\n' \
+                'Der Aktivierungslink ist für 24 Stunden gültig.\n\n' \
+                'Nach der Aktivierung können Sie sich auf unserer Website anmelden.')
+            send_mail(mail_subject, message, default_from_email, [user.email])
 
-            return redirect(to='/')
-
+            return redirect('success_url')
         return render(request, self.template_name, {'form': form})
+
     
     def dispatch(self, request, *args, **kwargs):
         # will redirect to the home page if a user tries to access the register page while logged in
@@ -281,15 +328,25 @@ class RegisterView(View):
 
         # else process dispatch as it otherwise normally would
         return super(RegisterView, self).dispatch(request, *args, **kwargs)
-    
+
+
+
+def success_view(request):
+    return render(request, 'accounts/activation_email.html') 
+
+
+
 
 # Class based view that extends from the built in login view to add a remember me functionality
 class CustomLoginView(LoginView):
     form_class = LoginForm
+    
+    def get_success_url(self):
+        return reverse_lazy('analytics:analytics-view')
 
     def form_valid(self, form):
         remember_me = form.cleaned_data.get('remember_me')
-
+        
         if not remember_me:
             # set session expiry to 0 seconds. So it will automatically close the session after the browser is closed.
             self.request.session.set_expiry(0)
@@ -310,8 +367,15 @@ class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
                       "if an account exists with the email you entered. You should receive them shortly." \
                       " If you don't receive an email, " \
                       "please make sure you've entered the address you registered with, and check your spam folder."
-    success_url = reverse_lazy('accounts:login')
-    
+    success_url = reverse_lazy('password_reste_success')
+
+
+
+class ResetPasswordSuccessView(View):
+    def get(self, request):
+        return render(request, 'accounts/password-reste-success.html')
+
+
 
 
 # Save Click Data Websiet

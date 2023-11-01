@@ -1,4 +1,4 @@
-{% extends "content-pages.html" %}
+{% extends "blank.html" %}
 {% load static %}
 {% load i18n %}
 
@@ -15,10 +15,10 @@
      </div>
 
      <div class="container">
-        <div class="row justify-content-center align-items-center h-100">
+        <div class="row justify-content-center align-items-center">
             <div class="col-12 col-md-5">
-                <div class="card shadow-lg border-0 rounded-lg mt-0 mb-3">
-                    <div class="card-header">
+                <div class="card border-0 rounded-lg mt-0 mb-3">
+                    <div class="card-header bg-white border-0">
                       <h3 class="font-weight-light my-1 text-center">{% trans 'Login' %}</h3>
                     </div>
                     {% if form.errors %}
@@ -57,6 +57,7 @@
                                     <div class="form-group">
                                         <!-- Add a Remember me functionality -->
                                         {{ form.remember_me }}
+                                       
                                         <label> {% trans 'Angemeldet bleiben' %}</label>
                                     </div>
                                 </div>
@@ -70,12 +71,12 @@
                             </div>
                         </form>
                     </div>
-                    <!-- <div class="card-footer text-center">
+                    <div class="card-footer text-center bg-white border-0">
                         <div class="small">
-                            <a href="">Don't have an account yet? Go to signup</a><br>
-                            <a href="#"><i>Forgot Password?</i></a>
+                            <a href="{% url 'users-register' %}">{% trans 'Sie haben doch ein Konto? Gehen Sie zur Anmeldung' %}</a><br>
+                            <a href="{% url 'password_reset' %}"><i>{% trans 'Passwort vergessen?' %}</i></a>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>

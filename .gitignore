@@ -10,9 +10,10 @@ _____xdb.sqlite3
 # Datenbankdatei
 db.sqlite3
 
-
+delete
 __pycache__/
 
+./src/__pycache__/
 ./geotargeting/__pycache__/
 ./contentpages/__pycache__/
 ./analytics/__pycache__/

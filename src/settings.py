@@ -31,9 +31,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
-    'django.contrib.flatpages',
     'translations',
+    # 'django.contrib.sites', Delete
+    # 'django.contrib.flatpages', Delete
+    
     
     #Party
     'rest_framework',
@@ -54,7 +55,7 @@ INSTALLED_APPS = [
     'linkinbio',
     'geotargeting',
     'products',
-    'contentpages',
+    # 'contentpages',Delete
 ]
 
 MIDDLEWARE = [
@@ -117,7 +118,6 @@ if ENVIRONMENT == 'local':
 
     # Password validation
     # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
-
     AUTH_PASSWORD_VALIDATORS = [
         {
             'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -160,7 +160,7 @@ if ENVIRONMENT == 'local':
     ROOT_HOSTCONF = 'src.hosts'
 
     LOGIN_REDIRECT_URL = '/'
-    LOGIN_URL = 'accounts:login'
+    LOGIN_URL = 'login'
     SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 
     AUTH_USER_MODEL = "accounts.CustomUser"
@@ -253,7 +253,7 @@ if ENVIRONMENT == 'production':
     ROOT_HOSTCONF = 'src.hosts'
 
     LOGIN_REDIRECT_URL = '/'
-    LOGIN_URL = 'accounts:login'
+    LOGIN_URL = 'login'
     SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 
     AUTH_USER_MODEL = "accounts.CustomUser"
@@ -272,3 +272,11 @@ if ENVIRONMENT == 'production':
     
     STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
     STRIPE_PUBLISHABLE_KEY = env('STRIPE_PUBLISHABLE_KEY')
+    
+    # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    # EMAIL_HOST = 'smtp.example.com'  # Der SMTP-Server Ihrer E-Mail-Provider
+    # EMAIL_PORT = 587  # Port des SMTP-Servers (kann variieren)
+    # EMAIL_USE_TLS = True  # Verwendung von TLS (kann variieren)
+    # EMAIL_HOST_USER = 'your_email@example.com'  # Ihre E-Mail-Adresse
+    # EMAIL_HOST_PASSWORD = 'your_email_password'  # Ihr E-Mail-Passwort
+    # DEFAULT_FROM_EMAIL = 'your_email@example.com'

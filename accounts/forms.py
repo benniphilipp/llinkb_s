@@ -41,24 +41,35 @@ class RegisterForm(UserCreationForm):
 #Login        
 class LoginForm(AuthenticationForm):
     username = forms.CharField(max_length=100,
-                                required=True,
-                                widget=forms.TextInput(attrs={'placeholder': _('E-Mail'),
-                                                                'class': 'form-control',
-                                                                }))
+                               required=True,
+                               widget=forms.TextInput(attrs={'placeholder': _('E-Mail-Adresse'),
+                                                           'class': 'form-control',
+                                                           }))
     password = forms.CharField(max_length=50,
                                required=True,
-                               widget=forms.PasswordInput(attrs={'placeholder': _('Password'),
-                                                                 'class': 'form-control',
-                                                                 'data-toggle': 'password',
-                                                                 'id': 'password',
-                                                                 'name': 'password',
-                                                                 }))
+                               widget=forms.PasswordInput(attrs={'placeholder': _('Passwort'),
+                                                                  'class': 'form-control',
+                                                                  'data-toggle': 'password',
+                                                                  'id': 'password',
+                                                                  }))
+    remember_me = forms.BooleanField(required=False)
+
+    class Meta:
+        model = User
+        fields = ['username', 'password', 'remember_me']
+
     remember_me = forms.BooleanField(required=False)
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'password', 'remember_me']
+        fields = ['email', 'password', 'remember_me']
+    
+
         
+
+
+
+      
 class UserUpdateForm(forms.Form):
     email = forms.EmailField(required=False)
     password = forms.CharField(widget=forms.PasswordInput, required=False)
