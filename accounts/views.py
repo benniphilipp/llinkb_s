@@ -250,15 +250,18 @@ class UserProfileView(DetailView):
     slug_field = "id"
     template_name = "userprofile.html"
     
-    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.get_object()
-        api_key = APIKey.objects.get(user=user)
-        
+
+        try:
+            api_key = APIKey.objects.get(user=user)
+        except APIKey.DoesNotExist:
+            api_key = None  
+            
         user_language = user.language
         
-        context['api_key'] = api_key.key
+        context['api_key'] = api_key.key if api_key else None
         context['user_adressform'] = ProfileFormAdresse()
         context['form'] = LanguageForm(initial={'language': user_language})
         return context
@@ -339,7 +342,7 @@ from django.utils.translation import get_language
 class CustomLoginView(LoginView):
     form_class = LoginForm
     activate('en')
-    
+
     def get_success_url(self):
         return reverse_lazy('analytics:analytics-view')
 

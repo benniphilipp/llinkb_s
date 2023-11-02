@@ -2,27 +2,14 @@
 {% load static %}
 {% load i18n %}
 
-
 {% block body %}
 
-
-
-    <div class="form-content my-3 p-3">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5">
-
-                </div>
-            </div>
-        </div>
-     </div>
-
-     <div class="container">
+     <div class="container mt-5">
         <div class="row justify-content-center align-items-center">
             <div class="col-12 col-md-5">
                 <div class="card border-0 rounded-lg mt-0 mb-3">
                     <div class="card-header bg-white border-0">
-                      <h3 class="font-weight-light my-1 text-center">{% trans "Login" %}</h3>
+                      <h3 class="font-weight-light my-1 text-center">{% trans "Log in" %}</h3>
                     </div>
                     {% if form.errors %}
                         <div class="alert alert-danger alert-dismissible" role="alert">
@@ -42,7 +29,7 @@
                             <div class="form-row">
                                 <div class="col-md-10 offset-md-1 mt-3">
                                     <div class="form-group">
-                                        <label class="small mb-1">{% trans "email" %}</label>
+                                        <label class="small mb-1">{% trans "Email" %}</label>
                                         {{ form.username }}
                                     </div>
                                 </div>
@@ -50,7 +37,7 @@
                             <div class="form-row">
                                 <div class="col-md-10 offset-md-1 mt-3">
                                     <div class="form-group">
-                                      <label class="small mb-1">{% trans "Passwort" %}</label>
+                                      <label class="small mb-1">{% trans "Password" %}</label>
                                       {{ form.password }}
                                     </div>
                                 </div>
@@ -61,14 +48,14 @@
                                         <!-- Add a Remember me functionality -->
                                         {{ form.remember_me }}
                                        
-                                        <label> {% trans "Angemeldet bleiben" %}</label>
+                                        <label> {% trans "remain signed in" %}</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-10 offset-md-1">
                                     <div class="form-group mt-0 mb-1 mt-3">
-                                      <button name="login" class="col-md-12 btn btn-primary" id="login">{% trans "Login" %}</button>
+                                      <button name="login" class="col-md-12 btn btn-primary" id="login">{% trans "Log in" %}</button>
                                     </div>
                                 </div>
                             </div>
@@ -76,8 +63,8 @@
                     </div>
                     <div class="card-footer text-center bg-white border-0">
                         <div class="small">
-                            <a href="{% url 'users-register' %}">{% trans "Sie haben doch ein Konto? Gehen Sie zur Anmeldung" %}</a><br>
-                            <a href="{% url 'password_reset' %}"><i>{% trans "Passwort vergessen?" %}</i></a>
+                            <a href="{% url 'users-register' %}">{% trans "Do you have an account? Go to registration" %}</a><br>
+                            <a href="{% url 'password_reset' %}">{% trans "Forgot Password?" %}</a>
                         </div>
                     </div>
                 </div>

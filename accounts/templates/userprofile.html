@@ -23,21 +23,21 @@
             <div class="col-6 mt-5">
                 <div class="card border-0">
                     <div class="card-header bg-white">
-                        <h5 class="mt-2">{% trans "Deine E-Mail-Adresse:" %} {{ user.email }}</h5>
+                        <h5 class="mt-2">{% trans "Your e-mail address:" %} {{ user.email }}</h5>
                     </div>
                     <div class="card-body">
-                        <p>{% trans "Bei uns werden Passwörter standardmäßig sicher gehasht und nicht entschlüsselt. Dies ist aus Sicherheitsgründen wichtig, da das Speichern von Passwörtern im Klartext ein erhebliches Sicherheitsrisiko darstellen würde. Bitte melde dich ab und beantrage das Zurücksetzen des Passworts. Anschließend kannst du ein neues Passwort erstellen." %}</p>
-                        <a href="{% url 'logout' %}" type="button" class="btn btn-primary mt-2">{% trans "Abmelden" %}</a>
+                        <p>{% trans "By default, we securely hash passwords and do not decrypt them. This is important for security reasons, as storing passwords in plain text would pose a significant security risk. Please log out and request a password reset. You can then create a new password." %}</p>
+                        <a href="{% url 'logout' %}" type="button" class="btn btn-primary mt-2">{% trans "Log out" %}</a>
                     </div>
                 </div>
 
                 <div class="card border-0 mt-5">
                     <div class="card-header bg-white">
-                        <h5 class="mt-2">{% trans "Konto Löschen" %}</h5>
+                        <h5 class="mt-2">{% trans "Deleting an account" %}</h5>
                     </div>
                     <div class="card-body">
-                        <p>{% trans "Du möchtest dein Konto bei uns auflösen? Kein Problem, sende uns bitte eine E-Mail, und wir werden umgehend alle deine Daten unwiderruflich löschen." %}</p>
-                        <a href="mailto:support@pixel-west.com">support@pixel-west.com</a>
+                        <p>{% trans "Would you like to close your account with us? No problem, please send us an email and we will immediately and irrevocably delete all your data." %}</p>
+                        <a href="mailto:contact@llinkb.com">contact@llinkb.com</a>
                     </div>
                 </div>
 
@@ -50,15 +50,16 @@
                         <div class="input-group mb-2 mt-2">
                             <input type="text" class="form-control" id="apiTokenInput" value="{{ api_key }}" readonly>
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" id="copyTokenButton">{% trans "Kopieren" %}</button>
+                                <button class="btn btn-primary" type="button" id="copyTokenButton">{% trans "Copy" %}</button>
                             </div>
                         </div>
+                        <small>{% trans "Work in progress, will be available with everyone soon" %}</small>
                     </div>
                 </div>
 
                 <div class="card border-0 mt-5 mb-5">
                     <div class="card-header bg-white">
-                        <h5 class="mt-2">{% trans "Adresse" %}</h5>
+                        <h5 class="mt-2">{% trans "Address" %}</h5>
                     </div>
                     <div class="card-body">
                         <form class="p-2" id="userProfileForm">
@@ -68,6 +69,9 @@
                 </div>
 
                 <div class="card broder-0 mt-5 mb-5">
+                    <div class="card-header bg-white">
+                        <h5 class="mt-2">{% trans "Language setting" %}</h5>
+                    </div>
                     <div class="card-body">
                         <form id="language-form" class="p-2" method="post">
                             {% crispy form %}  

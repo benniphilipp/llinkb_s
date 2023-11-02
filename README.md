@@ -306,3 +306,6 @@ https://www.google.com/search?q=kurzlinks+erstellen&sca_esv=561558033&sxsrf=AB5s
 
 # Login
 https://dev.to/earthcomfy/django-social-authentication-imk
+
+# Überstzung
+https://poeditor.com/projects/view?id=659859

@@ -1,4 +1,5 @@
 {% load custom_tags %}
+{% load i18n %}
 
 <nav class="navbar navbar-expand bd-header navbar bg-white" aria-label="Second navbar example">
     <div class="container-fluid">
@@ -13,11 +14,11 @@
                 </button>
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start border-0">
-                    <li><a class="dropdown-item" href="{% url 'user-profile' user.id %}">Nutzerprofil</a></li>
-                    <li><a class="dropdown-item" href="{% url 'logout' %}">Abmelden</a></li>
+                    <li><a class="dropdown-item" href="{% url 'user-profile' user.id %}">{% trans "User profile" %}</a></li>
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">{% trans "Log out" %}</a></li>
 
                     {% if user|is_free_user %}
-                        <li><a class="dropdown-item" href="#">Free User</a></li>
+                        <li><a class="dropdown-item" href="#">{% trans "Free User" %}</a></li>
                     {% endif %}
 
                 </ul>

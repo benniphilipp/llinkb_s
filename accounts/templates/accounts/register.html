@@ -21,7 +21,7 @@
                 <div class="col-12 col-md-5">
                     <div class="card border-0 rounded-lg mt-0 mb-5">
                         <div class="card-header justify-content-center bg-white border-0">
-                            <h3 class="font-weight-light my-4 text-center">{% trans "Benutzerkonto erstellen" %}</h3>
+                            <h3 class="font-weight-light my-4 text-center">{% trans "create Account" %}</h3>
                         </div>
                         <div class="card-body">
                             <form method="POST">
@@ -41,7 +41,7 @@
                                 <div class="form-row">
                                     <div class="col-md-10 offset-md-1 mt-3">
                                         <div class="form-group">
-                                            <label class="small mb-1">{% trans "E-Mail-Adresse" %}</label>
+                                            <label class="small mb-1">{% trans "Email" %}</label>
                                             {{ form.email }}
                                         </div>
                                     </div>
@@ -49,7 +49,7 @@
                                 <div class="form-row">
                                     <div class="col-md-10 offset-md-1 mt-3">
                                         <div class="form-group">
-                                            <label class="small mb-1">{% trans "Passwort" %}</label>
+                                            <label class="small mb-1">{% trans "Password" %}</label>
                                             {{ form.password1 }}
                                             {{ form.errors.password }}
                                         </div>
@@ -57,13 +57,13 @@
                                     <div class="col-md-10 offset-md-1 mt-3">
 
                                         <div class="form-group">
-                                            <label class="small mb-1">{% trans "Passwort bestätigen" %}</label>
+                                            <label class="small mb-1">{% trans "Confirm Password" %}</label>
                                             {{ form.password2 }}
                                         </div>
                                     </div>
                                     <div class="form-group mt-4 mb-0 mt-3">
                                         <div class="col-md-10 offset-md-1">
-                                            <button type="submit" class="col-md-12 btn btn-primary">{% trans "Konto erstellen" %}</button>
+                                            <button type="submit" class="col-md-12 btn btn-primary">{% trans "create Account" %}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@
                         </div>
                         <div class="card-footer text-center bg-white border-0">
                             <div class="small">
-                                <a href="{% url 'login' %}">{% trans "Sie haben doch ein Konto? Gehen Sie zur Anmeldung" %}</a>
+                                <a href="{% url 'login' %}">{% trans "Do you have an account? Go to registration" %}</a>
                             </div>
                         </div>
                     </div>

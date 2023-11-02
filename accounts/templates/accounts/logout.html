@@ -10,12 +10,12 @@
 
             <div class="card border-0">
                 <div class="card-body">
-                <h5 class="card-title text-center">{% trans "Sie wurden ausgeloggt" %}</h5>
+                <h5 class="card-title text-center">{% trans "You have been logged out" %}</h5>
                 <p class="card-text text-center">
                     {% trans "Vielen Dank für Ihre Zeit." %}
                 </p>
                     <div class="col text-center">
-                        <a href="{% url 'login' %}" class="btn btn-primary">{% trans "Melden Sie sich erneut an" %}</a>
+                        <a href="{% url 'login' %}" class="btn btn-primary">{% trans "Log in again" %}</a>
                     </div>
                 </div>
             </div>        
@@ -23,6 +23,5 @@
         </div>
     </div>
 </div>
-
 
 {% endblock body %}
