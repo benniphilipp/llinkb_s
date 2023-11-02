@@ -185,6 +185,11 @@ if ENVIRONMENT == 'local':
     SITE_ID = 4
     USE_I18N = True
     USE_L10N = True
+    
+    JS_INFO_DICT = {
+        'domain': 'djangojs',
+        'packages': ('shortcode'), 
+    }
 
     STATICFILES_DIRS = [
         os.path.join(BASE_DIR, "static"),

@@ -139,6 +139,7 @@ def unarchive_selected_shortcodes(request):
         return JsonResponse(response_data)
 
 
+# Ben
 #Create Shortcode
 @login_required(login_url="/login/")
 def post_crate_view(request): 
@@ -242,7 +243,7 @@ def update_post(request, pk):
         obj.save()
         return JsonResponse({'success': 'Dein link wurde erfolgreich geändert',})
 
-
+# Ben
 # View Shortcode list
 @login_required(login_url="/login/")
 def shortcode_view(request):

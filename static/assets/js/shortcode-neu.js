@@ -37,55 +37,56 @@ $(document).ready(function(){
         });
     }
 
+
     /***************** Open Sidebar for Crate Shorcode *****************/
     $("#openForm").on('click', function() {  //use a class, since your ID gets mangled
-        $('#aside-form').addClass("toggle"); 
-        $('#archive-btn').addClass('d-none');
-        $('#update-form-shortcode').addClass('d-none');
-        $('#openForm').addClass("disabled"); 
-        $('#overlay-open').addClass("overlay-open"); 
+        // $('#aside-form').addClass("toggle"); 
+        // $('#archive-btn').addClass('d-none');
+        // $('#update-form-shortcode').addClass('d-none');
+        // $('#openForm').addClass("disabled"); 
+        // $('#overlay-open').addClass("overlay-open"); 
 
         // limitation
-        $('#pills-profile-tab').addClass('disabled')
-        $('#limitation-form').hide();
+        // $('#pills-profile-tab').addClass('disabled')
+        // $('#limitation-form').hide();
 
         // iOS-Targeting & Android-Targeting
-        $('#mobile-tab').addClass('disabled');
-        $('#ios-targeting-from').hide();
-        $('#android-targeting-form').hide();
+        // $('#mobile-tab').addClass('disabled');
+        // $('#ios-targeting-from').hide();
+        // $('#android-targeting-form').hide();
 
         // Geo-Targeting
-        $('#geo-targeting-tab').addClass('disabled');
-        $('#geo-targeting-form').hide();
+        // $('#geo-targeting-tab').addClass('disabled');
+        // $('#geo-targeting-form').hide();
 
     });
 
     /***************** Close Sidebar *****************/
-    $("#closeForm").click(function() {  //use a class, since your ID gets mangled
-        $('#aside-form').removeClass("toggle"); 
-        $('#archive-btn').removeClass('d-none');
-        $('#update-form-shortcode').removeClass('d-none');
-        $('#crate-form-shortcode').removeClass('d-none');
-        $('#openForm').removeClass("disabled");
-        $('#overlay-open').removeClass("overlay-open"); 
-        $('#shortcode_id').html('');
+    // $("#closeForm").click(function() {  //use a class, since your ID gets mangled
+    //     $('#aside-form').removeClass("toggle"); 
+    //     $('#archive-btn').removeClass('d-none');
+    //     $('#update-form-shortcode').removeClass('d-none');
+    //     $('#crate-form-shortcode').removeClass('d-none');
+    //     $('#openForm').removeClass("disabled");
+    //     $('#overlay-open').removeClass("overlay-open"); 
+    //     $('#shortcode_id').html('');
 
-        // limitation
-        $('#pills-profile-tab').removeClass('disabled')
-        $('#limitation-form').show();
+    //     // limitation
+    //     $('#pills-profile-tab').removeClass('disabled')
+    //     $('#limitation-form').show();
 
-        // iOS-Targeting & Android-Targeting
-        $('#mobile-tab').removeClass('disabled');
-        $('#ios-targeting-from').show();
-        $('#android-targeting-form').show();
+    //     // iOS-Targeting & Android-Targeting
+    //     $('#mobile-tab').removeClass('disabled');
+    //     $('#ios-targeting-from').show();
+    //     $('#android-targeting-form').show();
 
-        // Geo-Targeting
-        $('#geo-targeting-tab').removeClass('disabled');
-        $('#geo-targeting-form').show();
+    //     // Geo-Targeting
+    //     $('#geo-targeting-tab').removeClass('disabled');
+    //     $('#geo-targeting-form').show();
 
-        resteFields();
+    //     resteFields();
 
-    });
+    // });
 
 
     /* Alert Box Close */
@@ -286,173 +287,173 @@ $(document).ready(function(){
 
 
     /*****************  Shortcode list View *****************/
-    var currentPage = 1;  
-    var totalShortcodes = 0; 
+    // var currentPage = 1;  
+    // var totalShortcodes = 0; 
 
-    function loadMore() {
-        $.ajax({
-            url: `/shortcode/json-list/?page=${currentPage}`,  
-            data: { page: currentPage  }, 
-            dataType: 'json',
-            success: function(response) {
+    // function loadMore() {
+    //     $.ajax({
+    //         url: `/shortcode/json-list/?page=${currentPage}`,  
+    //         data: { page: currentPage  }, 
+    //         dataType: 'json',
+    //         success: function(response) {
 
-                var shortcodeList = $('#shortcode-list');
-                var serialized_data = response.data;
+    //             var shortcodeList = $('#shortcode-list');
+    //             var serialized_data = response.data;
 
-                $('#gif-load').removeClass('d-none');
-                setTimeout(function() {
-                    serialized_data.forEach(function(item) {
+    //             $('#gif-load').removeClass('d-none');
+    //             setTimeout(function() {
+    //                 serialized_data.forEach(function(item) {
 
-                        var shortUrl = item.get_short_url;
-                        if (shortUrl.length > 90) {
-                            shortUrl = shortUrl.substring(0, 90) + '...';
-                        }
+    //                     var shortUrl = item.get_short_url;
+    //                     if (shortUrl.length > 90) {
+    //                         shortUrl = shortUrl.substring(0, 90) + '...';
+    //                     }
     
-                        var shortDestination = item.url_destination;
-                        if (shortDestination.length > 90) {
-                            shortDestination = shortDestination.substring(0, 90) + '...';
-                        }
+    //                     var shortDestination = item.url_destination;
+    //                     if (shortDestination.length > 90) {
+    //                         shortDestination = shortDestination.substring(0, 90) + '...';
+    //                     }
     
-                        // shortcodeList hinzufügen
-                        var shortcodeItem = $('<div class="card p-3 my-3 border border-0">');
-                        shortcodeItem.append(`<div class="card-header header-elements"> <form id="shortcode-form"><input type="checkbox" name="selected_shortcodes" value="shortcode_id_${item.short_id}"></form> <img src="${item.favicon_path? `${item.favicon_path}`: `${faviconPath}`}" class="img-thumbnail favicon-img" alt="favicon.ico"> <h5 class="card-title">${item.url_titel}</h5><div class="card-header-elements ms-auto"> <span class="d-none" id="short${ item.short_id }">${item.get_short_url}</span> <button data-button="short${ item.short_id }" type="button" class="btn btn-secondary btn-copy colorshort${ item.short_id } btn-sm"><i class="fa-regular fa-copy"></i> Kopieren</button> <a data-shortcode="${item.short_id}" data-shortname="${item.shortcode}" class="shortcode-class short-name btn btn-xs btn-primary btn-sm"><i class="fa-solid fa-pencil"></i> Bearbeiten</a>`);
-                        shortcodeItem.append(`<div class="card-body"><a href="${item.get_short_url}">${shortUrl}</a><br><a class="text-muted" href="${item.url_destination}">${shortDestination}</a>`);
-                        shortcodeItem.append(`<div class="card-footer">
-                        <small class="text-muted short-links-footer">
-                            <span class="short-calendar"><i class="fa-regular fa-calendar orb-icon"></i> ${item.url_create_date} </span>
-                            <span class="short-chart" data-anaylyse="${ item.short_id }"><i class="fa-solid fa-chart-line orb-icon"></i> ${item.click_count} klicks </span>
-                            <span class="short-tags"><i class="fa-solid fa-tag orb-icon"></i> ${item.tags.join(', ')} Tags</span>
-                        </small>
-                        `);
-                        shortcodeList.append(shortcodeItem);
-                    });
+    //                     // shortcodeList hinzufügen
+    //                     var shortcodeItem = $('<div class="card p-3 my-3 border border-0">');
+    //                     shortcodeItem.append(`<div class="card-header header-elements"> <form id="shortcode-form"><input type="checkbox" name="selected_shortcodes" value="shortcode_id_${item.short_id}"></form> <img src="${item.favicon_path? `${item.favicon_path}`: `${faviconPath}`}" class="img-thumbnail favicon-img" alt="favicon.ico"> <h5 class="card-title">${item.url_titel}</h5><div class="card-header-elements ms-auto"> <span class="d-none" id="short${ item.short_id }">${item.get_short_url}</span> <button data-button="short${ item.short_id }" type="button" class="btn btn-secondary btn-copy colorshort${ item.short_id } btn-sm"><i class="fa-regular fa-copy"></i> Kopieren</button> <a data-shortcode="${item.short_id}" data-shortname="${item.shortcode}" class="shortcode-class short-name btn btn-xs btn-primary btn-sm"><i class="fa-solid fa-pencil"></i> Bearbeiten</a>`);
+    //                     shortcodeItem.append(`<div class="card-body"><a href="${item.get_short_url}">${shortUrl}</a><br><a class="text-muted" href="${item.url_destination}">${shortDestination}</a>`);
+    //                     shortcodeItem.append(`<div class="card-footer">
+    //                     <small class="text-muted short-links-footer">
+    //                         <span class="short-calendar"><i class="fa-regular fa-calendar orb-icon"></i> ${item.url_create_date} </span>
+    //                         <span class="short-chart" data-anaylyse="${ item.short_id }"><i class="fa-solid fa-chart-line orb-icon"></i> ${item.click_count} klicks </span>
+    //                         <span class="short-tags"><i class="fa-solid fa-tag orb-icon"></i> ${item.tags.join(', ')} Tags</span>
+    //                     </small>
+    //                     `);
+    //                     shortcodeList.append(shortcodeItem);
+    //                 });
 
-                    $('#gif-load').addClass('d-none');
-                    $('#load-more-button').removeClass('d-none');
+    //                 $('#gif-load').addClass('d-none');
+    //                 $('#load-more-button').removeClass('d-none');
                     
-                    // Shortcode Load more
-                    if (totalShortcodes === 0) {
-                        totalShortcodes = response.total_shortcodes;
-                    }
+    //                 // Shortcode Load more
+    //                 if (totalShortcodes === 0) {
+    //                     totalShortcodes = response.total_shortcodes;
+    //                 }
     
-                    if (serialized_data.length === 0 || response.page * response.per_page >= totalShortcodes) {
-                        $('#load-more-button').hide();
-                    } else {
-                        $('#load-more-button').show();
-                    }
+    //                 if (serialized_data.length === 0 || response.page * response.per_page >= totalShortcodes) {
+    //                     $('#load-more-button').hide();
+    //                 } else {
+    //                     $('#load-more-button').show();
+    //                 }
         
-                    currentPage += 1; 
-                    start_index = response.start_index;
-                }, 500);
+    //                 currentPage += 1; 
+    //                 start_index = response.start_index;
+    //             }, 500);
 
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-                console.log(url)
-            },
-            cache: false,
-            contentType: false,
-            processData: false,
-        });
-    }
+    //         },
+    //         error: function(xhr, status, error) {
+    //             console.error(error);
+    //             console.log(url)
+    //         },
+    //         cache: false,
+    //         contentType: false,
+    //         processData: false,
+    //     });
+    // }
 
-    loadMore();
-    $('#load-more-button').on('click', loadMore);
-
-
+    // loadMore();
+    // $('#load-more-button').on('click', loadMore);
 
 
 
 
-    /* Crate functions Shortcode */
-    $("#crate-form-shortcode").on("click", function(event) {
-        event.preventDefault();
 
-        const fd = new FormData();
-        fd.append('csrfmiddlewaretoken', csrf[0].value)
-        fd.append('url_destination', url_destination.value);
-        fd.append('url_titel', url_titel.value);
-        fd.append('url_source', url_source.value);
-        fd.append('url_medium', url_medium.value);
-        fd.append('url_term', url_term.value);
-        fd.append('url_campaign', url_campaign.value);
-        fd.append('url_creator', url_creator.value);
-        fd.append('url_content', url_content.value);
 
-        $.ajax({
-            type: 'POST',
-            url: $("input[name=data]").val(),
-            data: fd,
-            enctype: 'multipart/form-data',
-            success: function(response){
+    // /* Crate functions Shortcode */
+    // $("#crate-form-shortcode").on("click", function(event) {
+    //     event.preventDefault();
 
-                //Alert
-                if(response.success == 'Dein link wurde erfolgreich erstellt'){
+    //     const fd = new FormData();
+    //     fd.append('csrfmiddlewaretoken', csrf[0].value)
+    //     fd.append('url_destination', url_destination.value);
+    //     fd.append('url_titel', url_titel.value);
+    //     fd.append('url_source', url_source.value);
+    //     fd.append('url_medium', url_medium.value);
+    //     fd.append('url_term', url_term.value);
+    //     fd.append('url_campaign', url_campaign.value);
+    //     fd.append('url_creator', url_creator.value);
+    //     fd.append('url_content', url_content.value);
 
-                    // Inputfilelds UTM Parameter
-                    $('.disabled-func').each(function() {
-                        $(this).find('input[type=text]').attr('disabled', 'disabled');
-                    });
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: $("input[name=data]").val(),
+    //         data: fd,
+    //         enctype: 'multipart/form-data',
+    //         success: function(response){
 
-                    // //Overlay
-                    $('#overlay').addClass('overlay-active');
-                    var dataImage = jQuery('#overlay').attr('data-image');
-                    $('#overlay').html("<div class=\"overlay-body\"><img src='"+dataImage+"' width=\"60\" height=\"60\"><span>Warten...</span></div>")
+    //             //Alert
+    //             if(response.success == 'Dein link wurde erfolgreich erstellt'){
 
-                    // Restefields
-                    $('#id_url_destination').val('')
-                    $('#id_url_titel').val('')
-                    $('#id_url_medium').val('')
-                    $('#id_url_source').val('')
-                    $('#id_url_term').val('')
-                    $('#id_url_titel').val('')
-                    $('#id_url_campaign').val('')
-                    $('#id_url_content').val('')
-                    $('#id_shortcode').val('')
+    //                 // Inputfilelds UTM Parameter
+    //                 $('.disabled-func').each(function() {
+    //                     $(this).find('input[type=text]').attr('disabled', 'disabled');
+    //                 });
+
+    //                 // //Overlay
+    //                 $('#overlay').addClass('overlay-active');
+    //                 var dataImage = jQuery('#overlay').attr('data-image');
+    //                 $('#overlay').html("<div class=\"overlay-body\"><img src='"+dataImage+"' width=\"60\" height=\"60\"><span>Warten...</span></div>")
+
+    //                 // Restefields
+    //                 $('#id_url_destination').val('')
+    //                 $('#id_url_titel').val('')
+    //                 $('#id_url_medium').val('')
+    //                 $('#id_url_source').val('')
+    //                 $('#id_url_term').val('')
+    //                 $('#id_url_titel').val('')
+    //                 $('#id_url_campaign').val('')
+    //                 $('#id_url_content').val('')
+    //                 $('#id_shortcode').val('')
             
-                    const tagsCheckboxes = $('input[name="tags"][type="checkbox"]');
-                    tagsCheckboxes.each(function(index, checkbox) {
-                        const tagValue = parseInt($(checkbox).val());
+    //                 const tagsCheckboxes = $('input[name="tags"][type="checkbox"]');
+    //                 tagsCheckboxes.each(function(index, checkbox) {
+    //                     const tagValue = parseInt($(checkbox).val());
             
-                        $(checkbox).prop('checked', '');
-                    });
+    //                     $(checkbox).prop('checked', '');
+    //                 });
                     
-                    // ALert Box
-                    ls_toast(response.success);
+    //                 // ALert Box
+    //                 ls_toast(response.success);
 
-                    //Close Sidebar
-                    setTimeout(()=>{
-                        location.reload();
-                        $('#overlay').removeClass('overlay-active');
-                    }, 2000);
+    //                 //Close Sidebar
+    //                 setTimeout(()=>{
+    //                     location.reload();
+    //                     $('#overlay').removeClass('overlay-active');
+    //                 }, 2000);
 
-                }else{
+    //             }else{
 
-                    // Error PopUp
-                    if(response.errors.url_destination){
-                        $('#id_url_destination').addClass('is-invalid');
-                        ls_toast(response.errors.url_destination);
-                    }
+    //                 // Error PopUp
+    //                 if(response.errors.url_destination){
+    //                     $('#id_url_destination').addClass('is-invalid');
+    //                     ls_toast(response.errors.url_destination);
+    //                 }
 
-                    if(response.errors.url_titel){
-                        $('#id_url_titel').addClass('is-invalid');
-                        ls_toast(response.errors.url_titel);
-                    }              
+    //                 if(response.errors.url_titel){
+    //                     $('#id_url_titel').addClass('is-invalid');
+    //                     ls_toast(response.errors.url_titel);
+    //                 }              
 
-                }
+    //             }
             
-                // setTimeout(function(){$('.alert').alert('close')}, 3000);
+    //             // setTimeout(function(){$('.alert').alert('close')}, 3000);
 
-            },
-            error: function(error){
-                console.log(error);
-            },
-            cache: false,
-            contentType: false,
-            processData: false,
-        })
+    //         },
+    //         error: function(error){
+    //             console.log(error);
+    //         },
+    //         cache: false,
+    //         contentType: false,
+    //         processData: false,
+    //     })
 
-    });
+    // });
 
 
 

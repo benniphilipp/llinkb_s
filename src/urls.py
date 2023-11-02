@@ -12,6 +12,7 @@ from django.views.i18n import set_language as django_set_language
 
 from products.views import stripe_webhook
 from linkinbio.views import LinkInBioDeatilePage
+from django.views.i18n import JavaScriptCatalog
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -22,6 +23,7 @@ urlpatterns = [
 urlpatterns += i18n_patterns(
     # path("pages/", include("django.contrib.flatpages.urls")), Delete
     # path('content/', include('contentpages.urls')), Delete
+    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('shortcode/', include('shortcode.urls')),
     path('analytics/', include('analytics.urls')),
     path('webclicktracker/', include('webclicktracker.urls')),

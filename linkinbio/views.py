@@ -375,7 +375,7 @@ class ShortcodeClassListView(View):
         return JsonResponse(shortcode_data, safe=False)
 
 
-
+#Ben
 # ListView LinkInBio
 class LinkInBioListView(LoginRequiredMixin, View):
     def get(self, request):

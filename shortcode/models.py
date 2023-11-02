@@ -40,7 +40,7 @@ class ShortcodeClass(models.Model):
     shortcode           = models.CharField(max_length=SHORTCODE_MAX, unique=True, blank=True)
     
     # LinkInBio Page
-    linkinbiopage        = models.ForeignKey('linkinbio.LinkInBio',on_delete=models.CASCADE)
+    linkinbiopage        = models.ForeignKey('linkinbio.LinkInBio',on_delete=models.CASCADE, blank=True, null=True)
 
     
     # Begrenzung von URLs
