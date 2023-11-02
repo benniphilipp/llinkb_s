@@ -4,8 +4,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
     entry: {
       vendor: './assets/js/vendor.js',
-      main: './assets/js/main.js',
+      main: './assets/js/main/main.js',
       linkInBio: './assets/js/linkinbio/linkinbio.js',
+      analytics: './assets/js/analytics/analytics.js',
       linkInBioView: './assets/js/linkinbio/linkinbio-view.js',
       styles: './assets/css/main.scss',
       customLinkinbio: './assets/css/linkinbio.scss',

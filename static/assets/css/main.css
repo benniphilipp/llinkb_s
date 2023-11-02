@@ -160,12 +160,27 @@
     background-color: #f4f6fa;
 }
 
+.main-body{
+    margin-left: 0; /* Breite der Sidebar */
+}
+
+.main-navbar{
+    left: 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 75px;
+    z-index:99;
+}
+
 .main hr{
     opacity: 1;
     /* border: 0.1rem solid #0c3ebb; */
     margin-top: 1rem;
     margin-bottom: 2.9rem;
 }
+
+
 
 /* Sidebar */
 .bd-aside {
@@ -181,6 +196,7 @@
     transition: all 300ms ease-in-out;
     z-index: 101;
     background-color: #fff !important;
+    width: 230px;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link{

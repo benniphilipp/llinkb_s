@@ -1,8 +1,12 @@
 {% load custom_tags %}
 {% load i18n %}
 
-<nav class="navbar navbar-expand bd-header navbar bg-white" aria-label="Second navbar example">
+<nav id="navbar-main" class="navbar navbar-expand bd-header bg-white" aria-label="Second navbar example">
     <div class="container-fluid">
+
+        <div class="mobile-open-div">
+            <i id="navbar-mobile-open" class="fa-solid fa-bars fa-icon-close"></i>
+        </div>
 
         <div class="collapse navbar-collapse order-1 pl-2" id="navbarsExample02">
             <ul class="navbar-nav me-auto"></ul> 
@@ -27,4 +31,38 @@
         </div>
 
     </div>
+</nav>
+
+<nav id="navbar-mobile" class="d-none">
+
+    <div id="close-navbar-mobile" class="close-div-menu">
+        <i class="fa-solid fa-xmark fa-icon-close"></i>
+    </div>
+
+    <ul>
+        <li>
+            <i class="fa-solid fa-gauge fa-icons"></i>
+            <a href="{% url 'analytics:analytics-view' %}" class="nav-link {% if '/analytics/' == request.get_full_path %} active {% endif %}">
+                {% trans "Dashboard" %}
+            </a>
+        </li>
+        <li>
+            <i class="fa-solid fa-link fa-icons"></i>
+            <a href="{% url 'shortcode:shortcode_list_view' %}" class="link-nav link-links nav-link {% if '/shortcode/list/' == request.get_full_path %} active {% endif %}">
+                Links
+            </a>
+        </li>
+        <li>
+            <i class="fa-regular fa-id-badge fa-icons"></i>
+            <a href="{% url 'linkinbio:linkinbio_view_list' %}" class="nav-link {% if '/linkinbio/' == request.get_full_path %} active {% endif %}">
+                LinkIn Bio
+            </a>
+        </li>
+        <li>
+            <i class="fa-regular fa-file fa-icons"></i>
+            <a href="{% url 'webclicktracker:click_view' %}" class="nav-link {% if '/webclicktracker/' == request.get_full_path %} active {% endif %}">
+                Websiten Trecker
+            </a>
+        </li>
+    </ul>
 </nav>
