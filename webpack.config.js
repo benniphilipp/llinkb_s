@@ -8,7 +8,9 @@ module.exports = {
       linkInBio: './assets/js/linkinbio/linkinbio.js',
       analytics: './assets/js/analytics/analytics.js',
       linkInBioView: './assets/js/linkinbio/linkinbio-view.js',
+      shortcode: './assets/js/shortcode/shortcode.js',
       styles: './assets/css/main.scss',
+      stylesshort: './assets/css/shortcode.scss',
       customLinkinbio: './assets/css/linkinbio.scss',
     },
     output: {

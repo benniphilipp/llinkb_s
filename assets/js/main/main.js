@@ -23,6 +23,7 @@ function siedbar() {
         mainSidebar.classList.remove('d-none');
         navbarMain.classList.add('main-navbar');
         bodyMain.classList.remove('main-body');
+        
     }
 }
 

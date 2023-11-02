@@ -7,6 +7,9 @@
 <link rel="stylesheet" type="text/css" href="{% static '/assets/css/dashbord.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static '/assets/css/analytics.css' %}">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<link rel="stylesheet" href="{% static '/css/stylesshort.css' %}">
+
 {% endblock %}
 
 {% block body %}
@@ -24,7 +27,7 @@
             {% include "includes/navbar.html" %}
 
             <!--Main-->
-            <div class="main">
+            <div class="main" id="body-main">
                 <div class="container-fluid mt-5 px-4">
                     <div class="row">
                         <div class="col-12">
@@ -116,5 +119,6 @@
 
 <!--Neu-->
 <script src="{% static '/assets/js/analytics-dashboard.js' %}"></script>
+<script src="{% static '/js/shortcode.bundle.js' %}"></script>
 
 {% endblock %}
