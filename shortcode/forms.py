@@ -2,12 +2,14 @@ from django.forms import ModelForm, Textarea, CharField, HiddenInput, Select, Bo
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column, HTML, Hidden, Div, Field
+from django.utils.translation import gettext_lazy as _
 
 from .models import ShortcodeClass, Tag
 from geotargeting.models import GeoThemplate
 
 class ShortcodeClassForm(forms.ModelForm):
-
+    submit_text = _("Save")
+    
     url_destination = forms.CharField(label="Ziel-Url", widget=forms.TextInput(attrs={'placeholder': 'Ziel Url'}))
     url_titel = forms.CharField(label="Titel", widget=forms.TextInput(attrs={'placeholder': 'Titel'}))
     shortcode = forms.CharField(label="Shortcode", required=False, widget=forms.TextInput(attrs={'placeholder': 'shortcode'}))
@@ -39,28 +41,28 @@ class ShortcodeClassForm(forms.ModelForm):
                 Column('shortcode', css_class='form-group col-12 my-2 disabled-func'),
                 css_class='row'
             ),
-            Row(
-                Column('url_source', css_class='form-group col-md-6 my-2 disabled-func'),
-                Column('url_medium', css_class='form-group col-md-6 my-2 disabled-func'),
-                css_class='row'
-            ),
-            Row(
-                Column('url_campaign', css_class='form-group col-md-6 my-2 disabled-func'),
-                Column('url_term', css_class='form-group col-md-6 my-2 disabled-func'),
-                css_class='row'
-            ),
-            Row(
-                Column('url_content', css_class='form-group col-md-6 my-2 disabled-func'),
-                css_class='row'
-            ),
+            # Row(
+            #     Column('url_source', css_class='form-group col-md-6 my-2 disabled-func'),
+            #     Column('url_medium', css_class='form-group col-md-6 my-2 disabled-func'),
+            #     css_class='row'
+            # ),
+            # Row(
+            #     Column('url_campaign', css_class='form-group col-md-6 my-2 disabled-func'),
+            #     Column('url_term', css_class='form-group col-md-6 my-2 disabled-func'),
+            #     css_class='row'
+            # ),
+            # Row(
+            #     Column('url_content', css_class='form-group col-md-6 my-2 disabled-func'),
+            #     css_class='row'
+            # ),
             Row(
                 Column('tags', css_class='form-group col-12 my-2'),
                 css_class='row'
             ),
             HTML('<div class="row"><div class="form-group col-12 my-2"></div></div>'),
             Hidden('url_creator', '{{ admin }}'),
-            HTML('<input id="crate-form-shortcode" class="btn btn-primary mt-3" type="submit" value="Speichern">'),
-            HTML('<input id="update-form-shortcode" class="btn btn-primary mt-3" type="submit" value="Speichern">')
+            HTML('<input id="crate-form-shortcode" class="btn btn-primary mt-3" type="submit" value="{}">'.format(self.submit_text)),
+            HTML('<input id="update-form-shortcode" class="btn btn-primary mt-3" type="submit" value="{}">'.format(self.submit_text))
         )
     
     class Meta:

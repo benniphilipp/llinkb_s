@@ -5,6 +5,7 @@ from django.core.cache import cache
 from django.http import HttpRequest
 from django.http.response import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.translation import gettext_lazy as _
 
 #Import Forms
 from shortcode.forms import (

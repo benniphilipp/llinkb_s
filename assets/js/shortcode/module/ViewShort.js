@@ -13,6 +13,7 @@ class ViewShort{
             crateFormShortcode.addEventListener('click', this.ShortcodeCrateView.bind(this))
         }
     }
+    
 
     // Craete
     ShortcodeCrateView(event){
