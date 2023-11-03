@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.core.cache import cache
 from django.http import HttpRequest
 from django.http.response import JsonResponse, HttpResponse
+from urllib.parse import unquote
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext_lazy as _
 from django.core.serializers import serialize
@@ -86,17 +87,9 @@ class ShortcodeListeCreateView(View, LoginRequiredMixin):
     def get_context(self, request):
         form = ShortcodeClassForm(request.POST or None, user=request.user)
         tags_form = CreateTagForm()
-        # limitation_form = LimitationShorcodeForm()
-        # geo_targeting_form = GeoTargetingForm()
-        # android_targetingform = AndroidTargetingForm()
-        # ios_targetingform = IosTargetingForm()
         
         context = {
             'form': form,
-            # 'geo_targeting_form': geo_targeting_form,
-            # 'android_targetingform': android_targetingform,
-            # 'ios_targetingform': ios_targetingform,
-            # 'limitation_form': limitation_form,
             'tags_form': tags_form,
             'admin': request.user.id,
             'useremail': request.user,
@@ -145,13 +138,9 @@ class ShortcodeListeCreateView(View, LoginRequiredMixin):
 
             return JsonResponse({'errors': error_messages}, status=200)
 
-        
-        
-        
-        
+  
 #Shortcode Update SingleView
 class ShortcodeSingelUpdateView(View, LoginRequiredMixin):
-    
     
     def get(self, request, pk):
         try:
@@ -194,7 +183,31 @@ class ShortcodeSingelUpdateView(View, LoginRequiredMixin):
             
             cache.delete('json_list_view_cache_key')
             obj.save()
-            return JsonResponse({'success': _('Your link has been successfully changed'),})
+            return JsonResponse({'success': _('Your link has been successfully changed')})
+        
+
+# Überprüfen der URL-Erreichbarkeit
+class CheckingUrlAccessibility(View):
+    def get(self, request):
+        url = request.GET.get('url', '')
+        decoded_url = unquote(url)  
+        
+        if not decoded_url.startswith('https://'):
+            decoded_url = 'https://' + decoded_url
+        
+        try:
+            response = requests.get(decoded_url)
+            if response.status_code == 200:
+                data = [{'data': 'true'}]
+                return JsonResponse(data, safe=False)
+        except requests.exceptions.RequestException:
+            pass 
+    
+        data = [{'data': 'false'}]
+        return JsonResponse(data, safe=False)
+
+        
+        
 
             
     

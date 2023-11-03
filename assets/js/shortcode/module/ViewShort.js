@@ -29,6 +29,61 @@ class ViewShort{
           }
         });
 
+        const IdUrlDestination = document.querySelector('#id_url_destination');
+        if(IdUrlDestination){
+            IdUrlDestination.addEventListener('input', this.ShortcodeUrlAccessibility.bind(this));
+        }
+
+        const urlTitel = document.getElementById('id_url_titel')
+        if(urlTitel){
+            urlTitel.addEventListener('input', function () {
+                const inputValue = this.value;
+                const otherInputValue = document.getElementById('id_url_destination').value;
+                const crate_form_shortcode = document.getElementById('crate-form-shortcode');
+                console.log(otherInputValue)
+                console.log(inputValue)
+                if (inputValue && otherInputValue) {
+                    crate_form_shortcode.classList.remove('disabled');
+                }
+            });
+        }
+    }
+
+    // Url Accessibility
+    ShortcodeUrlAccessibility(){
+        const UrlDestination = document.querySelector('#id_url_destination').value;
+        const urlAccessibility = document.querySelector('#CheckingUrlAccessibility').value;
+
+        const valueUrl = '?url=' + encodeURIComponent(UrlDestination)
+        const messageElement = document.querySelector('#id_url_destination');
+
+        $.ajax({
+            url: urlAccessibility+valueUrl,
+            type: 'GET',
+            dataType: 'json',
+            success: (data) => {
+                console.log(data)
+                if (data[0].data === 'true') {
+
+                    $("#id_url_destination").after('<div class="text-success">Deine Website ist erreichbar!</div>');
+                    setTimeout(()=>{
+                        $("#id_url_destination").next().remove();
+                    }, 2000);
+
+                } else {
+   
+                    $("#id_url_destination").after('<div class="text-danger">Deine Website ist erreichbar!</div>');
+                    setTimeout(()=>{
+                        $("#id_url_destination").next().remove();
+                    }, 2000);
+
+                }
+            },
+            error: (error) => {
+                console.log(error);
+            }
+        });       
+
     }
 
     //Update View
