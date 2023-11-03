@@ -213,6 +213,7 @@ $(document).ready(function(){
     /* Einzelansicht felder Befühlung */
     const updateShortcodeUrl = document.getElementById('update-shortcode-url');
 
+    
     $('#shortcode-list').on('click', '.shortcode-class', function() {
 
         // Shorcode Single Ansicht
@@ -573,25 +574,26 @@ $(document).ready(function(){
     })
 
     // Löst das holen von Favicon aus
-    $("#crate-form-shortcode").click(function() {
-        var url = $("#id_url_destination").val();
-        var titel = $("#id_url_titel").val();
-        if(url && titel){
-            $.ajax({
-                url: '/shortcode/get_favicon/?url=' + encodeURIComponent(url),
-                success: function(data) {
-                    if (data.favicon_url) {
-                        $("#result").html(`<img src="${data.favicon_url}" alt="Favicon">`);
-                    } else {
-                        $("#result").html("Favicon not found");
-                    }
-                },
-                error: function() {
-                    $("#result").html("Error fetching favicon.");
-                }
-            });
-        }
-    });
+    // $("#crate-form-shortcode").click(function() {
+    //     var url = $("#id_url_destination").val();
+    //     var titel = $("#id_url_titel").val();
+    //     if(url && titel){
+    //         $.ajax({
+    //             url: '/shortcode/get_favicon/?url=' + encodeURIComponent(url),
+    //             success: function(data) {
+    //                 if (data.favicon_url) {
+    //                     $("#result").html(`<img src="${data.favicon_url}" alt="Favicon">`);
+    //                 } else {
+    //                     $("#result").html("Favicon not found");
+    //                 }
+    //             },
+    //             error: function() {
+    //                 $("#result").html("Error fetching favicon.");
+    //             }
+    //         });
+    //     }
+    // });
+
 
 
 }); // End document ready function

@@ -1,4 +1,6 @@
 import json
+from bs4 import BeautifulSoup
+import requests
 from django.views import View
 from django.shortcuts import render
 from django.core.cache import cache
@@ -22,6 +24,10 @@ from shortcode.forms import (
 from accounts.models import CustomUser
 from shortcode.models import ShortcodeClass, Tag
 from analytics.models import ClickEvent, DailyClick, IPGeolocation
+
+
+
+    
 
 #Shorctcode Crate
 class ShortcodeListeCreateView(View, LoginRequiredMixin):
@@ -80,17 +86,17 @@ class ShortcodeListeCreateView(View, LoginRequiredMixin):
     def get_context(self, request):
         form = ShortcodeClassForm(request.POST or None, user=request.user)
         tags_form = CreateTagForm()
-        limitation_form = LimitationShorcodeForm()
-        geo_targeting_form = GeoTargetingForm()
-        android_targetingform = AndroidTargetingForm()
-        ios_targetingform = IosTargetingForm()
+        # limitation_form = LimitationShorcodeForm()
+        # geo_targeting_form = GeoTargetingForm()
+        # android_targetingform = AndroidTargetingForm()
+        # ios_targetingform = IosTargetingForm()
         
         context = {
             'form': form,
-            'geo_targeting_form': geo_targeting_form,
-            'android_targetingform': android_targetingform,
-            'ios_targetingform': ios_targetingform,
-            'limitation_form': limitation_form,
+            # 'geo_targeting_form': geo_targeting_form,
+            # 'android_targetingform': android_targetingform,
+            # 'ios_targetingform': ios_targetingform,
+            # 'limitation_form': limitation_form,
             'tags_form': tags_form,
             'admin': request.user.id,
             'useremail': request.user,
@@ -103,8 +109,30 @@ class ShortcodeListeCreateView(View, LoginRequiredMixin):
         form = ShortcodeClassForm(request.POST)
         
         if form.is_valid():
+            new_destination = form.cleaned_data.get('url_destination')
+
             form.save()
             cache.delete('json_list_view_cache_key')
+            
+            if new_destination:
+                response = requests.get(new_destination)
+                content = response.content
+                soup = BeautifulSoup(content, 'html.parser')
+                favicon_link = soup.find('link', rel='icon')
+
+                if favicon_link:
+                    favicon_url = favicon_link.get('href')
+                    if not favicon_url.startswith('http'):
+                        # Handle relative URLs
+                        base_url = new_destination.split('/')[2]
+                        favicon_url = f'http://{base_url}/{favicon_url}'
+
+                    shortcode_instances = ShortcodeClass.objects.filter(url_destination=new_destination)
+                    for shortcode_instance in shortcode_instances:
+                        shortcode_instance.favicon_path = favicon_url
+                        shortcode_instance.save()
+                        return JsonResponse({'favicon_url': favicon_url})
+                        
             return JsonResponse({'success': 'Dein Link wurde erfolgreich erstellt.'}, status=200)
         else:
             errors = form.errors
@@ -123,6 +151,7 @@ class ShortcodeListeCreateView(View, LoginRequiredMixin):
         
 #Shortcode Update SingleView
 class ShortcodeSingelUpdateView(View, LoginRequiredMixin):
+    
     
     def get(self, request, pk):
         try:
@@ -146,5 +175,26 @@ class ShortcodeSingelUpdateView(View, LoginRequiredMixin):
             return JsonResponse({'error': _('No shortcode found')})
 
     
-    def post(self, requuest):
-        pass
+    def post(self, request, pk):
+
+        obj = ShortcodeClass.objects.get(pk=pk)
+        if request.is_ajax():
+            new_destination = request.POST.get('url_destination')
+            new_titel       = request.POST.get('url_titel')
+            new_shortcode   = request.POST.get('shortcode_id')
+            new_tags        = request.POST.get('tags')
+            
+            obj.shortcode       = new_shortcode
+            obj.url_destination = new_destination
+            obj.url_titel       = new_titel
+            
+            if new_tags:
+                tag_ids = [int(tag_id) for tag_id in new_tags.split(',')]
+                obj.tags.set(tag_ids)
+            
+            cache.delete('json_list_view_cache_key')
+            obj.save()
+            return JsonResponse({'success': _('Your link has been successfully changed'),})
+
+            
+    

@@ -313,3 +313,7 @@ https://dev.to/earthcomfy/django-social-authentication-imk
 
 # Überstzung
 https://poeditor.com/projects/view?id=659859
+
+
+# Single select
+https://apalfrey.github.io/select2-bootstrap-5-theme/examples/single-select/

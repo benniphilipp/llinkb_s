@@ -1,3 +1,5 @@
+import { clearContent, lsToast } from '../../linkinbio/module/lsToast';
+
 class ViewShort{
     constructor(){
         this.ShortccodeEvents();
@@ -40,11 +42,15 @@ class ViewShort{
         asideForm.classList.add('toggle');
 
         const urlData = document.getElementById('ShortcodeSingelUpdateView').value.replace(/0/g, shortcodeValue);
+        
+        const archiveBtn = document.getElementById('archive-btn');
+        archiveBtn.setAttribute('data-archive', shortcodeValue);
 
         const url_destination = document.getElementById('id_url_destination');
         const url_titel = document.getElementById('id_url_titel');
         const idShort = document.getElementById('id_shortcode');
         const shortcodeId = document.querySelector('#shortcode_id');
+        const updateShortcodeUrl = document.querySelector('#update-shortcode-url');
 
         $.ajax({
             type: 'GET',
@@ -56,6 +62,7 @@ class ViewShort{
                 url_destination.value = data.url_destination;
                 url_titel.value = data.url_titel;
                 idShort.value = data.shortcode;
+                updateShortcodeUrl.value = data.id
 
                 const tagsCheckboxes = $('input[name="tags"][type="checkbox"]');
 
@@ -78,8 +85,78 @@ class ViewShort{
     }
 
     //Update Crate
-    ShortcodeUpdateCrateView(){
-        console.log('RUN')
+    ShortcodeUpdateCrateView(event){
+        event.preventDefault()
+
+        const updateShortcodeUrlID = document.querySelector('#update-shortcode-url').value;
+        const urlData = document.getElementById('ShortcodeSingelUpdateView').value.replace(/0/g, updateShortcodeUrlID);
+
+        const csrf = document.getElementsByName('csrfmiddlewaretoken');
+        const url_destination = document.getElementById('id_url_destination');
+        const url_titel = document.getElementById('id_url_titel');
+        const idShort = document.getElementById('id_shortcode');
+
+        const fd = new FormData();
+        fd.append('csrfmiddlewaretoken', csrf[0].value)
+        fd.append('url_destination', url_destination.value);
+        fd.append('shortcode_id', idShort.value);
+        fd.append('url_titel', url_titel.value);
+
+        const selectedTags = [];
+        document.querySelectorAll('input[name="tags"]:checked').forEach(function(checkbox) {
+            selectedTags.push(checkbox.value);
+        });
+        
+        fd.append('tags', selectedTags.join(','));
+
+        $.ajax({
+            type: 'POST',
+            url: urlData,
+            data: fd,
+            dataType: 'json',
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: (data) => {
+                console.log(data);
+
+                const archiveBtn = document.getElementById('archive-btn');
+                archiveBtn.setAttribute('data-archive', '');
+                url_destination.value = '';
+                url_titel.value = '';
+                idShort.value = '';
+
+                const overlayOpen = document.querySelector('#overlay-open');
+                const asideForm = document.querySelector('#aside-form');
+                const crateFormShortcode = document.querySelector('#crate-form-shortcode');
+        
+                crateFormShortcode.classList.remove('d-none')
+                overlayOpen.classList.remove('overlay-open')
+                asideForm.classList.remove('toggle');
+
+                const tagsCheckboxes = $('input[name="tags"][type="checkbox"]');
+                tagsCheckboxes.each(function(index, checkbox) {
+                    const tagValue = parseInt($(checkbox).val());
+                    $(checkbox).prop('checked', '');
+                });
+
+                const shortcodeList = document.querySelector('#shortcode-list');
+                while (shortcodeList.firstChild) {
+                    shortcodeList.removeChild(shortcodeList.firstChild);
+                }
+
+                lsToast(data.success);
+
+                setTimeout(()=>{
+                    this.ShortcodeAjaxView();
+                }, 200);
+
+            },
+            error: (error) => {
+                console.log(error)
+            }
+        });
+                
     }
     
 
@@ -90,24 +167,17 @@ class ViewShort{
 
         const url_destination = document.getElementById('id_url_destination');
         const url_titel = document.getElementById('id_url_titel');
-        const url_medium = document.getElementById('id_url_medium');
-        const url_source = document.getElementById('id_url_source');
-        const url_term = document.getElementById('id_url_term');
-        const url_content = document.getElementById('id_url_content');
-        const url_campaign = document.getElementById('id_url_campaign');
-        const csrf = document.getElementsByName('csrfmiddlewaretoken');
+        const id_shortcode = document.getElementById('id_shortcode');
         const url_creator = document.getElementById('url_creator');
+        const csrf = document.getElementsByName('csrfmiddlewaretoken');
+
     
         const fd = new FormData();
         fd.append('csrfmiddlewaretoken', csrf[0].value)
         fd.append('url_destination', url_destination.value);
         fd.append('url_titel', url_titel.value);
-        fd.append('url_source', url_source.value);
-        fd.append('url_medium', url_medium.value);
-        fd.append('url_term', url_term.value);
-        fd.append('url_campaign', url_campaign.value);
+        fd.append('id_shortcode', id_shortcode.value);
         fd.append('url_creator', url_creator.value);
-        fd.append('url_content', url_content.value);
 
         $.ajax({
             type: 'POST',
