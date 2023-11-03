@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'linkinbio',
     'geotargeting',
     'products',
+    'domain',
     # 'contentpages',Delete
 ]
 

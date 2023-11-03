@@ -21,8 +21,6 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    # path("pages/", include("django.contrib.flatpages.urls")), Delete
-    # path('content/', include('contentpages.urls')), Delete
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('shortcode/', include('shortcode.urls')),
     path('analytics/', include('analytics.urls')),
@@ -31,6 +29,7 @@ urlpatterns += i18n_patterns(
     path('geotargeting/', include('geotargeting.urls')),
     path('products/', include('products.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
+    path('domain/', include('domain.urls')),
     path('', include('accounts.urls')),
     url(r'^(?P<shortcode>[\w-]+)/$', URLRedirectView.as_view(), name='scode'), 
 )

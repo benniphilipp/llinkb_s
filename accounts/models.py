@@ -15,6 +15,7 @@ import string
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
+
 class CustomUserManager(BaseUserManager):
     """
     Custom user model manager where email is the unique identifiers
@@ -67,7 +68,7 @@ class CustomUser(AbstractUser):
     zip_code = models.CharField(max_length=20, blank=True, null=True)
     city = models.CharField(max_length=20, blank=True, null=True)
     payment_code = models.CharField(max_length=20, blank=True, null=True)
-    
+        
     language = models.CharField(max_length=2,choices=LANGUAGE_CHOICES, default='en', verbose_name=_('Sprache'))
 
     USERNAME_FIELD = "email"
@@ -77,6 +78,7 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+
 
 
 # Token API

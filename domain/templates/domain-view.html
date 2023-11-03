@@ -1,0 +1,48 @@
+{% extends "basic.html" %}
+{% load static %}
+{% load i18n %}
+
+<!--Css-->
+{% block css %}
+{% endblock %}
+
+<!--Body-->
+{% block body %}
+    <!--Sidebar-->
+    {% include "includes/sidebar.html" %}
+
+    <div class="container-fluid p-0 bg-body">
+
+        <!--Navbar-->
+        {% include "includes/navbar.html" %}
+
+        <!--Main-->
+        <div class="main" id="body-main">
+            <div class="container-fluid mt-5 px-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex flex-row align-items-center">
+                            <h3 class="p-1" style="margin-top: 10px;">Domains</h3>
+                            <div class="p-1 ms-auto">
+                                <button class="btn btn-primary mt-1" type="button">{% trans "Crate Domain" %}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="alert alert-primary" role="alert">
+                            {% trans "The domains are created here, the function is still under development." %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock body %}
+
+<!--Javasript-->
+{% block javasript %}
+{% endblock %}

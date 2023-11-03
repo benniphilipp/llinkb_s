@@ -27,7 +27,11 @@ python manage.py startapp contentpages
 python manage.py startapp accounts
 
 # Link in Bio Seite
-    Neues Module
+python manage.py startapp linkinbio
+
+# Domain 
+python manage.py startapp domain
+
 
 # Campaign
 https://support.bitly.com/hc/en-us/articles/115001195167
