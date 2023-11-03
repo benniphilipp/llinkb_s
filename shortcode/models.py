@@ -74,12 +74,14 @@ class ShortcodeClass(models.Model):
         super().save(*args, **kwargs)
         
     def save(self, *args, **kwargs):
-        if self.shortcode is None or self.shortcode == "":
-            self.shortcode = create_shortcode(self)
-        if not "http" in self.url_destination:
+        if not self.shortcode or self.shortcode == "":
+                self.shortcode = create_shortcode(self)
+
+        if not self.url_destination.startswith("http"):
             self.url_destination = "http://" + self.url_destination
+
         super(ShortcodeClass, self).save(*args, **kwargs)
-    
+
     
     @property
     def get_full_url(self):
@@ -113,5 +115,6 @@ class ShortcodeClass(models.Model):
     @property
     def get_short_url(self):
         url_path = reverse("scode", kwargs={'shortcode': self.shortcode}, host='www', scheme='http')
+        url_path = url_path.replace('/en/', '/').replace('/de/', '/')
         return url_path
     

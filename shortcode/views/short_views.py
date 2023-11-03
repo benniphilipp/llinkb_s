@@ -28,7 +28,6 @@ from analytics.models import ClickEvent, DailyClick, IPGeolocation
 
 
 
-    
 
 #Shorctcode Crate
 class ShortcodeListeCreateView(View, LoginRequiredMixin):
@@ -38,17 +37,35 @@ class ShortcodeListeCreateView(View, LoginRequiredMixin):
         if 'application/json' in request.META.get('HTTP_ACCEPT', ''):
             # JSON-Anfrage: Kontext als JSON zurückgeben
             if request.is_ajax():
+                query = request.GET.get('q')
+                tags = request.GET.getlist('tags[]') 
+                
+                print(f'Tags: {tags}')
+                print(f'Suche: {query}')
+                
                 page = int(request.GET.get('page', 1))
                 per_page = 5  # Anzahl der Einträge pro Seite
                 
                 start_index = (page - 1) * per_page
                 end_index = start_index + per_page
 
-                shortcodes = ShortcodeClass.objects.filter(url_creator=request.user, url_archivate=False) \
-                                                .order_by('-url_create_date')[start_index:end_index]
+                # shortcodes = ShortcodeClass.objects.filter(url_creator=request.user, url_archivate=False) \
+                #                                 .order_by('-url_create_date')[start_index:end_index]
                 
+                shortcodes = ShortcodeClass.objects.filter(url_creator=request.user, url_archivate=False)
+                
+                if tags:
+                    # Filtern nach Tags, wenn Tags in der Anfrage vorhanden sind
+                    shortcodes = shortcodes.filter(tags__name__in=tags)
+                    
+                if query:
+                    # Filtern nach Suchbegriff, wenn ein Suchbegriff in der Anfrage vorhanden ist
+                    shortcodes = shortcodes.filter(url_titel__icontains=query)
+                    
+                result_shortcodes = shortcodes.order_by('-url_create_date')[start_index:end_index]
+   
                 data = []  
-                for shortcode in shortcodes:
+                for shortcode in result_shortcodes:
                     try:
                         click_event = ClickEvent.objects.get(short_url=shortcode)
                         click_count = click_event.count

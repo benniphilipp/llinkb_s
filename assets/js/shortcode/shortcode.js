@@ -90,6 +90,17 @@ export function CloseShortcodeForm(){
     geoTargetingTab.classList.remove('disabled');
     geoTargetingForm.display = 'block';
 
+    const url_destination = document.getElementById('id_url_destination');
+    const url_titel = document.getElementById('id_url_titel');
+    const idShort = document.getElementById('id_shortcode');
+    const updateShortcodeUrl = document.querySelector('#update-shortcode-url');
+
+    url_destination.value = '';
+    url_titel.value = '';
+    idShort.value = '';
+    updateShortcodeUrl.value = '';
+    shortcodeId.innerHTML = '';
+
 }
 
 const closeForm = document.querySelector('#closeForm');

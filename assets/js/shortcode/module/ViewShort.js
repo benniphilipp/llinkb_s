@@ -34,19 +34,74 @@ class ViewShort{
             IdUrlDestination.addEventListener('input', this.ShortcodeUrlAccessibility.bind(this));
         }
 
-        const urlTitel = document.getElementById('id_url_titel')
+        const urlTitel = document.getElementById('id_url_titel');
         if(urlTitel){
             urlTitel.addEventListener('input', function () {
                 const inputValue = this.value;
                 const otherInputValue = document.getElementById('id_url_destination').value;
                 const crate_form_shortcode = document.getElementById('crate-form-shortcode');
-                console.log(otherInputValue)
-                console.log(inputValue)
-                if (inputValue && otherInputValue) {
-                    crate_form_shortcode.classList.remove('disabled');
+
+                const update_form_shortcode = document.getElementById('update-form-shortcode');
+
+                if(crate_form_shortcode){
+                    if (inputValue && otherInputValue) {
+                        crate_form_shortcode.classList.remove('disabled');
+                    }
                 }
+
+                if(update_form_shortcode){
+                    if (inputValue && otherInputValue) {
+                        update_form_shortcode.classList.remove('disabled');
+                    }
+                }
+
             });
         }
+
+        listContainer.addEventListener('click', function(event){
+            if (event.target.classList.contains('btn-copy')) {
+                const clickedListItem = event.target;
+                const buttonId = clickedListItem.getAttribute('data-button');
+                self.CopyButtonColort(buttonId);
+              } 
+        });
+
+
+        const asideForm = document.querySelector('#aside-form');
+        if(asideForm){
+            asideForm.addEventListener('click', function (event){
+                if (event.target.classList.contains('btn-copy')) {
+                    const clickedListItem = event.target;
+                    const buttonId = clickedListItem.getAttribute('data-button');
+                    self.CopyButtonColort(buttonId);
+                  }   
+            });
+        }
+
+
+        const loadMoreButton = document.querySelector('#load-more-button');
+        if(loadMoreButton){
+            loadMoreButton.addEventListener('click', this.ShortcodeAjaxView.bind(this))
+        }
+
+        const filter_search_form = document.querySelector('#filter-search-form');
+        if(filter_search_form){
+            filter_search_form.addEventListener('change', this.ShortcodeAjaxView.bind(this))
+        }
+
+    }
+
+    // Copy Button color
+    CopyButtonColort(buttonId){
+        let that = document.getElementById(buttonId);
+        navigator.clipboard.writeText(that?.innerText).then(res => {});
+
+        $('.color' + buttonId).addClass('bg-success text-white');
+        setTimeout(()=>{
+            $('.color' + buttonId).removeClass('bg-success text-white');
+                // onClick copy to clipboard
+                console.clear()
+        }, 2000);
     }
 
     // Url Accessibility
@@ -173,8 +228,7 @@ class ViewShort{
             contentType: false,
             processData: false,
             success: (data) => {
-                console.log(data);
-
+                
                 const archiveBtn = document.getElementById('archive-btn');
                 archiveBtn.setAttribute('data-archive', '');
                 url_destination.value = '';
@@ -257,20 +311,34 @@ class ViewShort{
         const dataInput = document.querySelector('input[name="data"]');
         const gifLoad = document.querySelector('#gif-load');
 
+        const selectedTag = document.querySelector('#tag-filter');
+        const searchQuery = document.querySelector('#search-input');
+        const ValueselectedTag = selectedTag.value;
+        const ValuesearchQuery = searchQuery.value;
+       
+        const tagsArray = ValueselectedTag ? [ValueselectedTag] : [];
+
         let start_index; 
-        var currentPage = 1;  
-        var totalShortcodes = 0; 
+        let currentPage = 1;  
+        let totalShortcodes = 0; 
 
         $.ajax({
             url: `${dataInput.value}?page=${currentPage}`,
             data: { page: currentPage  },
             dataType: 'json',
+            data: {
+                tags: tagsArray,
+                q: ValuesearchQuery
+            },
             success: (response) => {
 
                 const shortcodeList = document.querySelector('#shortcode-list');
                 const serialized_data = response.data;
                 gifLoad.classList.remove('d-none');
 
+                while (shortcodeList.firstChild) {
+                    shortcodeList.removeChild(shortcodeList.firstChild);
+                }
 
                 setTimeout(function(){
 

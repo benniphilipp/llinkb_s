@@ -4,6 +4,7 @@ urlpatterns = [
     path('short/', include('shortcode.views.short_urls')),
 ]
 
+
 # from shortcode.views.views_main import (
 #     post_crate_view, 
 #     load_shortcode_data_view, 

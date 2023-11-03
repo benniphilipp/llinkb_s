@@ -478,98 +478,98 @@ $(document).ready(function(){
 
 
     // Prüfung feld source code
-    $('#id_url_source').on('blur', function () {
-        var inputValue = $(this).val();
-        var otherInputValue = $('#id_url_medium').val();
+    // $('#id_url_source').on('blur', function () {
+    //     var inputValue = $(this).val();
+    //     var otherInputValue = $('#id_url_medium').val();
 
-        if (inputValue && otherInputValue) {
-            $('#crate-form-shortcode').removeClass('disabled');
-        }
-    });
+    //     if (inputValue && otherInputValue) {
+    //         $('#crate-form-shortcode').removeClass('disabled');
+    //     }
+    // });
 
-    $('#id_url_medium').on('blur', function () {
-        var inputValue = $('#id_url_source').val();
-        var otherInputValue = $(this).val();
+    // $('#id_url_medium').on('blur', function () {
+    //     var inputValue = $('#id_url_source').val();
+    //     var otherInputValue = $(this).val();
 
-        if (inputValue && otherInputValue) {
-            $('#crate-form-shortcode').removeClass('disabled');
-        }
-    });
+    //     if (inputValue && otherInputValue) {
+    //         $('#crate-form-shortcode').removeClass('disabled');
+    //     }
+    // });
 
-    $('#id_url_source, #id_url_medium').on('input', function () {
-        $('#crate-form-shortcode').addClass('disabled');
-    });
+    // $('#id_url_source, #id_url_medium').on('input', function () {
+    //     $('#crate-form-shortcode').addClass('disabled');
+    // });
 
 
     //destination https://stackoverflow.com/questions/60286543/how-to-check-if-a-url-is-valid-actually-loads-a-page-with-content-efficiently
-    $("#id_url_destination").on("change", function () {
+    // $("#id_url_destination").on("change", function () {
 
-        var link = $('#id_url_destination').val();
+    //     var link = $('#id_url_destination').val();
 
-        function UrlExists(url, cb){
-            jQuery.ajax({
-                url:      url,
-                dataType: 'text',
-                type:     'GET',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                complete:  function(xhr){
-                    if(typeof cb === 'function')
-                        cb.apply(this, [xhr.status]);
-                }
-            });
-        }
+    //     function UrlExists(url, cb){
+    //         jQuery.ajax({
+    //             url:      url,
+    //             dataType: 'text',
+    //             type:     'GET',
+    //             headers: {
+    //                 'Content-Type': 'application/x-www-form-urlencoded'
+    //             },
+    //             complete:  function(xhr){
+    //                 if(typeof cb === 'function')
+    //                     cb.apply(this, [xhr.status]);
+    //             }
+    //         });
+    //     }
 
-        UrlExists(link, function(status){
-            if(status === 200){
-                // file was found
-                setTimeout(()=>{
-                    $("#id_url_destination").after('<div class="text-success">Deine Website ist erreichbar!</div>');
-                }, 300);
-            }
-            else if(status === 404){
-                // 404 not found
-                setTimeout(()=>{
-                    $("#id_url_destination").after('<div class="text-danger">Deine Website ist erreichbar!</div>');
-                }, 300);
-            }
-        });
-    });
+    //     UrlExists(link, function(status){
+    //         if(status === 200){
+    //             // file was found
+    //             setTimeout(()=>{
+    //                 $("#id_url_destination").after('<div class="text-success">Deine Website ist erreichbar!</div>');
+    //             }, 300);
+    //         }
+    //         else if(status === 404){
+    //             // 404 not found
+    //             setTimeout(()=>{
+    //                 $("#id_url_destination").after('<div class="text-danger">Deine Website ist erreichbar!</div>');
+    //             }, 300);
+    //         }
+    //     });
+    // });
 
 
     //Copy Button color
-    $('#shortcode-list').on("click", '.btn-copy', function(event){
-        event.preventDefault();
+    // $('#shortcode-list').on("click", '.btn-copy', function(event){
+    //     event.preventDefault();
 
-        var buttonId = $(this).attr('data-button');
+    //     var buttonId = $(this).attr('data-button');
 
-        let that = document.getElementById(buttonId);
-        navigator.clipboard.writeText(that?.innerText).then(res => {});
+    //     let that = document.getElementById(buttonId);
+    //     navigator.clipboard.writeText(that?.innerText).then(res => {});
 
-        $('.color' + buttonId).addClass('bg-success text-white');
-        setTimeout(()=>{
-            $('.color' + buttonId).removeClass('bg-success text-white');
-                // onClick copy to clipboard
-                console.clear()
-        }, 2000);
+    //     $('.color' + buttonId).addClass('bg-success text-white');
+    //     setTimeout(()=>{
+    //         $('.color' + buttonId).removeClass('bg-success text-white');
+    //             // onClick copy to clipboard
+    //             console.clear()
+    //     }, 2000);
 
-    })
+    // })
 
-    $('#aside-form').on("click", '.btn-copy', function(event){
-        event.preventDefault();
+    // $('#aside-form').on("click", '.btn-copy', function(event){
+    //     event.preventDefault();
 
-        var buttonId = $(this).attr('data-button');
+    //     var buttonId = $(this).attr('data-button');
 
-        let that = document.getElementById(buttonId);
-        navigator.clipboard.writeText(that?.innerText).then(res => {});
+    //     let that = document.getElementById(buttonId);
+    //     navigator.clipboard.writeText(that?.innerText).then(res => {});
 
-        $('.color' + buttonId).addClass('bg-success text-white');
-        setTimeout(()=>{
-            $('.color' + buttonId).removeClass('bg-success text-white');
-                // onClick copy to clipboard
-                console.clear()
-        }, 2000);
+    //     $('.color' + buttonId).addClass('bg-success text-white');
+    //     setTimeout(()=>{
+    //         $('.color' + buttonId).removeClass('bg-success text-white');
+    //             // onClick copy to clipboard
+    //             console.clear()
+    //     }, 2000);
 
     })
 
@@ -596,4 +596,4 @@ $(document).ready(function(){
 
 
 
-}); // End document ready function
+//}); // End document ready function

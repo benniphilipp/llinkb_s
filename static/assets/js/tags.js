@@ -50,6 +50,7 @@ $(document).ready(function(){
 
     /***************** Tags *****************/
 
+    
 
     // Freiesuche für Shorcode
     $('#filter-search-form').on('change', function(event) {
