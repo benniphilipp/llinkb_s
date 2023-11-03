@@ -170,7 +170,7 @@ def post_detaile_data_view(request, pk):
     
     obj = ShortcodeClass.objects.get(pk=pk)
     
-    
+    # Ben
     # Tags User
     # user = request.user
     # user_tags = Tag.objects.filter(user=user)

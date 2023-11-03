@@ -3,9 +3,10 @@ from django.views import View
 from django.shortcuts import render
 from django.core.cache import cache
 from django.http import HttpRequest
-from django.http.response import JsonResponse
+from django.http.response import JsonResponse, HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext_lazy as _
+from django.core.serializers import serialize
 
 #Import Forms
 from shortcode.forms import (
@@ -120,6 +121,30 @@ class ShortcodeListeCreateView(View, LoginRequiredMixin):
         
         
         
-#Shortcode Update
+#Shortcode Update SingleView
+class ShortcodeSingelUpdateView(View, LoginRequiredMixin):
+    
+    def get(self, request, pk):
+        try:
+            
+            shortcode = ShortcodeClass.objects.get(pk=pk)
+            tags = [tag.id for tag in shortcode.tags.all()]
+            
+            short_date = {
+                'id': shortcode.pk,
+                'url_destination': shortcode.url_destination,
+                'url_titel': shortcode.url_titel,
+                'url_active': shortcode.url_active,
+                'url_archivate': shortcode.url_archivate,
+                'shortcode': shortcode.shortcode,
+                'tags': tags,
+            }
+        
+            return JsonResponse({'data': short_date})
 
-#Shortcode Liste View
+        except ShortcodeClass.DoesNotExist:
+            return JsonResponse({'error': _('No shortcode found')})
+
+    
+    def post(self, requuest):
+        pass

@@ -10,15 +10,15 @@ from geotargeting.models import GeoThemplate
 class ShortcodeClassForm(forms.ModelForm):
     submit_text = _("Save")
     
-    url_destination = forms.CharField(label="Ziel-Url", widget=forms.TextInput(attrs={'placeholder': 'Ziel Url'}))
-    url_titel = forms.CharField(label="Titel", widget=forms.TextInput(attrs={'placeholder': 'Titel'}))
-    shortcode = forms.CharField(label="Shortcode", required=False, widget=forms.TextInput(attrs={'placeholder': 'shortcode'}))
+    url_destination = forms.CharField(label=_("target URL"), widget=forms.TextInput(attrs={'placeholder': _("Target URL")}))
+    url_titel = forms.CharField(label=_("title"), widget=forms.TextInput(attrs={'placeholder': _("title")}))
+    shortcode = forms.CharField(label=_("shortcode"), required=False, widget=forms.TextInput(attrs={'placeholder': _("shortcode")}))
     url_source = forms.CharField(label="Source", required=False, widget=forms.TextInput(attrs={'placeholder': 'z.B Google, Newsletter'}))
     url_medium = forms.CharField(label="Medium", required=False, widget=forms.TextInput(attrs={'placeholder': 'z.B. CPC, Banner, E-Mail'}))
     url_campaign = forms.CharField(label="Campaign", required=False, widget=forms.TextInput(attrs={'placeholder': 'z.B spring_sale'}))
     url_term = forms.CharField(label="Term", required=False, widget=forms.TextInput(attrs={'placeholder': 'z.B etwas'}))
     url_content = forms.CharField(label="Content", required=False, widget=forms.TextInput(attrs={'placeholder': 'z.B etwas'}))
-    tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.none(), widget=forms.CheckboxSelectMultiple(attrs={'class': 'id_tags'}), required=False)
+    tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.none(), label=_("tags"), widget=forms.CheckboxSelectMultiple(attrs={'class': 'id_tags'}), required=False)
     
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None) 

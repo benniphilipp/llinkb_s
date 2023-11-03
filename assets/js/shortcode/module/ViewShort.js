@@ -1,5 +1,3 @@
-
-
 class ViewShort{
     constructor(){
         this.ShortccodeEvents();
@@ -12,6 +10,76 @@ class ViewShort{
         if (crateFormShortcode) {
             crateFormShortcode.addEventListener('click', this.ShortcodeCrateView.bind(this))
         }
+
+        const updateFormShortcode = document.querySelector('#update-form-shortcode');
+        if(updateFormShortcode){
+            updateFormShortcode.addEventListener('click', this.ShortcodeUpdateCrateView.bind(this))
+        }
+
+        const self = this;
+        const listContainer = document.getElementById('shortcode-list');
+
+        listContainer.addEventListener('click', function (event) {
+          if (event.target.classList.contains('shortcode-class')) {
+            const clickedListItem = event.target;
+            const shortcodeValue = clickedListItem.getAttribute('data-shortcode');
+            self.ShortcodeUpdateView(shortcodeValue);
+          }
+        });
+
+    }
+
+    //Update View
+    ShortcodeUpdateView(shortcodeValue){
+        const overlayOpen = document.querySelector('#overlay-open');
+        const asideForm = document.querySelector('#aside-form');
+        const crateFormShortcode = document.querySelector('#crate-form-shortcode');
+
+        crateFormShortcode.classList.add('d-none')
+        overlayOpen.classList.add('overlay-open')
+        asideForm.classList.add('toggle');
+
+        const urlData = document.getElementById('ShortcodeSingelUpdateView').value.replace(/0/g, shortcodeValue);
+
+        const url_destination = document.getElementById('id_url_destination');
+        const url_titel = document.getElementById('id_url_titel');
+        const idShort = document.getElementById('id_shortcode');
+        const shortcodeId = document.querySelector('#shortcode_id');
+
+        $.ajax({
+            type: 'GET',
+            url: urlData,
+            success: (response) => {
+
+                const data = response.data
+
+                url_destination.value = data.url_destination;
+                url_titel.value = data.url_titel;
+                idShort.value = data.shortcode;
+
+                const tagsCheckboxes = $('input[name="tags"][type="checkbox"]');
+
+                tagsCheckboxes.each(function(index, checkbox) {
+                    const tagValue = parseInt($(checkbox).val());
+                    const tagIsSelected = data.tags.includes(tagValue);
+                    $(checkbox).prop('checked', tagIsSelected);
+                });
+
+                tagsCheckboxes.trigger('change');
+
+                shortcodeId.innerHTML = `<button data-button="short${data.id}" type="button" class="btn btn-secondary btn-copy colorshort${data.id} btn-sm"><i class="fa-solid fa-link"></i> Kopieren</button>`;
+
+            },
+            error: (error) => {
+                console.log(error);
+            }
+        });
+
+    }
+
+    //Update Crate
+    ShortcodeUpdateCrateView(){
+        console.log('RUN')
     }
     
 
