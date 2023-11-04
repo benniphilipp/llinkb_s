@@ -31,7 +31,7 @@
                             <div class="d-flex flex-row align-items-center">
                                 <h3 class="p-1" style="margin-top: 10px;">Link Bio</h3>
                                 <div class="p-1 ms-auto">
-                                    <button id="openForm" class="btn btn-primary mt-1" type="button">Neu erstellen</button>
+                                    <button id="openForm" class="btn btn-primary mt-1 disabled" type="button">Neu erstellen</button>
                                     <!-- <button id="export-button" class="btn btn-secondary mt-1" type="button">Shortcodes exportieren</button> -->
                                 </div>
                             </div>
@@ -94,7 +94,9 @@
                                 {% endfor %}
                          
                             {% else %}
-                                <p>Es gibt keine LinkInBio-Objekte für diesen Benutzer.</p>
+                                <div class="alert alert-primary" role="alert">
+                                    {% trans "There are no LinkInBio objects for this user." %}
+                                </div>
                             {% endif %}
 
                         </div>

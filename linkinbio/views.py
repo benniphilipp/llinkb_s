@@ -521,18 +521,17 @@ class UpdateShortcodeLinkInBioView(View):
         return JsonResponse(response_data, status=400)
 
 
-
+# Ben
 # Löschen Linkinlink
 class LinkinbiolinkDeleteView(View):
     def post(self, request, pk):
         try:
-            link = LinkInBioLink.objects.get(pk=pk)
-            shortcode = link.shortcode
+            link = LinkInBio.objects.get(pk=pk)
             link.delete()
             
-            if not LinkInBioLink.objects.filter(shortcode=shortcode).exists():
-                # Lösche den Shortcode, da er nicht mehr verwendet wird
-                shortcode.delete()
+            # if not LinkInBioLink.objects.filter(shortcode=shortcode).exists():
+            #     # Lösche den Shortcode, da er nicht mehr verwendet wird
+            #     shortcode.delete()
                 
             return JsonResponse({'message': 'Datensatz erfolgreich gelöscht'})
         except LinkInBioLink.DoesNotExist:

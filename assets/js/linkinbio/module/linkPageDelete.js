@@ -28,6 +28,7 @@ class linkPageDelete{
 
     }
 
+
     openModalDeleteForm(event){
         const button = event.target.closest('.delete-linkinbio-page');
         console.log(button);
@@ -52,9 +53,10 @@ class linkPageDelete{
     }
 
     
+    
     delteModelForm(event){
         const button = event.target.closest('.btn-delete');
-
+        
         if(button.classList.contains('btn-delete')){
             const ulrTrash = button.getAttribute('data-url-delete');
 
