@@ -137,6 +137,10 @@ class adjustmentColor{
         const self = this;
         const dataUrl = document.querySelector('#CustomSettingsView');
 
+        if (!dataUrl) {
+            return;
+        }
+
         const pageOne = document.querySelector('#pageOne');
         const loaderImageMobile = document.querySelector('.loader-image-mobile');
         pageOne.classList.add('d-none');

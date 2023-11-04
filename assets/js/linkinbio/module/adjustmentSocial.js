@@ -558,51 +558,59 @@ class adjustmentSocial {
 
     sorttabelSaveUrlSocial(sortedLinks){
         const dataFrom = document.querySelector('#SocialMediaProfilesOrderSaveView').value;
-        console.log(dataFrom);
-        console.log(sortedLinks);
-        $.ajax({
-            url: dataFrom,
-            type: 'POST',
-            data: { sorted_links: sortedLinks },
-            headers: {
-                'X-CSRFToken': this.csrftoken,
-            },
-            success: function (data) {
-                console.log('Reihenfolge erfolgreich gespeichert.'+ data.sorted_links);
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                console.error('Fehler beim Speichern der Reihenfolge:', errorThrown);
-            },
-        });    
+        if(dataFrom){
+            $.ajax({
+                url: dataFrom,
+                type: 'POST',
+                data: { sorted_links: sortedLinks },
+                headers: {
+                    'X-CSRFToken': this.csrftoken,
+                },
+                success: function (data) {
+                    console.log('Reihenfolge erfolgreich gespeichert.'+ data.sorted_links);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.error('Fehler beim Speichern der Reihenfolge:', errorThrown);
+                },
+            });   
+        } 
     }
 
     socialplattformEmpty(){
-        const dataUrl = document.querySelector('#getSocialMdiaPlatforms').value;
-        const link_in_bio_id = $('#linkinbio_page_id_custome').val();
-        $.ajax({
-            url: dataUrl, // Hier setzt du deine Django-URL ein
-            type: 'GET',
-            data: {
-                link_in_bio_page_id: link_in_bio_id,
-            },
-            dataType: 'json',
-            success: function (data) {
-                // Daten erfolgreich abgerufen
-                if (data.platforms.length === 0) {
-                    const addElementButton = document.querySelector('#addElementButton');
-                    addElementButton.style.display = 'none';
-                } else {
-                    const addElementButton = document.querySelector('#addElementButton');
-                    addElementButton.style.display = 'block';
+        const dataUrl = document.querySelector('#getSocialMdiaPlatforms');
+
+        if (!dataUrl) {
+            return;
+        }
+
+        if(dataUrl){
+            
+            const link_in_bio_id = $('#linkinbio_page_id_custome').val();
+            $.ajax({
+                url: dataUrl.value,
+                type: 'GET',
+                data: {
+                    link_in_bio_page_id: link_in_bio_id,
+                },
+                dataType: 'json',
+                success: function (data) {
+                    // Daten erfolgreich abgerufen
+                    if (data.platforms.length === 0) {
+                        const addElementButton = document.querySelector('#addElementButton');
+                        addElementButton.style.display = 'none';
+                    } else {
+                        const addElementButton = document.querySelector('#addElementButton');
+                        addElementButton.style.display = 'block';
+                    }
+    
+    
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    // Fehler beim Abrufen der Daten
+                    console.error('Fehler:', errorThrown);
                 }
-
-
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                // Fehler beim Abrufen der Daten
-                console.error('Fehler:', errorThrown);
-            }
-        });
+            });
+        }
     }
     
 

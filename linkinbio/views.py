@@ -392,6 +392,7 @@ class LinkInBioListView(LoginRequiredMixin, View):
 
         return render(request, 'linkinbio_list.html', context)
     
+    
     def post(self, request: HttpRequest):
         link_in_bio_form = LinkInBioDashboardForm(request.POST)
 
@@ -401,7 +402,7 @@ class LinkInBioListView(LoginRequiredMixin, View):
             link_in_bio_instance.user = request.user
             link_in_bio_instance.save()
             
-            detail_url = reverse('linkinbio:detail_page', args=[link_in_bio_instance.pk])
+            detail_url = reverse('linkinbio:linkinbio_detail', args=[link_in_bio_instance.pk])
             full_detail_url = request.build_absolute_uri(detail_url)
             
             shortcode_instance = ShortcodeClass(
