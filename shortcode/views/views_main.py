@@ -384,6 +384,7 @@ def export_shortcodes_to_excel(request):
         return response
 
 
+
 # Create Tag
 class CreateTagView(View):
     def post(self, request, *args, **kwargs):

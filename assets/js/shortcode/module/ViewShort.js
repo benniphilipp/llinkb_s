@@ -34,6 +34,7 @@ class ViewShort{
             IdUrlDestination.addEventListener('input', this.ShortcodeUrlAccessibility.bind(this));
         }
 
+        // Feld Prüfen
         const urlTitel = document.getElementById('id_url_titel');
         if(urlTitel){
             urlTitel.addEventListener('input', function () {
@@ -85,8 +86,15 @@ class ViewShort{
         }
 
         const filter_search_form = document.querySelector('#filter-search-form');
-        if(filter_search_form){
-            filter_search_form.addEventListener('change', this.ShortcodeAjaxView.bind(this))
+        if (filter_search_form) {
+            filter_search_form.addEventListener('change', function () {
+                this.ShortcodeAjaxView();
+                console.log('Run');
+                const shortcodeList = document.querySelector('#shortcode-list');
+                while (shortcodeList.firstChild) {
+                    shortcodeList.removeChild(shortcodeList.firstChild);
+                }
+            }.bind(this));
         }
 
     }
@@ -143,6 +151,7 @@ class ViewShort{
 
     //Update View
     ShortcodeUpdateView(shortcodeValue){
+
         const overlayOpen = document.querySelector('#overlay-open');
         const asideForm = document.querySelector('#aside-form');
         const crateFormShortcode = document.querySelector('#crate-form-shortcode');
@@ -161,6 +170,11 @@ class ViewShort{
         const idShort = document.getElementById('id_shortcode');
         const shortcodeId = document.querySelector('#shortcode_id');
         const updateShortcodeUrl = document.querySelector('#update-shortcode-url');
+
+        const update_form_shortcode = document.getElementById('update-form-shortcode');
+        if (url_titel && url_destination) {
+            update_form_shortcode.classList.remove('disabled');
+        }
 
         $.ajax({
             type: 'GET',
@@ -197,6 +211,7 @@ class ViewShort{
     //Update Crate
     ShortcodeUpdateCrateView(event){
         event.preventDefault()
+
 
         const updateShortcodeUrlID = document.querySelector('#update-shortcode-url').value;
         const urlData = document.getElementById('ShortcodeSingelUpdateView').value.replace(/0/g, updateShortcodeUrlID);
@@ -308,6 +323,7 @@ class ViewShort{
 
     // View
     ShortcodeAjaxView(){
+  
         const dataInput = document.querySelector('input[name="data"]');
         const gifLoad = document.querySelector('#gif-load');
 
@@ -335,10 +351,6 @@ class ViewShort{
                 const shortcodeList = document.querySelector('#shortcode-list');
                 const serialized_data = response.data;
                 gifLoad.classList.remove('d-none');
-
-                while (shortcodeList.firstChild) {
-                    shortcodeList.removeChild(shortcodeList.firstChild);
-                }
 
                 setTimeout(function(){
 

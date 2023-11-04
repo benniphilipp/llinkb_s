@@ -1,4 +1,5 @@
 import json
+import csv
 from bs4 import BeautifulSoup
 import requests
 from django.views import View
@@ -10,6 +11,7 @@ from urllib.parse import unquote
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext_lazy as _
 from django.core.serializers import serialize
+
 
 #Import Forms
 from shortcode.forms import (
@@ -40,17 +42,11 @@ class ShortcodeListeCreateView(View, LoginRequiredMixin):
                 query = request.GET.get('q')
                 tags = request.GET.getlist('tags[]') 
                 
-                print(f'Tags: {tags}')
-                print(f'Suche: {query}')
-                
                 page = int(request.GET.get('page', 1))
                 per_page = 5  # Anzahl der Einträge pro Seite
                 
                 start_index = (page - 1) * per_page
                 end_index = start_index + per_page
-
-                # shortcodes = ShortcodeClass.objects.filter(url_creator=request.user, url_archivate=False) \
-                #                                 .order_by('-url_create_date')[start_index:end_index]
                 
                 shortcodes = ShortcodeClass.objects.filter(url_creator=request.user, url_archivate=False)
                 
@@ -222,6 +218,29 @@ class CheckingUrlAccessibility(View):
     
         data = [{'data': 'false'}]
         return JsonResponse(data, safe=False)
+    
+    
+# Export Shortcode
+def export_shortcodes_to_excel(request):
+    if request.method == 'POST':
+        selected_ids = request.POST.getlist('selected_ids[]')
+        selected_shortcodes = [int(id_str.split('_')[-1]) for id_str in selected_ids]
+
+        # Erzeuge die HTTPResponse mit der CSV-Inhalt
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename=shortcodes.csv'
+
+        # Erstelle einen CSV-Writer und schreibe die Header-Zeile
+        writer = csv.writer(response)
+        writer.writerow(['ID', 'URL Titel', 'Aktiviert', 'Shortcode', 'Utm'])
+
+        # Füge ausgewählte Shortcodes-Daten hinzu
+        for shortcode_id in selected_shortcodes:
+            shortcode = ShortcodeClass.objects.get(pk=shortcode_id)
+            row = [shortcode.id, shortcode.url_titel, shortcode.get_short_url, shortcode.url_active, shortcode.get_full_url]
+            writer.writerow(row)
+
+        return response
 
         
         

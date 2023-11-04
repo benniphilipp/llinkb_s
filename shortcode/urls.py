@@ -2,6 +2,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('short/', include('shortcode.views.short_urls')),
+    path('tags/', include('shortcode.views.tags_urls')),
 ]
 
 

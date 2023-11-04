@@ -90,6 +90,12 @@
 
     <input type="hidden" id="ShortcodeSingelUpdateView" value="{% url 'shortcode:shortcode_single_update_view' 0 %}">
     <input type="hidden" id="CheckingUrlAccessibility" value="{% url 'shortcode:checking_url_accessibility' %}">
+    <input type="hidden" id="CreateTagView" value="{% url 'tags:tags_create' %}">
+    <input type="hidden" id="get_all_tags" value="{% url 'tags:tags_load' %}">
+    <input type="hidden" id="TagListView" value="{% url 'tags:tag_list' %}">
+    <input type="hidden" id="tag_edit" value="{% url 'tags:tag_edit' 0 %}">
+    <input type="hidden" id="tag_delete" value="{% url 'tags:tag_delete' 0 %}">
+    <input type="hidden" id="export_shortcodes_to_excel" value="{% url 'shortcode:export' %}">
 
 {% endblock body %}
 
