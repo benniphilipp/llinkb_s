@@ -78,6 +78,7 @@ class ShortcodeListeCreateView(View, LoginRequiredMixin):
                         'url_destination': shortcode.url_destination,
                         'shortcode': shortcode.shortcode,
                         'favicon_path': shortcode.favicon_path,
+                        'archivate': shortcode.url_archivate,
                         'tags': tags
                     }
                     data.append(item)

@@ -105,92 +105,97 @@ pw@web.de
 benniph86@gmail.com
 TqXRm5ikowzmYtZVyCMC
 
-# Coding Guidelines
+# ToDo liste 4.11.23
 
+- Push
+    git add .
+    git commit -m '_text'
+    git push origin 
 
-# BUG LISTE
+- Shortcode Archive erledigt
+- Shortcode begrenzung auf 30 Stück
+- Shorcode Tag Model translate
+- Shortcode Ansicht Mobile
+- Siedbar Desktop Version Design
+- Shortcode Archive Pages
+- E-Mail-Benachrichtigungen Zahlung
+- Verwaltung von Abonnements Abmelden
+- Meldung Hinweis translate
+- Analytics Dahboard Anpssen 
+- Einzelansicht LinkInBio Page
+- Automasticher Tags bei link in bio Seite und in Shorcode Extra Makieren
+- Qr-Code Pages Crator
+- limitation, Android Targeting, Ios Targeting BETA Version GEO Targeting
+- Menü Shorcode
+- Fonts * adjustmentFonts.js 
+
+# BUG ERLEDIGT
+- LinkInBio List für Fehler in Javascript !erledigt
+- E-Mail Bestätigung und Passwort zurück stezen. !erledigt
+- Logo & Favicon austauschen !erledigt
+- User Type zum Model hinzufühgen !erledigt
 - Tags nur für User Anzeigen !erledigt
 - Tags nach dem Erstellen laden. !erleding
 - Archive keine ansicht für user. !erleding
 - Archive rückganig machen. !erleding
 - Shorcode Löschen. !erleding
 - Abrufen von mÖglichkeiten in der URL View !erldeigt
-    limitation, Android Targeting, Ios Targeting BETA Version GEO Targeting !erldeigt
 - Überstzung einbauen !erldeigt
 - Überszungssetings Ansicht aktuelle sprache anzeigen. !erldeigt
 - Startseite ist nicht erreichbar !erldeigt
-- Formular Shorcoe auf ES6 Umschreiben
-- LinkInBio List für Fehler in Javascript
-- Menü Shorcode
-- Automasticher Tags bei link in bio Seite und in Shorcode Extra Makieren
-
-# ToDos Liste
-- 
-    - Push
-    git add .
-    git commit -m '_text'
-    git push origin linkinbio
-
-    - Crate Script adjustment
-    - Add Image !erledingt
-    - Remove Image !erledingt
-    - Image View !erledingt
-    - Crate and titel, description !erledingt
-    - Add Social media and Remove Social media * adjustmentSocial.js --> !erledingt
-    - Fonts * adjustmentFonts.js 
-    - Color Button * adjustmentColor.js !erldeigt
-
-
+- Crate Script adjustment
+- Add Image !erledingt
+- Remove Image !erledingt
+- Image View !erledingt
+- Crate and titel, description !erledingt
+- Add Social media and Remove Social media * adjustmentSocial.js --> !erledingt
+- Color Button * adjustmentColor.js !erldeigt
 
 - Stripe Verkaufsseiten 1 Preis und keine Monadliche Zahlung maximal 90 Euro im Jahr.
-    - @https://stripe.com/docs/checkout/quickstart
-    - Payment Intigrieren 
-        Stipe einbinden und alle Formular bereistellen. !erldeigt
-        Frontend-Anpassungen !erldeigt
-        Stripe-Zahlungsverarbeitung !erldeigt
-        Erstellen Sie Abonnements !erldeigt
-        Benutzerprofil aktualisieren !erldeigt
-        E-Mail-Benachrichtigungen 
-        Verwaltung von Abonnements
-
-
+- @https://stripe.com/docs/checkout/quickstart
+- Payment Intigrieren 
+Stipe einbinden und alle Formular bereistellen. !erldeigt
+Frontend-Anpassungen !erldeigt
+Stripe-Zahlungsverarbeitung !erldeigt
+Erstellen Sie Abonnements !erldeigt
+Benutzerprofil aktualisieren !erldeigt
 - Neues Module Pages
-    - Update Anpassungen Header !erledigt
-    - Update Header Menü erstellen !erledigt --> https://codingyaar.com/bootstrap-navbar-button-right/
-    - Models überstzebar machen !erledigt
-    - Bug Überstzung seiten !erledigt --> https://pypi.org/project/django-translations/
-    - Hero Pages !erledigt
-    - Marketing Section Pages !erledigt
-    - Django's Flatpages App !erldeigt
+- Update Anpassungen Header !erledigt
+- Update Header Menü erstellen !erledigt --> https://codingyaar.com/bootstrap-navbar-button-right/
+- Models überstzebar machen !erledigt
+- Bug Überstzung seiten !erledigt --> https://pypi.org/project/django-translations/
+- Hero Pages !erledigt
+- Marketing Section Pages !erledigt
+- Django's Flatpages App !erldeigt
     
-    - Home Page und Pages HTML, css zusammen fühgen !erleding
-    - Menus auf Home seite einbinden !erleding
-    - Bilder Verkleinern auf Home !erleding
-    - Texte anpssen auf der Startseite !erleding
-    - Login Prüfen Designe !erleding
-    - Überszung Prüfen !erleding
-    - Mobile Prüfen !erleding
-    - Cookie für Überszung Prüfen final !erleding
-    - Cookie Banner
-        - Cookie Banner für normale Seiten Desing erstellt. erleding
-        - Definition der Cookie-Einstellungen erleding
-            Notwendige Cookies erleding
-            Analyse-Cookies erleding
-            Marketing-Cookies erleding
+- Home Page und Pages HTML, css zusammen fühgen !erleding
+- Menus auf Home seite einbinden !erleding
+- Bilder Verkleinern auf Home !erleding
+- Texte anpssen auf der Startseite !erleding
+- Login Prüfen Designe !erleding
+- Überszung Prüfen !erleding
+- Mobile Prüfen !erleding
+- Cookie für Überszung Prüfen final !erleding
+- Cookie Banner
+    - Cookie Banner für normale Seiten Desing erstellt. erleding
+    - Definition der Cookie-Einstellungen erleding
+        Notwendige Cookies erleding
+        Analyse-Cookies erleding
+        Marketing-Cookies erleding
 
-        - Cookie Model 
-            Speichern nach User das Jeder User sein Cookie einstellung erstellen kann.
+- Cookie Model 
+    Speichern nach User das Jeder User sein Cookie einstellung erstellen kann.
 
-        -  Cookie-Präferenzen speichern
-            Banner Cookie-Typen sie akzeptieren oder ablehnen möchten
+    -  Cookie-Präferenzen speichern
+        Banner Cookie-Typen sie akzeptieren oder ablehnen möchten
 
-        - Abrufen von JavaScript-Dateien serverseitig oder normal
-            Facebook Script
-            Google Tag Manger
-            Analytics
+    - Abrufen von JavaScript-Dateien serverseitig oder normal
+        Facebook Script
+        Google Tag Manger
+        Analytics
 
-        - Design und Funktion
-            Normales Banner zum auswälen welche daten man speichern kann.
+    - Design und Funktion
+        Normales Banner zum auswälen welche daten man speichern kann.
 
     - @ToDo Link in Bio
         * Link in Bio Module erleding
@@ -243,13 +248,8 @@ TqXRm5ikowzmYtZVyCMC
 # QR-Code
     Neues Module
 
-# Bug liste
-- Einzelansicht Profile Eisntellungs seite Formular die ID noch einfühgen das immer der Richtige name kommt.
-- Logo & Favicon austauschen !erledigt
-- User Type zum Model hinzufühgen
-- Analytics Dahboard Anpssen
+# Neue Ideen
 - IP Gefärliche IP Sicherung einbauen --> https://chat.openai.com/c/f6d2978c-6cb7-44ba-9c1b-918ee67a37b0
-- E-Mail Bestätigung und Passwort zurück stezen.
 - Externe Doamin Testen wen die Server einstellungen stimmen.
 - Notweiterleitung unter Profile Einstellungen
 - first cklick in der Analyse und im Targeting
@@ -258,7 +258,6 @@ TqXRm5ikowzmYtZVyCMC
 - Link speeren
 
 # Stripe Webhook
-
 stripe listen --forward-to http://localhost:8000/products/stripe-webhook/
 
 stripe login
@@ -317,3 +316,5 @@ https://poeditor.com/projects/view?id=659859
 
 # Single select
 https://apalfrey.github.io/select2-bootstrap-5-theme/examples/single-select/
+
+# Coding Guidelines

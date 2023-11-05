@@ -60,13 +60,12 @@ class ViewShort{
         }
 
         listContainer.addEventListener('click', function(event){
-            if (event.target.classList.contains('btn-copy')) {
+            if(event.target.classList.contains('btn-copy')) {
                 const clickedListItem = event.target;
                 const buttonId = clickedListItem.getAttribute('data-button');
                 self.CopyButtonColort(buttonId);
-              } 
+            } 
         });
-
 
         const asideForm = document.querySelector('#aside-form');
         if(asideForm){
@@ -89,7 +88,7 @@ class ViewShort{
         if (filter_search_form) {
             filter_search_form.addEventListener('change', function () {
                 this.ShortcodeAjaxView();
-                console.log('Run');
+
                 const shortcodeList = document.querySelector('#shortcode-list');
                 while (shortcodeList.firstChild) {
                     shortcodeList.removeChild(shortcodeList.firstChild);
@@ -355,7 +354,7 @@ class ViewShort{
                 setTimeout(function(){
 
                     serialized_data.forEach(function(item) {
-           
+
                         // Kürzen der URL und der Ziel-URL
                         const shortUrl = item.get_short_url.length > 90 ? item.get_short_url.substring(0, 90) + '...' : item.get_short_url;
                         const shortDestination = item.url_destination.length > 90 ? item.url_destination.substring(0, 90) + '...' : item.url_destination;

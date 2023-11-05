@@ -14,13 +14,15 @@
 
 import ViewShort from './module/ViewShort';
 import ShortcodeTags from './module/TagsShort';
-import ShortcodeExport from './module/ShortcodeShort'
+import ShortcodeExport from './module/ShortcodeShort';
+import ShortcodeArchive from './module/ArchiveShort';
 
 document.addEventListener('DOMContentLoaded', function() {
     // ViewShort
     const viewShort = new ViewShort();
     const shortcodeTag = new ShortcodeTags();
     const shortcodexxport = new ShortcodeExport();
+    const shortcodearchive = new ShortcodeArchive();
 });
 
 //Open CreateForm
