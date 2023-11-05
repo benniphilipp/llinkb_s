@@ -112,6 +112,7 @@ TqXRm5ikowzmYtZVyCMC
     git commit -m '_text'
     git push origin 
 
+- Stripe URL und Stipe englisch anpassen
 - Produkt seite Button Style Tauschen
 - Analytics Dahboard Anpssen 
 - Einzelansicht LinkInBio Page
