@@ -30,7 +30,8 @@ from django.http import JsonResponse
 STRIPE_SECRET_KEY = settings.STRIPE_SECRET_KEY
 STRIPE_PUBLISHABLE_KEY = settings.STRIPE_PUBLISHABLE_KEY
 stripe.api_key = STRIPE_SECRET_KEY
-YOUR_DOMAIN = 'http://127.0.0.1:8000'
+
+YOUR_DOMAIN = settings.YOUR_DOMAIN
 
 def success(request):
     return render(request, 'success.html')
@@ -111,7 +112,8 @@ def create_checkout_session(request):
 def stripe_webhook(request):
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
-    endpoint_secret = "whsec_387e284660acf96e06a67a70c9aab7e4d5212f02b29edaf4578312288c5323ec"  # Set your webhook secret here
+    endpoint_secret = settings.ENDPOINT_SECRET
+
 
     try:
         event = stripe.Webhook.construct_event(

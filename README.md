@@ -112,19 +112,20 @@ TqXRm5ikowzmYtZVyCMC
     git commit -m '_text'
     git push origin 
 
-- Zahlung Funktion Prüfen erledigt
-- Danke Seite nach Zahlung erledigt
-- E-Mail-Benachrichtigungen Zahlung erledigt
-- Verwaltung von Abonnements Abmelden
+- Produkt seite Button Style Tauschen
 - Analytics Dahboard Anpssen 
 - Einzelansicht LinkInBio Page
 - Automasticher Tags bei link in bio Seite und in Shorcode Extra Makieren
 - Qr-Code Pages Crator
 - limitation, Android Targeting, Ios Targeting BETA Version GEO Targeting
 - Menü Shorcode
+- Verwaltung von Abonnements Abmelden
 - Fonts * adjustmentFonts.js 
 
 # BUG ERLEDIGT
+- Zahlung Funktion Prüfen erledigt
+- Danke Seite nach Zahlung erledigt
+- E-Mail-Benachrichtigungen Zahlung erledigt
 - Shortcode Archive Pages erledigt
 - Shortcode Archive erledigt
 - Shortcode begrenzung auf 30 Stück erledigt
@@ -335,3 +336,30 @@ https://apalfrey.github.io/select2-bootstrap-5-theme/examples/single-select/
 
 - Short
     - checkout-button
+
+
+# Live Server
+
+    git status
+
+    source env/bin/activate
+
+    git pull
+    python3 manage.py makemigrations 
+    python3 manage.py migrate
+    python3 manage.py collectstatic
+
+
+    sudo systemctl daemon-reload
+    sudo systemctl restart gunicorn
+    sudo systemctl status gunicorn
+
+
+    sudo systemctl restart nginx
+
+    Wagtail
+    sudo systemctl restart wagtail_gunicorn
+    sudo systemctl status wagtail_gunicorn
+
+    Server neu Starten
+    sudo reboot
