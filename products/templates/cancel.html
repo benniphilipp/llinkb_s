@@ -1,1 +1,28 @@
-cancel.html
+{% extends "checkout.html" %}
+{% load static %}
+{% load custom_tags %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block css %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-8">
+            <h1 class="text-center">{% trans "An error has occurred" %}</h1>
+            <p class="text-center">{% trans "Please contact support or try again later." %}</p>
+            <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                <a  href="mailto:contact@llinkb.com" type="button" class="btn btn-primary text-center">Support</a>
+              </div>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
+
+{% block javasript %}
+{% endblock %}

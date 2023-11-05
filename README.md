@@ -88,7 +88,7 @@ python manage.py clearcache
     - from django.utils.translation import gettext_lazy as _
     - {% trans "Welcome" %}
     
-# SMPTP
+# SMTP
 python -m smtpd -n -c DebuggingServer localhost:1025
 
 # Test Nutzer
@@ -112,16 +112,10 @@ TqXRm5ikowzmYtZVyCMC
     git commit -m '_text'
     git push origin 
 
-- Shortcode Archive erledigt
-- Shortcode begrenzung auf 30 Stück erledigt
-- Shortcode Crate Form schliessen erledigt
-- Shorcode Tag Model translate erledigt
-- Shortcode Ansicht Mobile erledigt
-- Siedbar Desktop Version Design erledigt
-- Shortcode Archive Pages erledigt
-- E-Mail-Benachrichtigungen Zahlung
+- Zahlung Funktion Prüfen erledigt
+- Danke Seite nach Zahlung erledigt
+- E-Mail-Benachrichtigungen Zahlung erledigt
 - Verwaltung von Abonnements Abmelden
-- Meldung Hinweis translate erledigt
 - Analytics Dahboard Anpssen 
 - Einzelansicht LinkInBio Page
 - Automasticher Tags bei link in bio Seite und in Shorcode Extra Makieren
@@ -131,6 +125,14 @@ TqXRm5ikowzmYtZVyCMC
 - Fonts * adjustmentFonts.js 
 
 # BUG ERLEDIGT
+- Shortcode Archive Pages erledigt
+- Shortcode Archive erledigt
+- Shortcode begrenzung auf 30 Stück erledigt
+- Shortcode Crate Form schliessen erledigt
+- Shorcode Tag Model translate erledigt
+- Shortcode Ansicht Mobile erledigt
+- Siedbar Desktop Version Design erledigt
+- Meldung Hinweis translate erledigt
 - LinkInBio List für Fehler in Javascript !erledigt
 - E-Mail Bestätigung und Passwort zurück stezen. !erledigt
 - Logo & Favicon austauschen !erledigt
@@ -259,7 +261,7 @@ Benutzerprofil aktualisieren !erldeigt
 - Link speeren
 
 # Stripe Webhook
-stripe listen --forward-to http://localhost:8000/products/stripe-webhook/
+stripe listen --forward-to http://localhost:8000/stripe-webhook/
 
 stripe login
 https://stripe.com/docs/payments/quickstart
@@ -319,3 +321,17 @@ https://poeditor.com/projects/view?id=659859
 https://apalfrey.github.io/select2-bootstrap-5-theme/examples/single-select/
 
 # Coding Guidelines
+
+
+# Produkt Anlegen
+
+- Short Free
+    - Nichts eintragen 
+    - auch keine IDs
+
+- Short Month
+    - price_1O6ZIkFJc5Umrifwi3hxGJ74
+    - checkout-button-subscription
+
+- Short
+    - checkout-button

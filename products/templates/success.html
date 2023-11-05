@@ -5,17 +5,20 @@
 {% load i18n %}
 
 {% block css %}
-
-
 {% endblock %}
 
 {% block body %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <h1>Zahlung erfolgreich!</h1>
-            <p>Vielen Dank für Ihre Bestellung. Ihre Zahlung wurde erfolgreich verarbeitet.</p>
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-8">
+            <h1 class="text-center">{% trans "Payment successful!" %}</h1>
+            <p class="text-center">{% trans "Thank you for your order." %}</p>
+            <p class="text-center">{% trans "Your payment has been successfully processed." %}</p>
+            <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                <a  href="{% url 'analytics:analytics-view' %}" type="button" class="btn btn-primary text-center">Dashbord</a>
+              </div>
+            
         </div>
     </div>
 </div>

@@ -29,7 +29,7 @@
     </div>
 
     <div class="row">
-        <h1 class="text-center my-5">Preis</h1>
+        <h1 class="text-center my-5">{% trans "Create more meaningful, measurable experiences with the llinkb Connections Platform" %}</h1>
     </div>
 
     <div class="row d-flex justify-content-center">
@@ -40,13 +40,13 @@
                     <h5 class="card-title">{{ product.name }}</h5>
                     <small class='text-muted'>{{ product.stage }}</small>
                     <br><br>
-                    <span class="h2">${{ product.price }}</span> {% if product.payment_abo %}/month{% else %} /Jahr {% endif %}
+                    <span class="h2">${{ product.price }}</span> {% if product.payment_abo %}/month{% else %} /Year {% endif %}
                     <br><br>
                     {{ product.content }}
 
                     {% if user.is_authenticated %}
                     <div class="d-grid my-3">
-                        <button type="button" id="{{ product.button_id }}" class="btn btn-lg btn-primary btn-block" data-product="{{ product.id }}">Select</button>
+                        <button type="button" id="{{ product.button_id }}" class="btn btn-lg btn-primary btn-block" data-product="{{ product.id }}">Upgrade {{ product.stage }}</button>
                     </div>
                     {% else %}
                     <div class="d-grid my-3">
@@ -81,51 +81,57 @@ if (firstProduct) {
     
     var checkoutButton = document.getElementById('checkout-button');
 
-    checkoutButton.addEventListener('click', function() {
-
-        var productId = checkoutButton.getAttribute('data-product');
-        fetch("{% url 'products:create_checkout_session' %}?product_id=" + productId, {
-            method: 'POST',
-        })
-        .then(function(response) {
-        return response.json();
-        })
-        .then(function(session) {
-        return stripe.redirectToCheckout({ sessionId: session.id });
-        })
-        .then(function(result) {
-        if (result.error) {
-        alert(result.error.message);
-        }
-        })
-        .catch(function(error) {
-        console.error('Error:', error);
+    if(checkoutButton){
+        checkoutButton.addEventListener('click', function() {
+            console.log('RUN')
+            var productId = checkoutButton.getAttribute('data-product');
+            fetch("{% url 'products:create_checkout_session' %}?product_id=" + productId, {
+                method: 'POST',
+            })
+            .then(function(response) {
+            return response.json();
+            })
+            .then(function(session) {
+            return stripe.redirectToCheckout({ sessionId: session.id });
+            })
+            .then(function(result) {
+            if (result.error) {
+            alert(result.error.message);
+            }
+            })
+            .catch(function(error) {
+            console.error('Error:', error);
+            });
         });
-    });
+    }
+
 
     var checkoutButtonSubscription = document.getElementById('checkout-button-subscription');
-    checkoutButtonSubscription.addEventListener('click', function() {
-
-        var productId = checkoutButtonSubscription.getAttribute('data-product');
-        fetch("{% url 'products:create_checkout_session_subscription' %}?product_id=" + productId, {
-            method: 'POST',
-        })
-        .then(function(response) {
-        return response.json();
-        })
-        .then(function(session) {
-            return stripe.redirectToCheckout({ sessionId: session.id });
-        })
-        .then(function(result) {
-        if (result.error) {
-        alert(result.error.message);
-        }
-        })
-        .catch(function(error) {
-        console.error('Error:', error);
+    if(checkoutButtonSubscription){
+        checkoutButtonSubscription.addEventListener('click', function() {
+            var productId = checkoutButtonSubscription.getAttribute('data-product');
+            fetch("{% url 'products:create_checkout_session_subscription' %}?product_id=" + productId, {
+                method: 'POST',
+            })
+            .then(function(response) {
+            return response.json();
+            })
+            .then(function(session) {
+                return stripe.redirectToCheckout({ sessionId: session.id });
+            })
+            .then(function(result) {
+            if (result.error) {
+            alert(result.error.message);
+            }
+            })
+            .catch(function(error) {
+            console.error('Error:', error);
+            });
         });
-    });
+    }
+
 });
 </script>
     
 {% endblock %}
+

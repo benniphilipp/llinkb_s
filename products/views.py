@@ -20,6 +20,8 @@ from .models import Product
 from accounts.forms import ProfileFormAdresse
 from .forms import CheckoutForm, PaymentForm
 
+from django.utils.translation import gettext_lazy as _
+
 # Stripe
 import stripe
 from django.conf import settings
@@ -137,16 +139,16 @@ def stripe_webhook(request):
         user.free_user = False
         user.save()
         
-        # receiver_email = email  # Setzen Sie die E-Mail-Adresse des Kunden
-        # subject = 'Zahlung erfolgreich'
-        # message = 'Ihre Zahlung wurde erfolgreich verarbeitet. Vielen Dank!'
-        # from_email = 'ihre_email@example.com'  # Die Absender-E-Mail-Adresse
+        receiver_email = email  # Setzen Sie die E-Mail-Adresse des Kunden
+        subject = _("Payment successful!")
+        message = _("Your payment has been successfully processed. Thank you!")
+        from_email = 'contact@llinkb.com'
         
-        # connection = get_connection(username=settings.EMAIL_HOST_USER, password=settings.EMAIL_HOST_PASSWORD)
-        # email = EmailMessage(subject, message, from_email, [receiver_email], connection=connection)
+        connection = get_connection(username=settings.EMAIL_HOST_USER, password=settings.EMAIL_HOST_PASSWORD)
+        email = EmailMessage(subject, message, from_email, [receiver_email], connection=connection)
 
         # E-Mail senden
-        # email.send()
+        email.send()
 
     return JsonResponse({'message': 'Webhook received successfully'}, status=200)
 
