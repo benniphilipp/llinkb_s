@@ -50,6 +50,30 @@ class ShortcodeListeCreateView(View, LoginRequiredMixin):
                 
                 shortcodes = ShortcodeClass.objects.filter(url_creator=request.user, url_archivate=False)
                 
+                count = 0
+                if request.user.free_user == True:
+                    shortcodes_count = ShortcodeClass.objects.filter(url_creator=request.user)
+                    count = shortcodes_count.count()
+                    max_links = 30
+                    if count >= max_links:
+                        response_data = {
+                            'message': _('Maximum number of links reached.'),
+                            'count': 0,
+                            'alert': 'warning',
+                            }
+                    else:
+                        response_data = {
+                            'message': _('You have created {count}, from your {max_links} free links.').format(count=count, max_links=max_links),
+                            'count': count,
+                            'alert': 'primary',
+                            }
+                else:
+                    response_data = {
+                        'message': _('You have unlimited links'),
+                        'count': count,
+                        'alert': 'info',
+                        }
+                
                 if tags:
                     # Filtern nach Tags, wenn Tags in der Anfrage vorhanden sind
                     shortcodes = shortcodes.filter(tags__name__in=tags)
@@ -87,6 +111,7 @@ class ShortcodeListeCreateView(View, LoginRequiredMixin):
                 total_shortcodes = ShortcodeClass.objects.filter(url_creator=request.user, url_archivate=False).count()
 
                 return JsonResponse({
+                    'user_date': response_data,
                     'data': data,
                     'total_shortcodes': total_shortcodes,
                     'page': page,
@@ -138,9 +163,9 @@ class ShortcodeListeCreateView(View, LoginRequiredMixin):
                     for shortcode_instance in shortcode_instances:
                         shortcode_instance.favicon_path = favicon_url
                         shortcode_instance.save()
-                        return JsonResponse({'favicon_url': favicon_url})
+                        return JsonResponse({'success': _('Your link has been successfully created.')})
                         
-            return JsonResponse({'success': 'Dein Link wurde erfolgreich erstellt.'}, status=200)
+            return JsonResponse({'success': _('Your link has been successfully created.')}, status=200)
         else:
             errors = form.errors
             error_messages = {}

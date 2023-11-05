@@ -31,7 +31,12 @@
                 <div class="container-fluid mt-5 px-4">
                     <div class="row">
                         <div class="col-12">
-                            <div class="d-flex flex-row align-items-center">
+                            <div class="d-flex justify-content-end" id="alertUser">
+
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-md-flex flex-row align-items-center">
                                 <h3 class="p-1" style="margin-top: 10px;">Links</h3>
                                 <div class="p-1 ms-auto">
                                     <button id="openForm" class="btn btn-primary mt-1" type="button">{% trans "Create link" %}</button>
@@ -46,17 +51,14 @@
                         <div class="col-8">
                             <form id="filter-search-form">
                                 <div class="row">
-                                    <div class="col-3">
+                                    <div class="col-12 col-md-3 mt-1">
                                         <select id="tag-filter" class="form-select" aria-label="Default select example">
                                             <!-- <option selected>Open this select menu</option>
                                             <option value="1">One</option> -->
                                         </select>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-12 col-md-3 mt-1">
                                         <input type="text" class="form-control" id="search-input" placeholder="Nach was suchtst du" name="q">
-                                    </div>
-                                    <div class="col-2">
-                                        <button id="reset-filter-btn" class="btn btn-primary d-none"><i class="fas fa-redo-alt"></i></button>
                                     </div>
                                 </div>
                             </form>
@@ -66,7 +68,7 @@
     
                 <div class="container-fluid px-4">
                     <div class="row">
-                        <div class="col-12 mt-3">
+                        <div class="col-12 mt-1">
     
                             <!--Data Card-->
                             <div id="gif-load" class="d-none"><img class="mx-auto d-block" src="{% static '/gif/load-38_256.gif' %}" width="50px"></div>

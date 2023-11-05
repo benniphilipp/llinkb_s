@@ -113,9 +113,10 @@ TqXRm5ikowzmYtZVyCMC
     git push origin 
 
 - Shortcode Archive erledigt
-- Shortcode begrenzung auf 30 Stück
-- Shorcode Tag Model translate
-- Shortcode Ansicht Mobile
+- Shortcode begrenzung auf 30 Stück erledigt
+- Shortcode Crate Form schliessen erledigt
+- Shorcode Tag Model translate erledigt
+- Shortcode Ansicht Mobile erledigt
 - Siedbar Desktop Version Design
 - Shortcode Archive Pages
 - E-Mail-Benachrichtigungen Zahlung

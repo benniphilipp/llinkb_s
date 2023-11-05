@@ -1,3 +1,4 @@
+
 import { clearContent, lsToast } from '../../linkinbio/module/lsToast';
 
 class ViewShort{
@@ -87,12 +88,21 @@ class ViewShort{
         const filter_search_form = document.querySelector('#filter-search-form');
         if (filter_search_form) {
             filter_search_form.addEventListener('change', function () {
-                this.ShortcodeAjaxView();
+                const self = this;
+                setTimeout(function(){
+                    self.ShortcodeAjaxView();
+                }, 300)
 
                 const shortcodeList = document.querySelector('#shortcode-list');
                 while (shortcodeList.firstChild) {
                     shortcodeList.removeChild(shortcodeList.firstChild);
                 }
+
+                const alertUser = document.getElementById('alertUser');
+                while (alertUser.firstChild) {
+                    alertUser.removeChild(alertUser.firstChild);
+                }
+
             }.bind(this));
         }
 
@@ -211,6 +221,11 @@ class ViewShort{
     ShortcodeUpdateCrateView(event){
         event.preventDefault()
 
+        const alertUser = document.getElementById('alertUser');
+        while (alertUser.firstChild) {
+            alertUser.removeChild(alertUser.firstChild);
+        }
+
 
         const updateShortcodeUrlID = document.querySelector('#update-shortcode-url').value;
         const urlData = document.getElementById('ShortcodeSingelUpdateView').value.replace(/0/g, updateShortcodeUrlID);
@@ -270,6 +285,7 @@ class ViewShort{
 
                 lsToast(data.success);
 
+
                 setTimeout(()=>{
                     this.ShortcodeAjaxView();
                 }, 200);
@@ -294,6 +310,11 @@ class ViewShort{
         const url_creator = document.getElementById('url_creator');
         const csrf = document.getElementsByName('csrfmiddlewaretoken');
 
+        const alertUser = document.getElementById('alertUser');
+        while (alertUser.firstChild) {
+            alertUser.removeChild(alertUser.firstChild);
+        }
+
     
         const fd = new FormData();
         fd.append('csrfmiddlewaretoken', csrf[0].value)
@@ -308,7 +329,35 @@ class ViewShort{
             data: fd,
             dataType: 'json',
             success: (response) => {
-                console.log('RUN DATA' + response);
+                console.log(response)
+
+                const openForm = document.getElementById('openForm');
+                const overlayOpen = document.querySelector('#overlay-open');
+                const asideForm = document.querySelector('#aside-form');
+                const crateFormShortcode = document.querySelector('#crate-form-shortcode');
+        
+                openForm.classList.remove('disabled')
+                crateFormShortcode.classList.remove('d-none')
+                overlayOpen.classList.remove('overlay-open')
+                asideForm.classList.remove('toggle');
+
+                const tagsCheckboxes = $('input[name="tags"][type="checkbox"]');
+                tagsCheckboxes.each(function(index, checkbox) {
+                    const tagValue = parseInt($(checkbox).val());
+                    $(checkbox).prop('checked', '');
+                });
+
+                const shortcodeList = document.querySelector('#shortcode-list');
+                while (shortcodeList.firstChild) {
+                    shortcodeList.removeChild(shortcodeList.firstChild);
+                }
+
+                lsToast(response.success);
+
+                setTimeout(()=>{
+                    this.ShortcodeAjaxView();
+                }, 300);
+
             },
             error: (xhr, textStatus, errorThrown) => {
                 console.error('Fehler:', errorThrown);
@@ -347,14 +396,28 @@ class ViewShort{
             },
             success: (response) => {
 
+                const alertUser = document.getElementById('alertUser');
+                alertUser.innerHTML += `
+                    <div class="alert alert-${response.user_date.alert} d-inline-flex p-2" role="alert">
+                        ${response.user_date.message}
+                    </div>
+                `;     
+                
+                if(response.user_date.alert === 'warning'){
+                    const openForm = document.querySelector('#openForm');
+                    openForm.style.display = 'none'
+                }
+
                 const shortcodeList = document.querySelector('#shortcode-list');
                 const serialized_data = response.data;
                 gifLoad.classList.remove('d-none');
 
+                
+
                 setTimeout(function(){
 
                     serialized_data.forEach(function(item) {
-
+                       
                         // Kürzen der URL und der Ziel-URL
                         const shortUrl = item.get_short_url.length > 90 ? item.get_short_url.substring(0, 90) + '...' : item.get_short_url;
                         const shortDestination = item.url_destination.length > 90 ? item.url_destination.substring(0, 90) + '...' : item.url_destination;
@@ -379,7 +442,7 @@ class ViewShort{
                         // Erstellen eines DIV-Elements und Hinzufügen der HTML-Struktur
                         const shortcodeItem = document.createElement('div');
                         shortcodeItem.innerHTML = `
-                            <div class="card p-3 my-3 border border-0">
+                            <div class="card p-3 my-3 border border-0 shadow-sm">
                                 <div class="card-header header-elements">
                                     <form id="shortcode-form">
                                         <input type="checkbox" name="selected_shortcodes" value="shortcode_id_${short_id}">
@@ -389,7 +452,7 @@ class ViewShort{
                                     <div class="card-header-elements ms-auto">
                                         <span class="d-none" id="short${short_id}">${shortUrl}</span>
                                         <button data-button="short${short_id}" type="button" class="btn btn-secondary btn-copy colorshort${short_id} btn-sm">
-                                            <i class="fa-regular fa-copy"></i> copy
+                                            <i class="fa-regular fa-copy"></i> ${copy}
                                         </button>
                                         <a data-shortcode="${short_id}" data-shortname="${shortcode}" class="shortcode-class short-name btn btn-xs btn-primary btn-sm">
                                             <i class="fa-solid fa-pencil"></i> ${editTrans}
@@ -424,9 +487,11 @@ class ViewShort{
                     const loadButton = document.querySelector('#load-more-button');
                     loadButton.classList.remove('d-none');
 
+                    
                     if (totalShortcodes === 0) {
                         totalShortcodes = response.total_shortcodes;
                     }
+
 
                     if (serialized_data.length === 0 || response.page * response.per_page >= totalShortcodes) {
                         loadButton.classList.add('d-none');
@@ -436,6 +501,17 @@ class ViewShort{
 
                     currentPage += 1; 
                     start_index = response.start_index;
+
+
+                    const SearchTrans = gettext('Your search returned no results, please try again.')
+
+                    if (serialized_data.length === 0) {
+                        shortcodeList.innerHTML = `
+                        <div class="alert alert-primary" role="alert">
+                            ${SearchTrans}
+                        </div>
+                        `;
+                    }
 
                 }, 1000)
 

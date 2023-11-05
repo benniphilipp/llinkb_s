@@ -1,3 +1,4 @@
+
 import { getCookie } from '../../linkinbio/module/getCookie';
 import { clearContent, lsToast } from '../../linkinbio/module/lsToast';
 
@@ -93,10 +94,13 @@ class ShortcodeTags {
         const icon_modal_right = document.querySelector('.icon-modal-right');
         const modelFormTag = document.querySelector('#model-form-tag');
 
+
+        const editDelete = gettext('Delete or edit tags');
+
         form_tag_view.style.display = 'block';
         tagListEdit.style.display = 'none';
         id_name.value = '';
-        tagEdit.innerHTML = '<span id="tag-edit">Tags Löschen oder Bearbeiten</span>';
+        tagEdit.innerHTML = `<span id="tag-edit">${editDelete}</span>`;
         icon_modal_right.style.display = 'block';
         modelFormTag.classList.remove('active');
 
@@ -144,6 +148,9 @@ class ShortcodeTags {
         icon_modal_right.style.display = 'none'; 
         tagEdit.innerHTML = '';
 
+        const deleteTrans = gettext('delete');
+        const saveChanges = gettext('save Changes');
+
         $.ajax({
            url: dataURL,
            method: 'GET',
@@ -152,11 +159,12 @@ class ShortcodeTags {
             let tagOptions = '';
 
             tags.forEach(tag => {
+
                 tagOptions += `
                 <div class="input-group mb-3" id="tag-${tag.id}">
                     <input type="text" class="form-control" id="tag-value${tag.id}" value="${tag.name}" placeholder="">
-                    <button class="btn btn-outline-danger delete-tag-button" type="button" data-tag-id="${tag.id}">Löschen</button>
-                    <button class="btn btn-outline-primary edit-tag-button" type="button" data-tag-id="${tag.id}">Änderungen speichern</button>
+                    <button class="btn btn-outline-danger delete-tag-button" type="button" data-tag-id="${tag.id}">${deleteTrans}</button>
+                    <button class="btn btn-outline-primary edit-tag-button" type="button" data-tag-id="${tag.id}">${saveChanges}</button>
                 </div>`
             });
 

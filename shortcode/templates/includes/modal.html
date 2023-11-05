@@ -1,10 +1,11 @@
 {% load crispy_forms_tags %}
+{% load i18n %}
 
 <div class="tag-overlay" id="model-form-tag">
     <div class="tag-overlay-body">
 
         <div class="d-flex justify-content-between mb-3">
-            <h5>Tags Bearbeiten</h5>
+            <h5>{% trans "Create or edit tags" %}</h5>
             <div class="tag-header d-flex" id="tag-close">
                 <i class="fa-solid fa-xmark ms-auto"></i>
             </div>
@@ -18,7 +19,7 @@
         <div class="d-flex justify-content-start align-items-center model-box">
             <!-- <i class="fa-solid fa-arrow-left icon-modal-left"></i> -->
             <span id="tag-edit">
-                Tags Löschen oder Bearbeiten
+                {% trans "Delete or edit tags" %}
             </span>
             <i class="fa-solid fa-arrow-right icon-modal-right"></i>
         </div>
