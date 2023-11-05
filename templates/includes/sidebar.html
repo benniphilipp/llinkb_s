@@ -6,38 +6,40 @@
         </a>
         <ul class="nav nav-pills flex-column mb-auto mt-3 pt-3 border-top">
             <li class="nav-item">
-                <a href="{% url 'analytics:analytics-view' %}" class="nav-link {% if '/analytics/' == request.get_full_path %} active {% endif %}">
-     
+                {% url 'analytics:analytics-view' as analytics_url %}
+                <a href="{% url 'analytics:analytics-view' %}" class="nav-link {% if analytics_url == request.get_full_path %} active {% endif %}">
                     Dashboard
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{% url 'shortcode:shortcode_list_view' %}" class="link-nav link-links nav-link {% if '/shortcode/list/' == request.get_full_path %} active {% endif %}">
+                {% url 'shortcode:shortcode_list_view' as shortcode_list_view %}
+                <a href="{% url 'shortcode:shortcode_list_view' %}" class="link-nav link-links nav-link {% if shortcode_list_view == request.get_full_path %} active {% endif %}">
                     Links
                     <i class="fa-solid fa-chevron-down links-down"></i>
                 </a>
 
                 <div class="collapse" id="links-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="{% url 'geotargeting:index_geo_targeting' %}" class="link-dark link-geo {% if '/geotargeting/' == request.get_full_path %} active {% endif %} rounded mt-2">Geo Targetin Themplate</a></li>
-                        <li><a href="" class="link-dark link-archiv rounded mt-2 {% if '/shortcode/archive/' == request.get_full_path %} active {% endif %}">Link Archiv</a></li>
-                        <!-- <li><a href="#" class="link-dark rounded">Monthly</a></li>
-                        <li><a href="#" class="link-dark rounded">Annually</a></li> -->
+                        {% url 'archive:achivie_list' as achivie_list %}
+                        <li><a href="{% url 'archive:achivie_list' %}" class="link-dark link-archiv rounded mt-2 {% if achivie_list == request.get_full_path %} active{% endif %}">Link Archiv</a></li>
                     </ul>
                 </div>
 
             <li>
-                <a href="{% url 'linkinbio:linkinbio_view_list' %}" class="nav-link {% if '/linkinbio/' == request.get_full_path %} active {% endif %}">
+                {% url 'linkinbio:linkinbio_view_list' as linkinbio_view_list %}
+                <a href="{% url 'linkinbio:linkinbio_view_list' %}" class="nav-link {% if linkinbio_view_list == request.get_full_path %} active {% endif %}">
                     LinkIn Bio
                 </a>
             </li>
             <li>
-                <a href="{% url 'webclicktracker:click_view' %}" class="nav-link {% if '/webclicktracker/' == request.get_full_path %} active {% endif %}">
+                {% url 'webclicktracker:click_view' as click_view %}
+                <a href="{% url 'webclicktracker:click_view' %}" class="nav-link {% if click_view == request.get_full_path %} active {% endif %}">
                     Websiten Trecker
                 </a>
             </li>
             </li>
-                <a href="{% url 'domain:doamin_view' %}" class="nav-link">
+                {% url 'domain:doamin_view' as doamin_view %}
+                <a href="{% url 'domain:doamin_view' %}" class="nav-link {% if doamin_view == request.get_full_path %} active {% endif %}">
                     Domains
                 </a>
             </li>

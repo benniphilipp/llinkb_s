@@ -35,13 +35,15 @@ class ShortcodeTags {
         const self = this;
         const tagListEdit = document.getElementById('tag-list-edit');
 
-        tagListEdit.addEventListener('click', function (event) {
-          if (event.target.classList.contains('edit-tag-button')) {
-            const tagItem = event.target;
-            const tagId = tagItem.getAttribute('data-tag-id');
-            self.EditTags(tagId);
-          }
-        });
+        if(tagListEdit){
+            tagListEdit.addEventListener('click', function (event) {
+                if (event.target.classList.contains('edit-tag-button')) {
+                  const tagItem = event.target;
+                  const tagId = tagItem.getAttribute('data-tag-id');
+                  self.EditTags(tagId);
+                }
+              });
+        }
 
         // Tags Model Close
         const tagClose = document.querySelector('#tag-close');
@@ -50,13 +52,16 @@ class ShortcodeTags {
         }
 
         // Delete Tag
-        tagListEdit.addEventListener('click', function (event) {
-            if (event.target.classList.contains('delete-tag-button')) {
-              const tagItem = event.target;
-              const tagId = tagItem.getAttribute('data-tag-id');
-              self.DeleteTag(tagId);
-            }
-        });
+        if(tagListEdit){
+            tagListEdit.addEventListener('click', function (event) {
+                if (event.target.classList.contains('delete-tag-button')) {
+                  const tagItem = event.target;
+                  const tagId = tagItem.getAttribute('data-tag-id');
+                  self.DeleteTag(tagId);
+                }
+            });
+        }
+
 
     }
 
@@ -136,77 +141,87 @@ class ShortcodeTags {
 
     // Edit Tags
     EditTagsView(){
-        const dataURL = document.querySelector('#TagListView').value;
+        const ifUrl = document.querySelector('#TagListView');
 
-        const form_tag_view = document.querySelector('.form-tag-view');
-        const tag_list_edit = document.querySelector('#tag-list-edit');
-        const icon_modal_right = document.querySelector('.icon-modal-right');
-        const tagEdit = document.querySelector('#tag-edit');
-        
-        form_tag_view.style.display = 'none'; 
-        tag_list_edit.style.display = 'block';
-        icon_modal_right.style.display = 'none'; 
-        tagEdit.innerHTML = '';
+        if(ifUrl){
 
-        const deleteTrans = gettext('delete');
-        const saveChanges = gettext('save Changes');
+            const dataURL = ifUrl.value;
 
-        $.ajax({
-           url: dataURL,
-           method: 'GET',
-           success: (response) => {
-            const tags = response.tags;
-            let tagOptions = '';
-
-            tags.forEach(tag => {
-
-                tagOptions += `
-                <div class="input-group mb-3" id="tag-${tag.id}">
-                    <input type="text" class="form-control" id="tag-value${tag.id}" value="${tag.name}" placeholder="">
-                    <button class="btn btn-outline-danger delete-tag-button" type="button" data-tag-id="${tag.id}">${deleteTrans}</button>
-                    <button class="btn btn-outline-primary edit-tag-button" type="button" data-tag-id="${tag.id}">${saveChanges}</button>
-                </div>`
+            const form_tag_view = document.querySelector('.form-tag-view');
+            const tag_list_edit = document.querySelector('#tag-list-edit');
+            const icon_modal_right = document.querySelector('.icon-modal-right');
+            const tagEdit = document.querySelector('#tag-edit');
+            
+            form_tag_view.style.display = 'none'; 
+            tag_list_edit.style.display = 'block';
+            icon_modal_right.style.display = 'none'; 
+            tagEdit.innerHTML = '';
+    
+            const deleteTrans = gettext('delete');
+            const saveChanges = gettext('save Changes');
+    
+            $.ajax({
+               url: dataURL,
+               method: 'GET',
+               success: (response) => {
+                const tags = response.tags;
+                let tagOptions = '';
+    
+                tags.forEach(tag => {
+    
+                    tagOptions += `
+                    <div class="input-group mb-3" id="tag-${tag.id}">
+                        <input type="text" class="form-control" id="tag-value${tag.id}" value="${tag.name}" placeholder="">
+                        <button class="btn btn-outline-danger delete-tag-button" type="button" data-tag-id="${tag.id}">${deleteTrans}</button>
+                        <button class="btn btn-outline-primary edit-tag-button" type="button" data-tag-id="${tag.id}">${saveChanges}</button>
+                    </div>`
+                });
+    
+                tag_list_edit.innerHTML = tagOptions
+    
+    
+               },
+               error: (error) => {
+                console.log(error);
+               }
             });
-
-            tag_list_edit.innerHTML = tagOptions
-
-
-           },
-           error: (error) => {
-            console.log(error);
-           }
-        })
+        }
 
     }
 
     // Load Tags
     LoadTags(){
-        const dataUrl = document.querySelector('#get_all_tags').value;
-        $.ajax({
-            type:'GET',
-            url: dataUrl,
-            success: (response) => {
-                const tags = response.tags;
-                const tagFilter = document.querySelector('#tag-filter');
+        const dataIf = document.querySelector('#get_all_tags');
 
-                const emptyOption = document.createElement('option');
-                emptyOption.text = 'Tag Wählen...';
-                emptyOption.value = '';
-                tagFilter.innerHTML = '';
-                tagFilter.appendChild(emptyOption);
-                
-                tags.forEach(function(tag) {
-                  const option = document.createElement('option');
-                  option.text = tag;
-                  option.value = tag;
-                  tagFilter.appendChild(option);
-                });
+        if(dataIf){
+            const dataUrl = dataIf.value;
+            $.ajax({
+                type:'GET',
+                url: dataUrl,
+                success: (response) => {
+                    const tags = response.tags;
+                    const tagFilter = document.querySelector('#tag-filter');
+    
+                    const emptyOption = document.createElement('option');
+                    emptyOption.text = 'Tag Wählen...';
+                    emptyOption.value = '';
+                    tagFilter.innerHTML = '';
+                    tagFilter.appendChild(emptyOption);
+                    
+                    tags.forEach(function(tag) {
+                      const option = document.createElement('option');
+                      option.text = tag;
+                      option.value = tag;
+                      tagFilter.appendChild(option);
+                    });
+    
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+        }
 
-            },
-            error: (error) => {
-                console.log(error);
-            }
-        });
     }
 
     // Crate Tags

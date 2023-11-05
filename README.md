@@ -117,11 +117,11 @@ TqXRm5ikowzmYtZVyCMC
 - Shortcode Crate Form schliessen erledigt
 - Shorcode Tag Model translate erledigt
 - Shortcode Ansicht Mobile erledigt
-- Siedbar Desktop Version Design
-- Shortcode Archive Pages
+- Siedbar Desktop Version Design erledigt
+- Shortcode Archive Pages erledigt
 - E-Mail-Benachrichtigungen Zahlung
 - Verwaltung von Abonnements Abmelden
-- Meldung Hinweis translate
+- Meldung Hinweis translate erledigt
 - Analytics Dahboard Anpssen 
 - Einzelansicht LinkInBio Page
 - Automasticher Tags bei link in bio Seite und in Shorcode Extra Makieren

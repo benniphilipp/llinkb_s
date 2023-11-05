@@ -43,6 +43,7 @@ class ShortcodeListeCreateView(View, LoginRequiredMixin):
                 tags = request.GET.getlist('tags[]') 
                 
                 page = int(request.GET.get('page', 1))
+                
                 per_page = 5  # Anzahl der Einträge pro Seite
                 
                 start_index = (page - 1) * per_page

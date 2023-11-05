@@ -28,7 +28,7 @@
                 <div class="container-fluid mt-5 px-4">
                     <div class="row">
                         <div class="col-12">
-                            <div class="d-flex flex-row align-items-center">
+                            <div class="d-md-flex flex-row align-items-center">
                                 <h3 class="p-1" style="margin-top: 10px;">Links Archiviert</h3>
                                 <div class="p-1 ms-auto">
                                     <button id="archive-button" class="btn btn-primary mt-1" type="button">Entarchivieren</button>
@@ -71,10 +71,12 @@
         </div>
 
 
+        <input type="hidden" id="ArchivListLiftView" value="{% url 'archive:achivie_list' %}">
+        <input type="hidden" id="ShortcodeUnarchived" value="{% url 'archive:shortcode_unarchived' %}">
     
     
     {% endblock body %}
     
     {% block javasript %}
-    <script src="{% static '/assets/js/archive-shortcode.js' %}"></script>
+    <script src="{% static '/js/shortcode.bundle.js' %}"></script>
     {% endblock %}

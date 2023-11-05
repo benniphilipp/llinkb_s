@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-
+ console.log('men')
     // Menu Style
     $('.links-down').click(function(event){
         event.preventDefault();
@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if($('.link-geo').hasClass('active')){
         $('.link-nav').addClass('active');
     }
+
+
 
 
 

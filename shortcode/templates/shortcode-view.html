@@ -105,53 +105,21 @@
 {% block javasript %}
 
 <!--Icon Default-->
-
 <input id="favicon-path" type="hidden" value='{% static "/favicon/favicon-32x32.png" %}'>
-<!--/. Icon Default-->
-
-<!--Chart js-->
-<!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-  -->
-<!--jQuery UI-->
-<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-
-<!---Shorcode Scripts Tageting-->
-<!-- <script src="{% static '/assets/js/shortcode/limitation.js' %}"></script>
-<script src="{% static '/assets/js/shortcode/geo-targeting.js' %}"></script>
-<script src="{% static '/assets/js/shortcode/android.js' %}"></script>
-<script src="{% static '/assets/js/shortcode/ios.js' %}"></script> -->
-
-<!--Shorctcode JS Allgemein-->
-<!-- <script src="{% static '/assets/js/tags.js' %}"></script>
-<script src="{% static '/assets/js/export-shortcode.js' %}"></script>
-<script src="{% static '/assets/js/archive-shortcode.js' %}"></script>
-<script src="{% static '/assets/js/shortcode-neu.js' %}"></script> -->
-
-<!--Shorctcode JS Dashboard Wird später gelöscht-->
-<!-- <script src="{% static '/assets/js/dashboard.js' %}"></script> -->
-
-<!--Neu-->
-<!-- <script src="{% static '/assets/js/analytics-dashboard.js' %}"></script> -->
 <script src="{% static '/js/shortcode.bundle.js' %}"></script>
 
-
-<script type="text/javascript">
-    var translatedText = gettext('This is a translatable string');
-</script>
-
-
 <script>
-var translations = {
-'text1': '{% trans "This is text 1" %}',
-'text2': '{% trans "This is text 2" %}',
-};
-
-$(document).ready(function () {
-var text1 = translations.text1;
-var text2 = translations.text2;
-console.log(text1);
-console.log(text2);
-});
+//var translations = {
+//'text1': '{% trans "This is text 1" %}',
+//'text2': '{% trans "This is text 2" %}',
+//};
+//
+//$(document).ready(function () {
+//var text1 = translations.text1;
+//var text2 = translations.text2;
+//console.log(text1);
+//console.log(text2);
+//});
 </script>
 
 {% endblock %}

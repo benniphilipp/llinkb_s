@@ -1,14 +1,15 @@
 from django.urls import path
 
 from shortcode.views.archivi_views import (
-        ShortcodeAcivieren
+        ShortcodeAcivieren,
+        ArchivListLiftView,
+        ShortcodeUnarchived
     )
 
 app_name = 'archive'
 
 urlpatterns = [
+    path('', ArchivListLiftView.as_view(), name='achivie_list'),
+    path('unarchived/', ShortcodeUnarchived.as_view(), name='shortcode_unarchived'),
     path('achivie/<int:pk>/', ShortcodeAcivieren.as_view(), name='shortcode_achivie'),
-    # path('update/<pk>/', ShortcodeSingelUpdateView.as_view(), name='shortcode_single_update_view'),
-    # path('checking/', CheckingUrlAccessibility.as_view(), name='checking_url_accessibility'),
-    # path('export/', export_shortcodes_to_excel, name='export')
 ]

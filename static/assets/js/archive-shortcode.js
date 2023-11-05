@@ -77,6 +77,7 @@ $(document).ready(function(){
     });
 
 
+
     // List ansicht Shorcode Archiviert
     function loadArchivedShortcodes() {
         $.ajax({
@@ -184,46 +185,46 @@ $(document).ready(function(){
 
 
     //Shorcode Löschen
-    function deleteSelectedShortcodes() {
-        const selectedShortcodeIds = []; // Array zum Speichern der ausgewählten Shortcode-IDs
+    // function deleteSelectedShortcodes() {
+    //     const selectedShortcodeIds = []; // Array zum Speichern der ausgewählten Shortcode-IDs
     
-        // Iteriere durch alle Checkboxen und füge die ausgewählten IDs zum Array hinzu
-        $('input[type="checkbox"]:checked').each(function() {
-            const checkboxId = $(this).attr('id'); // ID der Checkbox
-            const shortcodeId = checkboxId.split('-')[1]; // Extrahiere die Shortcode-ID aus der Checkbox-ID
-            selectedShortcodeIds.push(shortcodeId); // Füge die Shortcode-ID zum Array hinzu
-        });
+    //     // Iteriere durch alle Checkboxen und füge die ausgewählten IDs zum Array hinzu
+    //     $('input[type="checkbox"]:checked').each(function() {
+    //         const checkboxId = $(this).attr('id');
+    //         const shortcodeId = checkboxId.split('-')[1];
+    //         selectedShortcodeIds.push(shortcodeId);
+    //     });
     
-        if (selectedShortcodeIds.length === 0) {
-            alert('Bitte wählen Sie mindestens einen Shortcode zum Löschen aus.');
-            return;
-        }
+    //     if (selectedShortcodeIds.length === 0) {
+    //         alert('Bitte wählen Sie mindestens einen Shortcode zum Löschen aus.');
+    //         return;
+    //     }
     
-        $.ajax({
-            type: 'POST',
-            url: '/shortcode/delete/', // Die URL zur Lösch-View
-            data: {
-                'shortcode_ids[]': selectedShortcodeIds,
-                'csrfmiddlewaretoken': csrftoken, // CSRF-Token, falls erforderlich
-            },
-            success: function(response) {
-                // Hier kannst du die Erfolgsmeldung aus der JSON-Antwort verarbeiten
-                console.log(response.message);
-                loadArchivedShortcodes();
-                ls_toast(response.message);
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '/shortcode/delete/', // Die URL zur Lösch-View
+    //         data: {
+    //             'shortcode_ids[]': selectedShortcodeIds,
+    //             'csrfmiddlewaretoken': csrftoken, // CSRF-Token, falls erforderlich
+    //         },
+    //         success: function(response) {
+    //             // Hier kannst du die Erfolgsmeldung aus der JSON-Antwort verarbeiten
+    //             console.log(response.message);
+    //             loadArchivedShortcodes();
+    //             ls_toast(response.message);
 
-            },
-            error: function(error) {
-                console.log(error);
-            },
-        });
-    }
+    //         },
+    //         error: function(error) {
+    //             console.log(error);
+    //         },
+    //     });
+    // }
     
-    // Füge einen Event-Listener hinzu, um das Löschen von Shortcodes auszulösen
-    $('#delete-button').on('click', function(event) {
-        event.preventDefault();
-        deleteSelectedShortcodes();
-    });
+    // // Füge einen Event-Listener hinzu, um das Löschen von Shortcodes auszulösen
+    // $('#delete-button').on('click', function(event) {
+    //     event.preventDefault();
+    //     deleteSelectedShortcodes();
+    // });
 
 
 }); // End document ready function

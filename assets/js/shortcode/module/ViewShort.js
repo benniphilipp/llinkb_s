@@ -4,7 +4,8 @@ import { clearContent, lsToast } from '../../linkinbio/module/lsToast';
 class ViewShort{
     constructor(){
         this.ShortccodeEvents();
-        this.ShortcodeAjaxView();
+        let currentPage = 1;
+        this.ShortcodeAjaxView(currentPage);
     }
 
     //Event
@@ -22,13 +23,15 @@ class ViewShort{
         const self = this;
         const listContainer = document.getElementById('shortcode-list');
 
-        listContainer.addEventListener('click', function (event) {
-          if (event.target.classList.contains('shortcode-class')) {
-            const clickedListItem = event.target;
-            const shortcodeValue = clickedListItem.getAttribute('data-shortcode');
-            self.ShortcodeUpdateView(shortcodeValue);
-          }
-        });
+        if(listContainer){
+            listContainer.addEventListener('click', function (event) {
+                if (event.target.classList.contains('shortcode-class')) {
+                  const clickedListItem = event.target;
+                  const shortcodeValue = clickedListItem.getAttribute('data-shortcode');
+                  self.ShortcodeUpdateView(shortcodeValue);
+                }
+              });
+        }
 
         const IdUrlDestination = document.querySelector('#id_url_destination');
         if(IdUrlDestination){
@@ -60,13 +63,15 @@ class ViewShort{
             });
         }
 
-        listContainer.addEventListener('click', function(event){
-            if(event.target.classList.contains('btn-copy')) {
-                const clickedListItem = event.target;
-                const buttonId = clickedListItem.getAttribute('data-button');
-                self.CopyButtonColort(buttonId);
-            } 
-        });
+        if(listContainer){
+            listContainer.addEventListener('click', function(event){
+                if(event.target.classList.contains('btn-copy')) {
+                    const clickedListItem = event.target;
+                    const buttonId = clickedListItem.getAttribute('data-button');
+                    self.CopyButtonColort(buttonId);
+                } 
+            });
+        }
 
         const asideForm = document.querySelector('#aside-form');
         if(asideForm){
@@ -82,15 +87,20 @@ class ViewShort{
 
         const loadMoreButton = document.querySelector('#load-more-button');
         if(loadMoreButton){
-            loadMoreButton.addEventListener('click', this.ShortcodeAjaxView.bind(this))
+            let currentPage = 1; 
+            loadMoreButton.addEventListener('click', function(){
+                currentPage += 1; 
+                this.ShortcodeAjaxView(currentPage);
+            }.bind(this))
         }
 
         const filter_search_form = document.querySelector('#filter-search-form');
         if (filter_search_form) {
+            let currentPage = 1; 
             filter_search_form.addEventListener('change', function () {
                 const self = this;
                 setTimeout(function(){
-                    self.ShortcodeAjaxView();
+                    self.ShortcodeAjaxView(currentPage);
                 }, 300)
 
                 const shortcodeList = document.querySelector('#shortcode-list');
@@ -287,7 +297,8 @@ class ViewShort{
 
 
                 setTimeout(()=>{
-                    this.ShortcodeAjaxView();
+                    let currentPage = 1; 
+                    this.ShortcodeAjaxView(currentPage);
                 }, 200);
 
             },
@@ -355,7 +366,8 @@ class ViewShort{
                 lsToast(response.success);
 
                 setTimeout(()=>{
-                    this.ShortcodeAjaxView();
+                    let currentPage = 1
+                    this.ShortcodeAjaxView(currentPage);
                 }, 300);
 
             },
@@ -370,157 +382,160 @@ class ViewShort{
     }
 
     // View
-    ShortcodeAjaxView(){
+    ShortcodeAjaxView(currentPage){
   
         const dataInput = document.querySelector('input[name="data"]');
-        const gifLoad = document.querySelector('#gif-load');
+        if(dataInput){
+            const gifLoad = document.querySelector('#gif-load');
 
-        const selectedTag = document.querySelector('#tag-filter');
-        const searchQuery = document.querySelector('#search-input');
-        const ValueselectedTag = selectedTag.value;
-        const ValuesearchQuery = searchQuery.value;
-       
-        const tagsArray = ValueselectedTag ? [ValueselectedTag] : [];
+            const selectedTag = document.querySelector('#tag-filter');
+            const searchQuery = document.querySelector('#search-input');
+            const ValueselectedTag = selectedTag.value;
+            const ValuesearchQuery = searchQuery.value;
+           
+            let start_index; 
+            let totalShortcodes = 0; 
 
-        let start_index; 
-        let currentPage = 1;  
-        let totalShortcodes = 0; 
-
-        $.ajax({
-            url: `${dataInput.value}?page=${currentPage}`,
-            data: { page: currentPage  },
-            dataType: 'json',
-            data: {
-                tags: tagsArray,
-                q: ValuesearchQuery
-            },
-            success: (response) => {
-
-                const alertUser = document.getElementById('alertUser');
-                alertUser.innerHTML += `
-                    <div class="alert alert-${response.user_date.alert} d-inline-flex p-2" role="alert">
-                        ${response.user_date.message}
-                    </div>
-                `;     
-                
-                if(response.user_date.alert === 'warning'){
-                    const openForm = document.querySelector('#openForm');
-                    openForm.style.display = 'none'
-                }
-
-                const shortcodeList = document.querySelector('#shortcode-list');
-                const serialized_data = response.data;
-                gifLoad.classList.remove('d-none');
-
-                
-
-                setTimeout(function(){
-
-                    serialized_data.forEach(function(item) {
-                       
-                        // Kürzen der URL und der Ziel-URL
-                        const shortUrl = item.get_short_url.length > 90 ? item.get_short_url.substring(0, 90) + '...' : item.get_short_url;
-                        const shortDestination = item.url_destination.length > 90 ? item.url_destination.substring(0, 90) + '...' : item.url_destination;
-
-                        // Extrahieren der benötigten Werte aus item
-                        const short_id = item.short_id;
-                        const url_create_date = item.url_create_date;
-                        const click_count = item.click_count;
-                        const shortcode = item.shortcode;
-                        const tags = item.tags;
-                        const url_titel = item.url_titel;
-                        
-                        let faviconPath = item.favicon_path;
-                        if (faviconPath === 'null' || faviconPath === null) {
-                            faviconPath = document.querySelector('#favicon-path').value;
-                        }
-
-                        const editTrans = gettext('edit');
-                        const clicksTrans = gettext('clicks');
-                        const copy = gettext('copy');
-                        
-                        // Erstellen eines DIV-Elements und Hinzufügen der HTML-Struktur
-                        const shortcodeItem = document.createElement('div');
-                        shortcodeItem.innerHTML = `
-                            <div class="card p-3 my-3 border border-0 shadow-sm">
-                                <div class="card-header header-elements">
-                                    <form id="shortcode-form">
-                                        <input type="checkbox" name="selected_shortcodes" value="shortcode_id_${short_id}">
-                                    </form>
-                                    <img src="${faviconPath}" class="img-thumbnail favicon-img" alt="favicon.ico">
-                                    <h5 class="card-title">${url_titel}</h5>
-                                    <div class="card-header-elements ms-auto">
-                                        <span class="d-none" id="short${short_id}">${shortUrl}</span>
-                                        <button data-button="short${short_id}" type="button" class="btn btn-secondary btn-copy colorshort${short_id} btn-sm">
-                                            <i class="fa-regular fa-copy"></i> ${copy}
-                                        </button>
-                                        <a data-shortcode="${short_id}" data-shortname="${shortcode}" class="shortcode-class short-name btn btn-xs btn-primary btn-sm">
-                                            <i class="fa-solid fa-pencil"></i> ${editTrans}
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <a href="${shortUrl}">${shortUrl}</a><br>
-                                    <a class="text-muted" href="${shortDestination}">${shortDestination}</a>
-                                </div>
-                                <div class="card-footer">
-                                    <small class="text-muted short-links-footer">
-                                        <span class="short-calendar"><i class="fa-regular fa-calendar orb-icon"></i> ${url_create_date} </span>
-                                        <span class="short-chart" data-anaylyse="${short_id}">
-                                            <i class="fa-solid fa-chart-line orb-icon"></i> ${click_count} ${clicksTrans}
-                                        </span>
-                                        <span class="short-tags"><i class="fa-solid fa-tag orb-icon"></i> ${tags.join(', ')} Tags</span>
-                                    </small>
-                                </div>
+            const tagsArray = ValueselectedTag ? [ValueselectedTag] : [];
+    
+            $.ajax({
+                url: `${dataInput.value}?page=${currentPage}`,
+                type: 'GET',
+                data: { page: currentPage  },
+                dataType: 'json',
+                data: {
+                    tags: tagsArray,
+                    q: ValuesearchQuery
+                },
+                success: (response) => {
+    
+                    const alertUser = document.getElementById('alertUser');
+                    const existingAlert = alertUser.querySelector('.alert');
+                    if (!existingAlert) {
+                        alertUser.innerHTML += `
+                            <div class="alert alert-${response.user_date.alert} d-inline-flex p-2" role="alert">
+                                ${response.user_date.message}
                             </div>
                         `;
-
-                        // Hinzufügen des Elements zur Seite
-                        shortcodeList.appendChild(shortcodeItem);
-
-                    });
-
-                    // Gif
-                    gifLoad.classList.add('d-none');
-
-                    // Load Button
-                    const loadButton = document.querySelector('#load-more-button');
-                    loadButton.classList.remove('d-none');
-
+                    }
                     
-                    if (totalShortcodes === 0) {
-                        totalShortcodes = response.total_shortcodes;
+                    if(response.user_date.alert === 'warning'){
+                        const openForm = document.querySelector('#openForm');
+                        openForm.style.display = 'none'
                     }
+    
+                    const shortcodeList = document.querySelector('#shortcode-list');
+                    const serialized_data = response.data;
+                    gifLoad.classList.remove('d-none');
+    
+    
+                    setTimeout(function(){
+    
+                        serialized_data.forEach(function(item) {
+                           
+                            // Kürzen der URL und der Ziel-URL
+                            const shortUrl = item.get_short_url.length > 90 ? item.get_short_url.substring(0, 90) + '...' : item.get_short_url;
+                            const shortDestination = item.url_destination.length > 90 ? item.url_destination.substring(0, 90) + '...' : item.url_destination;
+    
+                            // Extrahieren der benötigten Werte aus item
+                            const short_id = item.short_id;
+                            const url_create_date = item.url_create_date;
+                            const click_count = item.click_count;
+                            const shortcode = item.shortcode;
+                            const tags = item.tags;
+                            const url_titel = item.url_titel;
+                            
+                            let faviconPath = item.favicon_path;
+                            if (faviconPath === 'null' || faviconPath === null) {
+                                faviconPath = document.querySelector('#favicon-path').value;
+                            }
+    
+                            const editTrans = gettext('edit');
+                            const clicksTrans = gettext('clicks');
+                            const copy = gettext('copy');
+                            
+                            // Erstellen eines DIV-Elements und Hinzufügen der HTML-Struktur
+                            const shortcodeItem = document.createElement('div');
+                            shortcodeItem.innerHTML = `
+                                <div class="card p-3 my-3 border border-0 shadow-sm">
+                                    <div class="card-header header-elements">
+                                        <form id="shortcode-form">
+                                            <input type="checkbox" name="selected_shortcodes" value="shortcode_id_${short_id}">
+                                        </form>
+                                        <img src="${faviconPath}" class="img-thumbnail favicon-img" alt="favicon.ico">
+                                        <h5 class="card-title">${url_titel}</h5>
+                                        <div class="card-header-elements ms-auto">
+                                            <span class="d-none" id="short${short_id}">${shortUrl}</span>
+                                            <button data-button="short${short_id}" type="button" class="btn btn-secondary btn-copy colorshort${short_id} btn-sm">
+                                                <i class="fa-regular fa-copy"></i> ${copy}
+                                            </button>
+                                            <a data-shortcode="${short_id}" data-shortname="${shortcode}" class="shortcode-class short-name btn btn-xs btn-primary btn-sm">
+                                                <i class="fa-solid fa-pencil"></i> ${editTrans}
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <a href="${shortUrl}">${shortUrl}</a><br>
+                                        <a class="text-muted" href="${shortDestination}">${shortDestination}</a>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted short-links-footer">
+                                            <span class="short-calendar"><i class="fa-regular fa-calendar orb-icon"></i> ${url_create_date} </span>
+                                            <span class="short-chart" data-anaylyse="${short_id}">
+                                                <i class="fa-solid fa-chart-line orb-icon"></i> ${click_count} ${clicksTrans}
+                                            </span>
+                                            <span class="short-tags"><i class="fa-solid fa-tag orb-icon"></i> ${tags.join(', ')} Tags</span>
+                                        </small>
+                                    </div>
+                                </div>
+                            `;
+    
+                            // Hinzufügen des Elements zur Seite
+                            shortcodeList.appendChild(shortcodeItem);
+    
+                        });
 
-
-                    if (serialized_data.length === 0 || response.page * response.per_page >= totalShortcodes) {
-                        loadButton.classList.add('d-none');
-                    } else {
+                        const SearchTrans = gettext('Your search returned no results, please try again.')
+    
+                        if (serialized_data.length === 0) {
+                            shortcodeList.innerHTML = `
+                            <div class="alert alert-primary" role="alert">
+                                ${SearchTrans}
+                            </div>
+                            `;
+                        }
+    
+                        // Gif
+                        gifLoad.classList.add('d-none');
+    
+                        // Load Button
+                        const loadButton = document.querySelector('#load-more-button');
                         loadButton.classList.remove('d-none');
-                    }
-
-                    currentPage += 1; 
-                    start_index = response.start_index;
-
-
-                    const SearchTrans = gettext('Your search returned no results, please try again.')
-
-                    if (serialized_data.length === 0) {
-                        shortcodeList.innerHTML = `
-                        <div class="alert alert-primary" role="alert">
-                            ${SearchTrans}
-                        </div>
-                        `;
-                    }
-
-                }, 1000)
-
-            },
-            error: (xhr, status, error) => {
-                console.error(error);
-            }
-
-        });
+    
+                        
+                        if (totalShortcodes === 0) {
+                            totalShortcodes = response.total_shortcodes;
+                        }
+    
+    
+                        if (serialized_data.length === 0 || response.page * response.per_page >= totalShortcodes) {
+                            loadButton.classList.add('d-none');
+                        } else {
+                            loadButton.classList.remove('d-none');
+                        }
+    
+                        currentPage += 1; 
+                        start_index = response.start_index;
+        
+                    }, 1000)
+    
+                },
+                error: (xhr, status, error) => {
+                    console.error(error);
+                }
+    
+            });
+        }
 
     }
 
