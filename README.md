@@ -343,6 +343,7 @@ https://apalfrey.github.io/select2-bootstrap-5-theme/examples/single-select/
     git status
 
     source env/bin/activate
+    deactivate
 
     git pull
     python3 manage.py makemigrations 
