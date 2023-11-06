@@ -235,7 +235,7 @@ if ENVIRONMENT == 'production':
             'USER': 'djuser',
             'PASSWORD': 'password',
             'HOST': 'localhost',
-            'PORT': '',
+            'PORT': '5432',
         }
     }
 
