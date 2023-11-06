@@ -214,7 +214,7 @@ if ENVIRONMENT == 'local':
 ## Produktions 
 if ENVIRONMENT == 'production':
     
-    ALLOWED_HOSTS = ['llinkb.com', 'www.llinkb.com', 'localhost', '*', 'http://5.45.101.54/']
+    ALLOWED_HOSTS = ['llinkb.com', 'www.llinkb.com', 'localhost']
         
     LANGUAGE_CODE = 'en'
     DEFAULT_CHARSET = 'utf-8'
