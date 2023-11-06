@@ -352,6 +352,12 @@ https://apalfrey.github.io/select2-bootstrap-5-theme/examples/single-select/
     python3 manage.py collectstatic
 
 
+
+    sudo ls -l /etc/postgresql/11/second
+
+
+
+
     sudo systemctl daemon-reload
     sudo systemctl restart gunicorn
     sudo systemctl status gunicorn

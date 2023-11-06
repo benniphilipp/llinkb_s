@@ -231,8 +231,8 @@ if ENVIRONMENT == 'production':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'dj',
-            'USER': 'djuser',
+            'NAME': 'django',
+            'USER': 'djangouser',
             'PASSWORD': 'password',
             'HOST': 'localhost',
             'PORT': '5432',
