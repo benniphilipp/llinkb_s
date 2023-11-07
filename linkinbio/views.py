@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpRequest
 
 from django.views.decorators.http import require_POST
+from django.utils.translation import gettext_lazy as _
 
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseServerError
@@ -521,7 +522,6 @@ class UpdateShortcodeLinkInBioView(View):
         return JsonResponse(response_data, status=400)
 
 
-# Ben
 # Löschen Linkinlink
 class LinkinbiolinkDeleteView(View):
     def post(self, request, pk):
@@ -655,14 +655,27 @@ class ImageSaveAdjustmentView(View):
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
 
-
+#DelteImageProfile
+class DeleteImageAdjustmentView(View):
+    def post(self, request, pk):
+        try:
+            print(pk)
+            obj = LinkInBio.objects.get(id=pk)
+            obj.profile_image
+            img = obj.profile_image
+            img.delete()
+            
+            return JsonResponse({'message': _('Image deleted successfully.')})
+        except UrlSocialProfiles.DoesNotExist:
+            return JsonResponse({'error': _('No image found.')}, status=404)
+        
 # Detaile Profile Image
 class ProfileImageDetailView(LoginRequiredMixin, View):
     def get(self, request, pk):
         try:
             profileimage = get_object_or_404(LinkInBio, pk=pk, user=request.user)
-
-            if profileimage.profile_image.url:
+            
+            if profileimage.profile_image:
                 data = [{'profile_image': profileimage.profile_image.url}]
             else:
                 data = [{'profile_image': None}]

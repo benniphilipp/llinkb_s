@@ -20,11 +20,14 @@ class adjustmentViewImg{
             type: 'GET',
             dataType: 'json',
             success: (data) => {
+                
 
                 const newImageUrl = data[0].profile_image;
-                profileImage.src = newImageUrl;
-                pageImage.src = newImageUrl;
-                
+                if(newImageUrl){
+                    profileImage.src = newImageUrl;
+                    pageImage.src = newImageUrl;
+                }
+
             },
             error: (xhr, textStatus, errorThrown) => {
               console.error('Fehler:', errorThrown);

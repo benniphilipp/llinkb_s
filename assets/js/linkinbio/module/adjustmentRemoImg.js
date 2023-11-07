@@ -1,4 +1,6 @@
 import { getCookie } from './getCookie';
+import profileImageView from '../../linkinbio/module/adjustmentViewImg';
+import { clearContent, lsToast } from './lsToast';
 
 class adjustmentRemoImg {
 
@@ -29,22 +31,33 @@ class adjustmentRemoImg {
 
     profileImageDelete(event){
 
-        const urlData = document.querySelector('#ImageProfileAdjustment');
-
-        const dummyImageBlob = new Blob([''], { type: 'image/png' });
-        const formData = new FormData();
-        formData.append('image', dummyImageBlob, 'profile_image.png');
-        
+        const urlData = document.querySelector('#DeleteImageAdjustmentView');
+        const profileImageValue = document.querySelector('#ProfileImageDetailView')?.value || '';
+        const self = this;
         $.ajax({
             type: 'POST',
             url: urlData.value,
             enctype: 'multipart/form-data',
-            data: formData,
             headers: {
                 'X-CSRFToken': this.csrftoken 
             },
             success: function(response) {
-                console.log('success', response);
+                
+
+
+                // self.profileImage = new profileImageView();
+                // self.profileImage.profileImageView(profileImageValue);
+
+
+                const pageImage = document.querySelector('.page-image');
+                const profileImage = document.querySelector('#profileImage');
+
+                pageImage.src = 'https://placehold.co/600x400';
+                profileImage.src = 'https://placehold.co/600x400';
+                lsToast(response.message);
+                $('#exampleModalImageDelete').modal('hide');
+                
+
             },
             error: function(error) {
                 console.log('error', error);
