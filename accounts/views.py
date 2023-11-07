@@ -309,13 +309,13 @@ class RegisterView(View):
             token = default_token_generator.make_token(user)
             activation_link = reverse('activate_account', kwargs={'uidb64': uid, 'token': token})
             current_site = get_current_site(request)
-            mail_subject = _('Aktivieren Sie Ihr Benutzerkonto')
-            message = _(f'Hallo,\n\n' \
-                'Vielen Dank für die Registrierung bei unserer Website. ' \
-                'Um Ihr Konto zu aktivieren, klicken Sie auf den folgenden Link:\n\n' \
+            mail_subject = _('Activate your user account')
+            message = _(f'Hello,\n\n' \
+                'Thank you for registering on our website. ' \
+                'To activate your account, click the following link:\n\n' \
                 f'{current_site.domain}{activation_link}\n\n' \
-                'Der Aktivierungslink ist für 24 Stunden gültig.\n\n' \
-                'Nach der Aktivierung können Sie sich auf unserer Website anmelden.')
+                'The activation link is valid for 24 hours.\n\n' \
+                'After activation you can log in to our website.')
             send_mail(mail_subject, message, default_from_email, [user.email])
 
             return redirect('success_url')
@@ -441,7 +441,7 @@ def update_user_json(request, pk):
         obj.city = new_city
         obj.save()
         
-        return JsonResponse({'success': True, 'message': 'Profil erfolgreich aktualisiert.'})
+        return JsonResponse({'success': True, 'message': 'Profile updated successfully.'})
     else:
         return JsonResponse({'success': False, 'message': 'Nur POST-Anfragen sind erlaubt.'}, status=400)
 
