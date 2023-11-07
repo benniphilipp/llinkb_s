@@ -11,6 +11,7 @@ class linkDelete{
         this.event();
     }
 
+    
     event(){
         const linkinbioEditcardContainer = document.querySelector('#card-container');
         

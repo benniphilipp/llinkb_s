@@ -68,6 +68,7 @@ class adjustmentAddImg{
         });    
     }
 
+    
     imageSaveCropper() {
         const self = this;
         if (this.cropper) {

@@ -264,7 +264,7 @@ class CreateLinkView(View):
                 shortcode = ShortcodeClass.objects.get(id=shortcode_id)
                 linkinbio_page = LinkInBio.objects.get(id=linkinbio_page_id)
             except (ShortcodeClass.DoesNotExist, LinkInBio.DoesNotExist):
-                response_data = {'success': False, 'message': 'Ungültige Shortcode- oder LinkInBio-Seite.'}
+                response_data = {'success': False, 'message': _('Invalid shortcode or LinkInBio page.')}
                 return JsonResponse(response_data, status=400)
 
             shortcode.button_label = button_label
@@ -277,7 +277,7 @@ class CreateLinkView(View):
             new_order = current_order + 1
             LinkInBioLink.objects.create(link_in_bio=linkinbio_page, shortcode=shortcode, order=new_order)
 
-            response_data = {'success': True, 'message': 'Shortcode mit LinkInBio verknüpft.'}
+            response_data = {'success': True, 'message': _('Shortcode linked to LinkInBio.')}
             return JsonResponse(response_data)
 
         except json.JSONDecodeError:
@@ -337,11 +337,11 @@ class CreateShortcodeView(View):
             
             LinkInBioLink.objects.create(link_in_bio=selected_linkinbio_page, shortcode=shortcode, order=new_order)
 
-            response_data = {'success': True, 'message': 'Shortcode erstellt und zur LinkInBio hinzugefügt.'}
+            response_data = {'success': True, 'message': _('Shortcode created and added to LinkInBio.')}
             return JsonResponse(response_data)
 
         except json.JSONDecodeError:
-            response_data = {'success': False, 'message': 'Ungültiges JSON-Format.'}
+            response_data = {'success': False, 'message': _('Invalid JSON format.')}
             return JsonResponse(response_data, status=400)
 
 
@@ -414,16 +414,10 @@ class LinkInBioListView(LoginRequiredMixin, View):
             )
             shortcode_instance.save()
             
-            
-            # Pfad zur JSON-Datei
-            BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            x = BASE_DIR + '/Users/benjaminphilipp/Documents/GitHub/shortcode/src/linkinbio/templates/json/default_styles.json' 
-            print(f'pfad: {x}')
-            
-            json_file_path = '/Users/benjaminphilipp/Documents/GitHub/shortcode/src/linkinbio/templates/json/default_styles.json'
 
-            
-            
+            BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            json_file_path = BASE_DIR + '/src/linkinbio/templates/json/default_styles.json' 
+                
             # JSON-Datei einlesen
             with open(json_file_path, 'r') as json_file:
                 json_data = json.load(json_file)
@@ -452,6 +446,7 @@ class LinkInBioDetailView(LoginRequiredMixin, View):
         try:
             # Holen Sie die LinkInBio-Instanz anhand des Primärschlüssels (pk)
             link_in_bio_instance = LinkInBio.objects.get(pk=pk, user=request.user)
+            
         except LinkInBio.DoesNotExist:
             # Wenn die Instanz nicht existiert, werfen Sie eine Http404-Ausnahme
             raise Http404
@@ -500,9 +495,9 @@ class UpdateShortcodeLinkInBioView(View):
                     bio_page.shortcode = shortcode
                     bio_page.save()
                     
-                    response_data = {'success': True, 'message': 'Shortcode gefunden und aktualisiert.'}
+                    response_data = {'success': True, 'message': _('Shortcode found and updated.')}
                 except ShortcodeClass.DoesNotExist:
-                    response_data = {'success': False, 'message': 'Shortcode nicht gefunden.'}
+                    response_data = {'success': False, 'message': _('Shortcode not found.')}
                 
             else:
                 
@@ -513,7 +508,7 @@ class UpdateShortcodeLinkInBioView(View):
                 )
                 
                 
-                response_data = {'success': True, 'message': 'Neuer Shortcode erstellt.'}
+                response_data = {'success': True, 'message': _('New shortcode created.')}
                 
             return JsonResponse(response_data)
 
@@ -522,20 +517,21 @@ class UpdateShortcodeLinkInBioView(View):
         return JsonResponse(response_data, status=400)
 
 
+
 # Löschen Linkinlink
 class LinkinbiolinkDeleteView(View):
     def post(self, request, pk):
         try:
-            link = LinkInBio.objects.get(pk=pk)
+            link = LinkInBioLink.objects.get(pk=pk)
             link.delete()
             
             # if not LinkInBioLink.objects.filter(shortcode=shortcode).exists():
             #     # Lösche den Shortcode, da er nicht mehr verwendet wird
             #     shortcode.delete()
                 
-            return JsonResponse({'message': 'Datensatz erfolgreich gelöscht'})
+            return JsonResponse({'message': _('Record deleted successfully')})
         except LinkInBioLink.DoesNotExist:
-            return JsonResponse({'message': 'Datensatz nicht gefunden'}, status=404)
+            return JsonResponse({'message': _('Data record not found')}, status=404)
         except Exception as e:
             return JsonResponse({'message': str(e)}, status=500)
 
@@ -546,7 +542,7 @@ class LinkInBioDeatilePage(View):
         try:
             linkinbio = LinkInBio.objects.get(id=pk)
         except LinkInBio.DoesNotExist:
-            return JsonResponse({'error': 'Eintrag nicht gefunden'}, status=404)
+            return JsonResponse({'error': _('entry not found')}, status=404)
         
         profileimage = get_object_or_404(LinkInBio, pk=pk, user=request.user)
 
@@ -636,7 +632,7 @@ class UpdateFormLinkInBioSingel(View):
             
             link_in_bio.save()
             
-            response_data = {'success': True, 'message': 'LinkInBio aktualisiert.'}
+            response_data = {'success': True, 'message': _('LinkInBio updated.')}
             return JsonResponse(response_data)
        
  
@@ -651,7 +647,7 @@ class ImageSaveAdjustmentView(View):
             linkinbiopage.profile_image = image_data
             linkinbiopage.save()
             
-            return JsonResponse({'message': 'Bild erfolgreich gespeichert'})
+            return JsonResponse({'message': _('Image saved successfully')})
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
 
@@ -700,7 +696,7 @@ class TexteCreateAdjustmentView(View):
             linkinbiopage.description = description
             linkinbiopage.save()
             
-            return JsonResponse({'message': 'Text erfolgreich gespeichert'})
+            return JsonResponse({'message': _('Text saved successfully')})
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
         
@@ -728,6 +724,7 @@ class TexteDeatileAdjustmentView(LoginRequiredMixin, View):
 class CustomSettingsView(View):
     def get(self, request, pk):        
         link_in_bio_instance = LinkInBio.objects.get(id=pk)
+
         try:
             custom_settings = CustomSettings.objects.get(link_in_bio=link_in_bio_instance)
             settings_json_data = custom_settings.settings_json
@@ -735,7 +732,7 @@ class CustomSettingsView(View):
 
         except CustomSettings.DoesNotExist:
             # Behandeln Sie den Fall, wenn keine CustomSettings gefunden wurden
-            return JsonResponse({'message': 'Keine Einstellungen gefunden'})
+            return JsonResponse({'message': _('No settings found')})
         
 
 
@@ -753,6 +750,6 @@ class CustomSettingsUpdateView(View):
             custom_settings.settings_json = settings_json_data
             custom_settings.save()
 
-            return JsonResponse({'message': 'Erfolgreich aktualisiert'})
+            return JsonResponse({'message': _('Updated successfully')})
         except LinkInBio.DoesNotExist:
-            return JsonResponse({'message': 'Ungültige Anfrage'})
+            return JsonResponse({'message': _('invalid request')})
