@@ -13,6 +13,8 @@ db.sqlite3
 delete
 __pycache__/
 
+./staticfiles
+
 ./src/__pycache__/
 ./geotargeting/__pycache__/
 ./contentpages/__pycache__/
