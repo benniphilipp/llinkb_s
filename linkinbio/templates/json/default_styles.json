@@ -23,8 +23,8 @@
             "height": "130px",
             "align-items": "center",
             "justify-content": "center",
-            "background-color": "#ffffff",
-            "color": "#ffffff"
+            "background-color": "",
+            "color": ""
         }
     },
     "image-header": {

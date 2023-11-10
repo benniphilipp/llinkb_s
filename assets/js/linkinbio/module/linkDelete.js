@@ -4,6 +4,7 @@ import adjustmentSocial from './adjustmentSocial';
 import adjustmentColor from './adjustmentColor';
 import { clearContent, lsToast } from './lsToast';
 
+
 class linkDelete{
     constructor(){
         this.linkList = new linkListe();
@@ -44,13 +45,18 @@ class linkDelete{
             const urlTrash = button.getAttribute('data-url-trash');
             const linkinbioEditcard = button.getAttribute('data-linkinbio-editcard');
             const linkinbioTitel = button.getAttribute('data-linkinbio-titel');
-    
+
+
+            //Transpalte
+            const ModelDoyouwantto = gettext('Do you want to');
+            const ModelDelte = gettext('Delete');
+
             const exampleModalLabel = document.querySelector('#exampleModalLabel');
             exampleModalLabel.textContent = linkinbioTitel;
 
             const idContent = document.querySelector('#idContent');
             const contentItem = document.createElement('p');
-            contentItem.textContent = ' Möchten Sie" ' + linkinbioTitel + ' "Löschen';
+            contentItem.textContent = ModelDoyouwantto + '" ' + linkinbioTitel + ' "' + ModelDelte;
 
             $(idContent).append(contentItem);
 
@@ -97,7 +103,7 @@ class linkDelete{
                     'X-CSRFToken': this.csrftoken, 
                 },
                 success: (data) => {
-                    console.log('Antwort von Server:', data);
+                    //console.log('Antwort von Server:', data);
 
                     const exampleModalLabel = document.querySelector('#exampleModalLabel');
                     exampleModalLabel.textContent = '';

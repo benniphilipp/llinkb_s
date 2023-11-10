@@ -137,7 +137,6 @@ class ShortcodeListeCreateView(View, LoginRequiredMixin):
         
         return context
     
-    
     def post(self, request):
         form = ShortcodeClassForm(request.POST)
         

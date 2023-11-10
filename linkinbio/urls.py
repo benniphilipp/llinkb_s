@@ -27,7 +27,8 @@ from .views import (
         CustomSettingsView,
         CustomSettingsUpdateView,
         SocialMediaProfilesOrderSaveView,
-        DeleteImageAdjustmentView
+        DeleteImageAdjustmentView,
+        BackgroundImageJson
     )
 
 
@@ -61,4 +62,5 @@ urlpatterns = [
     path('linkinbio_edit_screen/<int:pk>/', LinkInBioViewEditScreen.as_view(), name='linkinbio_edit_screen'),
     path('custom_settings_view/<int:pk>/', CustomSettingsView.as_view(), name='custom_settings_view'), 
     path('custom_settings_update_view/<int:pk>/', CustomSettingsUpdateView.as_view(), name='custom_settings_update_view'), 
+    path('background_image_json/<int:pk>/', BackgroundImageJson.as_view(), name='background_image_json'), 
 ]

@@ -376,24 +376,56 @@ class ShortcodeClassListView(View):
         return JsonResponse(shortcode_data, safe=False)
 
 
-#Ben
+
 # ListView LinkInBio
 class LinkInBioListView(LoginRequiredMixin, View):
     def get(self, request):
-
-        link_in_bio_objects = LinkInBio.objects.filter(user=request.user)
-        link_in_bio_form = LinkInBioDashboardForm()
-        aktuelle_url = request.build_absolute_uri()
         
-        context = {
-            'link_in_bio_form': link_in_bio_form,
-            'link_in_bio_objects': link_in_bio_objects,
-            'aktuelle_url': aktuelle_url
-        }
+        if 'application/json' in request.META.get('HTTP_ACCEPT', ''):
+            if request.is_ajax():
+                
+                count = 0
+                if request.user.free_user == True:
+                    link_bio = LinkInBio.objects.filter(user=request.user)
+                    count = link_bio.count()
+                    max_bio = 1
+                    if count >= max_bio:
+                        response_data = {
+                            'message': _('Maximum number of Link in Bio reached.'),
+                            'count': 0,
+                            'alert': 'warning',
+                            }
+                    else:
+                        response_data = {
+                            'message': _('You have created {count}, from your {max_bio} free links.').format(count=count, max_bio=max_bio),
+                            'count': count,
+                            'alert': 'primary',
+                            }
+                else:
+                    response_data = {
+                        'message': _('You have unlimited Link in Bio'),
+                        'count': count,
+                        'alert': 'info',
+                        }
+            return JsonResponse({
+                    'user_date': response_data,
+                })
+        else:
+
+            link_in_bio_objects = LinkInBio.objects.filter(user=request.user)
+            link_in_bio_form = LinkInBioDashboardForm()
+            aktuelle_url = request.build_absolute_uri()
+            
+            context = {
+                'link_in_bio_form': link_in_bio_form,
+                'link_in_bio_objects': link_in_bio_objects,
+                'aktuelle_url': aktuelle_url
+            }
 
         return render(request, 'linkinbio_list.html', context)
     
     
+
     def post(self, request: HttpRequest):
         link_in_bio_form = LinkInBioDashboardForm(request.POST)
 
@@ -536,7 +568,7 @@ class LinkinbiolinkDeleteView(View):
             return JsonResponse({'message': str(e)}, status=500)
 
 
-# LinkinBio Page View
+# LinkinBio Page User View
 class LinkInBioDeatilePage(View):
     def get(self, request, pk):
         try:
@@ -546,10 +578,15 @@ class LinkInBioDeatilePage(View):
         
         profileimage = get_object_or_404(LinkInBio, pk=pk, user=request.user)
 
-        if profileimage.profile_image.url:
+        if profileimage.profile_image:
             image = [{'profile_image': profileimage.profile_image.url}]
         else:
             image = [{'profile_image': None}]
+        
+        if profileimage.image:
+            image_bg = [{'image_bg': profileimage.image.url}]
+        else:
+            image_bg = [{'profile_image': None}]
 
         social_media_profiles = UrlSocialProfiles.objects.filter(link_in_bio=linkinbio).order_by('order')
         links = LinkInBioLink.objects.filter(link_in_bio=linkinbio).order_by('order')
@@ -589,6 +626,7 @@ class LinkInBioDeatilePage(View):
         if request.is_ajax():
             data = {
                 'image': image,
+                'image_bg': image_bg,
                 'context_json': context_json,
                 'social_media_data': social_media_data,
                 'links': links_data,
@@ -636,7 +674,6 @@ class UpdateFormLinkInBioSingel(View):
             return JsonResponse(response_data)
        
  
-
 # Crate Image Profile Adjustment
 class ImageSaveAdjustmentView(View):
     def post(self, request, pk, *args, **kwargs):
@@ -650,6 +687,46 @@ class ImageSaveAdjustmentView(View):
             return JsonResponse({'message': _('Image saved successfully')})
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
+
+
+class BackgroundImageJson(View):
+    def get(self, request, pk):
+        try:
+            link_in_bio = LinkInBio.objects.get(id=pk)
+           
+            if link_in_bio.image:
+                data = [{'image': link_in_bio.image.url}]
+            else:
+                data = [{'image': None}]
+            
+            return JsonResponse(data, safe=False)
+        except LinkInBio.DoesNotExist:
+            return JsonResponse({'error': _('LinkInBioLink not found')})
+    
+    def post(self, request, pk, *args, **kwargs):
+        try:
+            link_in_bio = LinkInBio.objects.get(id=pk)
+            image_data = request.FILES['image']
+            print(image_data)
+            link_in_bio.image = image_data
+            link_in_bio.save()
+            return JsonResponse({'message': _('Image saved successfully')})
+        
+        except LinkInBio.DoesNotExist:
+            return JsonResponse({'error': _('LinkInBioLink not found')})
+        
+    def delete(self, request, pk):
+        try:
+            link_in_bio = LinkInBio.objects.get(id=pk)
+            if link_in_bio.image:
+                link_in_bio.image.delete()  # Lösche das Bild
+                return JsonResponse({'message': _('Image deleted successfully')})
+            else:
+                return JsonResponse({'error': _('No image to delete')})
+        except LinkInBio.DoesNotExist:
+            return JsonResponse({'error': _('LinkInBioLink not found')})
+            
+
 
 #DelteImageProfile
 class DeleteImageAdjustmentView(View):
@@ -753,3 +830,4 @@ class CustomSettingsUpdateView(View):
             return JsonResponse({'message': _('Updated successfully')})
         except LinkInBio.DoesNotExist:
             return JsonResponse({'message': _('invalid request')})
+        

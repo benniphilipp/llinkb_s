@@ -62,6 +62,39 @@ class crateFormLink{
         if(selectShortcodeInput){
             this.selectShortcodeInput.addEventListener('input', this.checkInputs.bind(this));
         }
+
+        const UrlData = document.querySelector('#LinkInBioListView');
+        if(UrlData){
+            this.userCountView(UrlData.value);
+        }
+    }
+
+    // date User View
+    userCountView(valuData){
+        //console.log(valuData);
+
+        $.ajax({
+            url: valuData,
+            type:'GET',
+            dataType: 'json',
+            success: (response) => {
+                console.log(response);
+
+                const alertUser = document.getElementById('alertUser');
+                const existingAlert = alertUser.querySelector('.alert');
+                if (!existingAlert) {
+                    alertUser.innerHTML += `
+                        <div class="alert alert-${response.user_date.alert} d-inline-flex p-2" role="alert">
+                            ${response.user_date.message}
+                        </div>
+                    `;
+                }
+            },
+            error: (error) => {
+
+            }
+        });
+
     }
 
     // Cratelink in bio Submit form

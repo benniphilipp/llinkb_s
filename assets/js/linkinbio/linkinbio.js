@@ -27,7 +27,9 @@ import adjustmentTexDesc from './module/adjustmentTexDesc'; // Crate and titel, 
 import adjustmentSocial from './module/adjustmentSocial'; // Add Social media and Remove Social media * adjustmentSocial.js
 import adjustmentColor from './module/adjustmentColor'; // Color Button * adjustmentColor.js
 import adjustmentFonts from './module/adjustmentFonts'; // Fonts * adjustmentFonts.js 
+import BackgroundImage from './module/backgroundImage';
 
+const backgroundimage = new BackgroundImage();
 const adjustmentaddimg = new adjustmentAddImg();
 const adjustmentremoimg = new adjustmentRemoImg();
 const adjustmentviewimg = new adjustmentViewImg();

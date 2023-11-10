@@ -1,26 +1,30 @@
 
 class LinkInBioView {
     constructor(){
+        
         const dataUrl = document.querySelector('#LinkInBioDeatilePage');
         if(dataUrl){
-            this.ajaxView(dataUrl)
+            this.ajaxView(dataUrl);
         }
     }
 
+
     ajaxView(dataUrl){
+        const self = this;
         $.ajax({
             url: dataUrl.value,
             type: 'GET',
             dataType: 'json',
             success: function(data) {
-            console.log(data);
 
+            
             $('#descriptionPageValue').text(data.context_json.description);
             $('#titelpageValue').text(data.context_json.title);
 
             // Rendern der URL-Social-Profile
             const urlSocialProfilesContainer = $('#urlSocialProfilesContainer');
             urlSocialProfilesContainer.empty();
+
 
             data.social_media_data.forEach((profile) => {
                 const profileElement = `
@@ -32,8 +36,7 @@ class LinkInBioView {
                 `;
                 urlSocialProfilesContainer.append(profileElement);
             });
-
-
+            
             // Rendern der Link-in-Bio-Links
             const linkInBioLinksContainer = $('#linkInBioLinksContainer');
             linkInBioLinksContainer.empty();
@@ -48,8 +51,24 @@ class LinkInBioView {
             //Image
             const pageImage = document.querySelector('.page-image');
             const newImageUrl = data.image[0].profile_image;
-            pageImage.src = newImageUrl;
+            if(newImageUrl){
+                pageImage.src = newImageUrl;
+            }
 
+        
+            // Background Image
+            const bg_image = data.image_bg[0].image_bg;
+            if(bg_image){
+                
+                self.handleBlurEffect(bg_image);
+
+                const pageOne = document.querySelector('#pageOne');
+                pageOne.style.backgroundImage = `url(${bg_image})`;
+                pageOne.style.backgroundSize = 'cover';
+                pageOne.style.backgroundRepeat = 'no-repeat';
+                pageOne.style.backgroundPosition = 'center center';
+                pageOne.style.zIndex = '99'; 
+            }
 
             const cssStyles  = data['settings_json_data'];
 
@@ -90,8 +109,48 @@ class LinkInBioView {
         });
     }
 
+
+    handleBlurEffect(bg_image) {
+        console.log('run');
+        const pageUserBg = document.querySelector('#pageUserBg');
+        const viewportWidth = window.innerWidth;
+    
+        if (viewportWidth >= 168) {
+            if (pageUserBg) {
+                pageUserBg.style.backgroundImage = `url(${bg_image})`;
+                pageUserBg.style.backgroundSize = 'cover';
+                pageUserBg.style.backgroundRepeat = 'no-repeat';
+                pageUserBg.style.backgroundPosition = 'center center';
+                pageUserBg.style.filter = 'blur(4px)';
+                pageUserBg.style.zIndex = '0';
+                pageUserBg.style.position = 'absolute';
+                pageUserBg.style.height = '100%';
+                pageUserBg.style.width = '100%';
+            }
+        } else {
+            if (pageUserBg) {
+                pageUserBg.style.backgroundImage = 'none';
+                pageUserBg.style.filter = 'none';
+                pageUserBg.style.backgroundSize = 'none';
+                pageUserBg.style.backgroundRepeat = 'none';
+                pageUserBg.style.backgroundPosition = 'none';
+                pageUserBg.style.filter = 'none';
+                pageUserBg.style.zIndex = 'none';
+                pageUserBg.style.position = 'none';
+                pageUserBg.style.height = 'none%';
+                pageUserBg.style.width = 'none';
+            }
+        }
+    }
+      
+
 }
 
 export default LinkInBioView;
 
 const linkinbioview = new LinkInBioView();
+// window.addEventListener('resize', linkinbioview.handleBlurEffect);
+
+window.addEventListener('resize', () => {
+    linkinbioview.ajaxView(document.querySelector('#LinkInBioDeatilePage'));
+  });

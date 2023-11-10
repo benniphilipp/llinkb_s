@@ -1,25 +1,28 @@
-{% extends "blank.html" %}
+{% extends "link_in_bio_page.html" %}
 {% load static %}
 {% load i18n %}
 
 <!--Block Content-->
 {% block body %}
 
-<div id="pageOne" class="body-page">
-    <div class="header-page">
-        <div class="image-header">
-            <img src="https://placehold.co/600x400" class="page-image" alt="">
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="box" id="pageUserBg"></div>
+    <div id="pageOne" class="body-page">
+        <div class="header-page">
+            <div class="image-header">
+                <img src="{% static '/images/placholder.jpg' %}" class="page-image" alt="">
+            </div>
         </div>
-    </div>
-    <div class="titel-description">
-        <div id="titelpageValue" class="titel">Titel</div>
-        <div id="descriptionPageValue" class="description">Description</div>
-    </div>
-    <div class="sozial">
-        <ul class="media-icon" id="urlSocialProfilesContainer">
-        </ul>
-    </div>
-    <div class="main-content" id="linkInBioLinksContainer">
+        <div class="titel-description">
+            <div id="titelpageValue" class="titel">Titel</div>
+            <div id="descriptionPageValue" class="description">Description</div>
+        </div>
+        <div class="sozial">
+            <ul class="media-icon" id="urlSocialProfilesContainer">
+            </ul>
+        </div>
+        <div class="main-content" id="linkInBioLinksContainer">
+        </div>
     </div>
 </div>
 

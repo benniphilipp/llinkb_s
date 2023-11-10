@@ -38,12 +38,16 @@ class linkPageDelete{
             const dataLinkinbioPageTitel = button.getAttribute('data-linkinbio-page-titel');
             const linkinbioDeleteJson = document.querySelectorAll('#linkinbioDeleteJson');
 
+            //Transpalte
+            const ModelDoyouwantto = gettext('Do you want to');
+            const ModelDelte = gettext('Delete');
+
             const urlData = document.getElementById('linkinbioDeleteJson').value.replace(/0/g, dataID);
         
             $('#exampleModalDelete').modal('show');
             const idContent = document.querySelector('#idContent');
             const contentItem = document.createElement('p');
-            contentItem.textContent = ' Möchten Sie" ' + dataLinkinbioPageTitel + ' "Löschen';
+            contentItem.textContent = ModelDoyouwantto + '" ' + dataLinkinbioPageTitel + ' "' + ModelDelte;
 
             const saveChangesButton = document.querySelector('.modal-footer .btn-delete');
             saveChangesButton.setAttribute('data-url-delete', urlData);

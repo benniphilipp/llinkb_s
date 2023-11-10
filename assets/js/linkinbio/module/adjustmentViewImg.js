@@ -20,12 +20,19 @@ class adjustmentViewImg{
             type: 'GET',
             dataType: 'json',
             success: (data) => {
-                
+                const openModelButton = document.querySelector('#openMoadlImage');
+                const openModelDelte = document.querySelector('#openModelDelte');
 
+                openModelButton.classList.remove('d-none');
+                openModelDelte.classList.remove('d-none');
+                
                 const newImageUrl = data[0].profile_image;
                 if(newImageUrl){
                     profileImage.src = newImageUrl;
                     pageImage.src = newImageUrl;
+                    openModelButton.classList.add('d-none');
+                }else{
+                    openModelDelte.classList.add('d-none');
                 }
 
             },

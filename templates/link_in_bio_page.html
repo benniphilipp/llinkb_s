@@ -1,0 +1,35 @@
+{% load static %}
+
+<html lang="de" data-lt-installed="true">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Datenpunkt</title>
+
+        <!--Style CSS Import-->
+        <link rel="stylesheet" type="text/css" href="{% static '/app-assets/css/bootstrap/bootstrap.min.css' %}?=1.0">
+
+        <!--Favicons-->
+        {% include "includes/favicons.html" %}
+
+        <!-- Our project just needs Font Awesome Free's Solid and Brand files -->
+        <link href="{% static 'fontawesomefree/css/all.min.css' %}?=1.0" rel="stylesheet" type="text/css">
+        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    </head>
+
+    <body>        
+        <!--Block Content-->
+        {% block body%}{% endblock %}
+        <!--Javascript-->
+
+        {% include "includes/footer-content-pages.html" %}
+
+        {% block javasript %}{% endblock %}
+
+    </body>
+</html>

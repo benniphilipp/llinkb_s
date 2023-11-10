@@ -14,7 +14,7 @@ delete
 __pycache__/
 
 ./staticfiles
-
+./media/link_bio_images/
 ./src/__pycache__/
 ./geotargeting/__pycache__/
 ./contentpages/__pycache__/
@@ -35,6 +35,8 @@ __pycache__/
 ./products/migrations/__pycache__/
 ./shortcode/migrations/__pycache__/
 ./webclicktracker/migrations/__pycache__/
+
+# git rm --cached -r ./media/link_bio_images/
 
 # git rm --cached -r geotargeting/__pycache__/
 # git rm --cached -r contentpages/__pycache__/

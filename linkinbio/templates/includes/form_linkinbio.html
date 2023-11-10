@@ -1,11 +1,12 @@
 {% load static %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 
 <aside id="aside-form" class="crate-form p-3">
 
     <div class="card p-2 border-0">
         <div class="card-header bg-white border-0">
-            <button id="closeForm" type="button" class="btn btn-secondary btn-sm">Schließen</button>
+            <button id="closeForm" type="button" class="btn btn-secondary btn-sm">{% trans "Close" %}</button>
         </div>
     </div>
 

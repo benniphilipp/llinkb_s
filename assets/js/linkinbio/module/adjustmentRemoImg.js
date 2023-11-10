@@ -44,16 +44,16 @@ class adjustmentRemoImg {
             success: function(response) {
                 
 
-
-                // self.profileImage = new profileImageView();
-                // self.profileImage.profileImageView(profileImageValue);
-
+                self.profileImage = new profileImageView();
+                self.profileImage.profileImageView(profileImageValue);
 
                 const pageImage = document.querySelector('.page-image');
                 const profileImage = document.querySelector('#profileImage');
 
-                pageImage.src = 'https://placehold.co/600x400';
-                profileImage.src = 'https://placehold.co/600x400';
+                const profileImageSrc = document.querySelector('#ImageProfilePlacholder').value;
+
+                pageImage.src = profileImageSrc;
+                profileImage.src = profileImageSrc; 
                 lsToast(response.message);
                 $('#exampleModalImageDelete').modal('hide');
                 

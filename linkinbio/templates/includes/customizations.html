@@ -1,9 +1,9 @@
-
+{% load static %}
 
         <div class="row mt-5">
             <div class="col-sm-3">
                 <div class="profile-img">
-                    <img id="profileImage" src="https://placehold.co/600x400">
+                    <img id="profileImage" src="{% static '/images/placholder.jpg' %}">
                 </div>
             </div>
             <div class="col-sm-9 d-flex align-items-center">
@@ -38,16 +38,39 @@
 
         <button type="button" id="addElementButton" class="btn btn-outline-primary mt-4 mb-3">Connect another profile</button>
 
-        <div class="row mb-5 mt-2">
+        <div class="row">
+            <div class="col-12">
+                
+            </div>
+        </div>
+
+        <div class="row mb-5 mt-3">
             <div class="col-12">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
+                        <div class="card border-0">
+                                <div class="card-body">
+                                    <h5>Background Image</h5>
 
+                                    <div class="d-flex">
+                                        <div class="mt-4">
+                                            <div id="backgroungImageMobile">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="align-self-center mx-3">
+                                            <button data-crate-image="create" type="button" class="btn btn-outline-primary btn-sm backgroundImage btnBgImageAdd">Add Image</button>
+                                            <button data-crate-image="delete" type="button" class="btn btn-outline-danger btn-sm backgroundImage btnBgImageRemove">Remove Image</button>     
+                                        </div>
+                                    </div>
+                                           
+                            </div>
+                        </div>
                         <div class="card border-0">
                             <div class="card-body">
-                                <span>Fraben</span>
+                                <h5>Fraben</h5>
 
-                                <div class="wrapper-color mt-2">
+                                <div class="wrapper-color">
                                     <div class="color-group">
                                         <label class="label" id="colorTextLabel" for="">Title color</label>
                                         <div class="wrapper">

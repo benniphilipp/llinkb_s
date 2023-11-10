@@ -29,16 +29,16 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="d-flex justify-content-end" id="alertUser">
-                                <div class="alert alert-info d-inline-flex p-2" role="alert">
+                                <!-- <div class="alert alert-info d-inline-flex p-2" role="alert">
                                     You have unlimited links
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="d-flex flex-row align-items-center">
-                                <h3 class="p-1" style="margin-top: 10px;">Link Bio</h3>
+                                <h3 class="p-1" style="margin-top: 10px;">{% trans "Link in Bio" %}</h3>
                                 <div class="p-1 ms-auto">
-                                    <button id="openForm" class="btn btn-primary mt-1" type="button">Neu erstellen</button>
+                                    <button id="openForm" class="btn btn-primary mt-1" type="button">{% trans "Create new" %}</button>
                                 </div>
                             </div>
                         </div>
@@ -63,31 +63,31 @@
                                                         <small class="mt-1"><i class="fa-solid fa-link li-icon"></i> {{ aktuelle_url }}m/{{ link_in_bio.id }}/</small>
                                                   
                                                     </div>
-                                                    <div class="d-flex align-self-start align-items-end mt-3">
+                                                    <!-- <div class="d-flex align-self-start align-items-end mt-3">
                                                         <div class="d-flex align-items-baseline" style="gap: 10px">
                                                             <small><i class="fa-solid fa-eye li-icon"></i> 1 Clicks</small>
                                                         </div>
                                                         <div class="d-flex align-items-baseline mx-3" style="gap: 10px">
                                                             <small><i class="fa-solid fa-chart-line" style="gap: 10px"></i>  1 Views</small>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                                 <div class="col-8">
                                                     <div class="d-flex">
                                                         <div class="d-flex flex-column align-items-stretch">
-                                                            <span class="badge rounded-pill bg-success" style="max-width: 80px;">Secondary</span>
-                                                            <small><i class="fa-regular fa-calendar-days li-icon mt-3"></i> {{ link_in_bio.crate_date|date:"d. m. y" }}</small>
+                                                            <!-- <span class="badge rounded-pill bg-success" style="max-width: 80px;">Secondary</span> -->
+                                                            <small><i class="fa-regular fa-calendar-days li-icon"></i> {{ link_in_bio.crate_date|date:"d. m. y" }}</small>
                                                         </div>
                                                         <div class="ms-auto">
                                                             <div class="d-flex align-items-baseline">
-                                                                <a class="btn btn-primary btn-sm" href="{% url 'linkinbio:linkinbio_detail' link_in_bio.pk %}">Ansicht</a>
+                                                                <a class="btn btn-primary btn-sm" href="{% url 'linkinbio:linkinbio_detail' link_in_bio.pk %}">{% trans "View" %}</a>
                                                                 <div class="dropdown">
                                                                     <a class="btn btn-secondary dropdown-toggle mx-2 btn-sm" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                                                         <i class="fa-solid fa-ellipsis li-icon"></i>
                                                                     </a>
                                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                                      <li><a class="dropdown-item update-linkinbio-page" data-linkinbio-page-id="{{ link_in_bio.id }}" href="javascript:void(0);">Bearbeiten</a></li>
-                                                                      <li><a class="dropdown-item delete-linkinbio-page" data-linkinbio-page-delete-id="{{ link_in_bio.id }}" data-linkinbio-page-titel="{{ link_in_bio.title }}" href="javascript:void(0);">Delete</a></li>
+                                                                      <li><a class="dropdown-item update-linkinbio-page" data-linkinbio-page-id="{{ link_in_bio.id }}" href="javascript:void(0);">{% trans "Edit" %}</a></li>
+                                                                      <li><a class="dropdown-item delete-linkinbio-page" data-linkinbio-page-delete-id="{{ link_in_bio.id }}" data-linkinbio-page-titel="{{ link_in_bio.title }}" href="javascript:void(0);">{% trans "Delete" %}</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -118,15 +118,15 @@
         <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalDeleteLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalDeleteLabel">{% trans "Delete" %}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div id="idContent"></div>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-danger btn-delete">Löschen</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
+            <button type="button" class="btn btn-danger btn-delete">{% trans "Delete" %}</button>
             </div>
         </div>
         </div>
@@ -142,6 +142,8 @@
     <input type="hidden" id="linkinbioUpdateJson" value="{% url 'linkinbio:linkinbio_update_json' 0 %}">
     <!--LinkinbiolinkDeleteView-->
     <input type="hidden" id="linkinbioDeleteJson" value="{% url 'linkinbio:linkinbio_delete_json' 0 %}">
+
+    <input type="hidden" id="LinkInBioListView" value="{% url 'linkinbio:linkinbio_view_list' %}">
 
     {% endblock body %}
     

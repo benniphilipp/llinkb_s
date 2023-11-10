@@ -31,12 +31,12 @@
 
                 <div class="container-fluid mt-5 px-4">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 col-md-8">
                             <div class="d-flex flex-row align-items-center">
                                 <h3 class="p-1" style="margin-top: 10px;">{{link_in_bio_instance.title}}</h3>
                                 <div class="p-1 ms-auto">
                                     <!-- <button id="openForm" class="btn btn-primary mt-1" type="button">Neu erstellen</button> -->
-                                    <!-- <button id="export-button" class="btn btn-secondary mt-1" type="button">Shortcodes exportieren</button> -->
+                                    <a href="{% url 'detail_page' link_in_bio_instance.id %}" class="btn btn-secondary mt-1" type="button" target="_blank">{% trans "View Profile" %}</a>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
 
                 <div class="container-fluid mt-5 px-4">
                     <div class="row">
-                        <div id="linkinbio-content" class="col-8">
+                        <div id="linkinbio-content" class="col-12 col-md-8">
 
                             <!--Value-->
                             <div class="card border-0 bg-color-gray shadow-sm">
@@ -80,7 +80,7 @@
                             </div>
 
                         </div>
-                        <div class="col-4 sidebar-mobile">
+                        <div class="col-3 sidebar-mobile">
                             <!-- Ansicht Desing Linkin Bio Page -->
                             <img class="loader-image-mobile mx-auto d-block d-none" src="/static/gif/load-38_256.gif">
                             {% include "linkinbiopage/style-one.html" %}
@@ -99,14 +99,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{% trans "Delete" %}</h5>
             </div>
             <div class="modal-body">
                 <div id="idContent"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary modal-close">Close</button>
-                <button type="button" class="btn btn-danger btn-trash">Löschen</button>
+                <button type="button" class="btn btn-secondary modal-close">{% trans "Close" %}</button>
+                <button type="button" class="btn btn-danger btn-trash">{% trans "Delte" %}</button>
             </div>
             </div>
         </div>
@@ -117,7 +117,7 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabelImage">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabelImage">{% trans "Profile Image" %}</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -133,8 +133,8 @@
 
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" id="crop-button">Speichern</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
+              <button type="button" class="btn btn-primary" id="crop-button">{% trans "Save" %}</button>
             </div>
           </div>
         </div>
@@ -145,15 +145,15 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabelImageDelete">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabelImageDelete">{% trans "Delete" %}</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              Image löschen?
+              {% trans "Delete Image" %}
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
-              <button type="button" id="imageProfileDeleteBtn" class="btn btn-danger">Löschen</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
+              <button type="button" id="imageProfileDeleteBtn" class="btn btn-danger">{% trans "Delete" %}</button>
             </div>
           </div>
         </div>
@@ -164,19 +164,41 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleUrlsLabel">Social Media</h5>
+              <h5 class="modal-title" id="exampleUrlsLabel">{% trans "Delete" %}</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <h6>Social Media Löschen, unwiederuflich löschen.</h6>
+              <h6>{% trans "Delete social media, delete it irretrievably." %}</h6>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-danger" id="urlsDelete">Löschen</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
+              <button type="button" class="btn btn-danger" id="urlsDelete">{% trans "Delete" %}</button>
             </div>
           </div>
         </div>
+    </div>
+
+
+    <!--Modal Background Image Crate-->
+    <div class="modal fade" id="exampleBackground" tabindex="-1" aria-labelledby="exampleBackgroundLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleBackgroundLabel">{% trans "Create Background Image" %}</h5>
+            <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="backgroundImageBody"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">{% trans "Close" %}</button>
+            <button type="button" class="btn btn-danger d-none" id="backgroundDelete">{% trans "Löschen" %}</button>
+            <button type="button" class="btn btn-primary d-none" id="backgroundCreate">{% trans "Crate" %}</button>
+          </div>
+        </div>
       </div>
+  </div>
+
 
     <!--URLs-->
     <!--Image Profile Adjustment-->
@@ -207,11 +229,14 @@
     <!--Order Save -->
     <input type="hidden" id="SocialMediaProfilesOrderSaveView" value="{% url 'linkinbio:social_media_profiles_order_save' %}">
 
+    <input type="hidden" id="BackgroundImageJson" value="{% url 'linkinbio:background_image_json' link_in_bio_instance.id %}">
 
     <input type="hidden" id="urlSocial" value="{% url 'linkinbio:save_url_social' %}">
 
     <!---->
     <input type="hidden" id="linkinbio_page_id_custome" value="{{link_in_bio_instance.id}}">
+
+    <input type="hidden" id="ImageProfilePlacholder" value="{% static '/images/placholder.jpg' %}">
 
     {% endblock body %}
     
