@@ -110,10 +110,17 @@ class LinkInBioView {
                             }
                         }
                     });
+
+                    // Entfernen Sie den Hover-Effekt
+                    element.addEventListener('mouseleave', () => {
+                        for (const styleName in defaultStyles) {
+                            element.style[styleName] = defaultStyles[styleName];
+                        }
+                    });
             
                     // Prüfen, ob mobile Stile verfügbar sind und den Bildschirm überwachen
                     const mobileStyles = elementInfo.mobile;
-                    console.log(mobileStyles)
+                    
                     if (mobileStyles) {
                         const mediaQuery = window.matchMedia('(max-width: 768px)'); // Hier an die gewünschte Bildschirmbreite anpassen
                         const applyMobileStyles = () => {

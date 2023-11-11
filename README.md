@@ -112,28 +112,94 @@ TqXRm5ikowzmYtZVyCMC
     git commit -m '_text'
     git push origin 
 
+
+- Analytics Dahboard Anpssen 
+    - Clicks nach Buttton Label
+    - Clicks Country 
+    - Clicks City
+    - Clicks Referrer
+    - clicks Device
+
+- Übersezung Crate Shortcode Erfolgsmeldeung Website erreichbar --erleding
+- Produkt seite Button Style Tauschen --erleding
+- Stripe URL und Stipe englisch anpassen --erleding
+- favicon LinkInBioPage --erleding
+
+- Cookie Banner
+    - Cookie Banner für normale Seiten Desing erstellt. --erleding
+    - Definition der Cookie-Einstellungen --erleding
+        Notwendige Cookies erleding
+        Analyse-Cookies erleding
+        Marketing-Cookies erleding
+
+- Cookie Model 
+    Speichern nach User das Jeder User sein Cookie einstellung erstellen kann.
+
+    -  Cookie-Präferenzen speichern
+        Banner Cookie-Typen sie akzeptieren oder ablehnen möchten
+
+    - Abrufen von JavaScript-Dateien serverseitig oder normal
+        Facebook Script
+        Google Tag Manger
+        Analytics
+
+    - Design und Funktion
+        Normales Banner zum auswälen welche daten man speichern kann.
+
+    - @ToDo Link in Bio
+        * Link in Bio Module erleding
+            - user
+            - Links erstellen und verbinden erledigt
+            - Link liste anzeigen und sortieren erledigt
+            - sozialen Crate und View erledigt
+                Facebook
+                Instagram
+                YouTube
+                Vimeo
+                Xing
+                LinkedIn
+                Pinterest
+                Twitter
+                Twitch
+                TikTok
+                Reddit
+                Tumblr
+                Snapchat
+                Discord
+            - sozialen löschen --erledigt
+            - Image Profile --erledigt
+            - Image Hinteregund --erledigt
+            - Titel --erledigt
+            - Beschreibung --erledigt
+
+        + links
+            - Name link --erledigt
+            - selection links --erledigt
+            - Datum wie lange Verfühgbar
+
+        + Crate neuen link
+            - Datum wie lange Verfügbar --erledigt
+
+        + Style
+            color --erledigt
+            font 
+        - LinkInBio mit Shorcode Vergnüpfen --erledigt
+
+
+- Qr-Code Pages Crator
+- limitation, Android Targeting, Ios Targeting BETA Version GEO Targeting
+- Menü Shorcode
+- Verwaltung von Abonnements Abmelden
+- Add Youtube Video Iframe
+- Podcast Irame
+- Fonts * adjustmentFonts.js 
+
+# BUG ERLEDIGT
 - Automasticher Tags bei link in bio Seite und in Shorcode Extra Makieren --erledigt
 - Text Bustaben Zählung bei LinkInBio Seite Abrufen auch nicht nur bei Tippen --erldeigt
 - Bug Shorcode hinzufühgen LinkInBio Page --erldeigt
 - Sozial Medai Links Sortierung Backend und Frontad --erldeigt
 - Button Image --erldeigt
-
-
-- Link Analyse bei LinkInBio Page
-- Add Youtube Video Iframe
-- Podcast Irame
-
-
-- Stripe URL und Stipe englisch anpassen
-- Produkt seite Button Style Tauschen
-- Analytics Dahboard Anpssen 
-- Qr-Code Pages Crator
-- limitation, Android Targeting, Ios Targeting BETA Version GEO Targeting
-- Menü Shorcode
-- Verwaltung von Abonnements Abmelden
-- Fonts * adjustmentFonts.js 
-
-# BUG ERLEDIGT
 - Einzelansicht LinkInBio Page --erledigt
 - Mobile Ansicht LinkInBio Page User --erledigt
 - Zahlung Funktion Prüfen erledigt
@@ -193,71 +259,6 @@ Benutzerprofil aktualisieren !erldeigt
 - Überszung Prüfen !erleding
 - Mobile Prüfen !erleding
 - Cookie für Überszung Prüfen final !erleding
-- Cookie Banner
-    - Cookie Banner für normale Seiten Desing erstellt. erleding
-    - Definition der Cookie-Einstellungen erleding
-        Notwendige Cookies erleding
-        Analyse-Cookies erleding
-        Marketing-Cookies erleding
-
-- Cookie Model 
-    Speichern nach User das Jeder User sein Cookie einstellung erstellen kann.
-
-    -  Cookie-Präferenzen speichern
-        Banner Cookie-Typen sie akzeptieren oder ablehnen möchten
-
-    - Abrufen von JavaScript-Dateien serverseitig oder normal
-        Facebook Script
-        Google Tag Manger
-        Analytics
-
-    - Design und Funktion
-        Normales Banner zum auswälen welche daten man speichern kann.
-
-    - @ToDo Link in Bio
-        * Link in Bio Module erleding
-            - user
-            - Links erstellen und verbinden erledigt
-            - Link liste anzeigen und sortieren erledigt
-            - sozialen Crate und View erledigt
-                Facebook
-                Instagram
-                YouTube
-                Vimeo
-                Xing
-                LinkedIn
-                Pinterest
-                Twitter
-                Twitch
-                TikTok
-                Reddit
-                Tumblr
-                Snapchat
-                Discord
-            - sozialen löschen
-            - Image Profile
-            - Image Hinteregund
-            - Titel
-            - Beschreibung
-
-        + links
-            - Name link
-            - selection links
-            - Datum wie lange Verfühgbar
-
-        + Crate neuen link
-            - Datum wie lange Verfügbar
-
-        + Style
-            color
-            font
-        - LinkInBio mit Shorcode Vergnüpfen
-        - Performens Treching analyse
-        - Clicks nach Buttton Label
-        - Clicks Country 
-        - Clicks City
-        - Clicks Referrer
-        - clicks Device
 
 # Google Sheets
 - https://pypi.org/project/django-gsheets/

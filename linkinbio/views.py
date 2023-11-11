@@ -24,7 +24,7 @@ from .forms import LinkInBioDashboardForm
 
 
 # View Edit Screen
-class LinkInBioViewEditScreen(View):
+class LinkInBioViewEditScreen(LoginRequiredMixin, View):
     def get(self, request, pk):
             try:
                 linkinbio = LinkInBio.objects.get(pk=pk)
@@ -63,7 +63,7 @@ class LinkInBioViewEditScreen(View):
             
 
 # Delete Social Media
-class UrlSocialProfilesDeleteView(View):
+class UrlSocialProfilesDeleteView(LoginRequiredMixin, View):
     def post(self, request):
         try:
             url_social_id = request.POST.get('url_social_id')  # ID des zu löschenden URL-Social-Profils
@@ -95,7 +95,7 @@ class UrlSocialProfilesUpdateView(View):
         
 
 # Select View Sozial Media
-class UrlSocialProfilesViewList(View):
+class UrlSocialProfilesViewList(LoginRequiredMixin, View):
     def get(self, request, pk):
         try:
             link_in_bio = LinkInBio.objects.get(id=pk)
@@ -118,7 +118,7 @@ class UrlSocialProfilesViewList(View):
 
 
 # Wir vielleicht nicht mehr gebraucht!
-class SocialMediaProfilesOrderSaveView(View):
+class SocialMediaProfilesOrderSaveView(LoginRequiredMixin, View):
     def post(self, request):
         try:            
             sorted_links = request.POST.getlist('sorted_links[]')
@@ -135,7 +135,7 @@ class SocialMediaProfilesOrderSaveView(View):
 
 
 # Save Url Social Profiles
-class SaveUrlSocialView(View):
+class SaveUrlSocialView(LoginRequiredMixin, View):
     def post(self, request):
         try:
             url_social = request.POST.get('url_social')
@@ -170,7 +170,7 @@ def get_social_media_platforms(request):
 
 
 # Ajax-Anfrage zum Speichern der Reihenfolge
-class UpdateLinksOrderView(View):
+class UpdateLinksOrderView(LoginRequiredMixin, View):
     def post(self, request):
         try:
             sorted_links = request.POST.getlist('sorted_links[]')
@@ -188,7 +188,7 @@ class UpdateLinksOrderView(View):
 
 
 # Link liste Datile LinkInBio
-class LinkInBioLinksListView(View):
+class LinkInBioLinksListView(LoginRequiredMixin, View):
     def get(self, request, linkinbio_id):
         try:
             # Holen Sie sich die LinkInBio-Seite anhand ihrer ID
@@ -218,7 +218,7 @@ class LinkInBioLinksListView(View):
 
 
 
-class updateSwichtLinkinbioAtive(View):
+class updateSwichtLinkinbioAtive(LoginRequiredMixin, View):
     def post(self, request, pk):
         try:
 
@@ -240,7 +240,7 @@ class updateSwichtLinkinbioAtive(View):
 @Create Link
 Die vorhandene Shortcode wird ausgewählt und mit dem LinkInBio verknüpft.
 '''
-class CreateLinkView(View):
+class CreateLinkView(LoginRequiredMixin, View):
     @transaction.atomic
     def post(self, request):
         try:
@@ -277,7 +277,7 @@ class CreateLinkView(View):
 @Crate Shorcode
 Ein neuer Shortcode wird erstellt und mit der LinkInBio über die Seite 'LinkInBioLink' verbunden.
 '''
-class CreateShortcodeView(View):
+class CreateShortcodeView(LoginRequiredMixin, View):
     def post(self, request):
         try:
             # data = json.loads(request.body)
@@ -314,7 +314,8 @@ class CreateShortcodeView(View):
                     url_titel=button_label,
                     url_destination=link_url,
                     button_label=button_label,
-                    linkinbiopage=selected_linkinbio_page
+                    linkinbiopage=selected_linkinbio_page,
+                    favicon_path=favicon_path
                 )
             except Exception as e:
                 print(f"Fehler beim Erstellen der ShortcodeClass-Instanz: {e}")
@@ -336,7 +337,7 @@ class CreateShortcodeView(View):
 
 
 #Autocomplete
-class ShortcodeClassListView(View):
+class ShortcodeClassListView(LoginRequiredMixin, View):
     def get(self, request):
         search_term = request.GET.get('search_term', '')
         current_user = request.user
@@ -489,7 +490,7 @@ class LinkInBioDetailView(LoginRequiredMixin, View):
     
 
 # LinkInBio Links Detaile Json View
-class LinksDetaileJsonView(View):
+class LinksDetaileJsonView(LoginRequiredMixin, View):
     def get(self, request, pk):
         try:
             link_in_bio_link = LinkInBioLink.objects.get(id=pk)
@@ -508,7 +509,7 @@ class LinksDetaileJsonView(View):
 '''
 Update bestehner Shorcode link und Label für LinkInBio Seite.
 '''
-class UpdateShortcodeLinkInBioView(View):
+class UpdateShortcodeLinkInBioView(LoginRequiredMixin, View):
     def post(self, request, pk):
         if request.method == 'POST':
             shortcode_id = request.POST.get('shortcode_id')
@@ -549,7 +550,7 @@ class UpdateShortcodeLinkInBioView(View):
 
 
 # Löschen Linkinlink
-class LinkinbiolinkDeleteView(View):
+class LinkinbiolinkDeleteView(LoginRequiredMixin, View):
     def post(self, request, pk):
         try:
             link = LinkInBioLink.objects.get(pk=pk)
@@ -576,7 +577,8 @@ class LinkinbiolinkDeleteView(View):
             return JsonResponse({'message': _('Data record not found')}, status=404)
 
 
-# LinkinBio Page User View
+# LinkinBio Page User View 
+''' NICHT SICHERN '''
 class LinkInBioDeatilePage(View):
     def get(self, request, pk):
         try:
@@ -651,7 +653,7 @@ class LinkInBioDeatilePage(View):
 
 
 # UpdateView LinkInBio Singel
-class LinkinbioDetaileJsonView(View):
+class LinkinbioDetaileJsonView(LoginRequiredMixin, View):
     def get(self, request, pk):
         try:
             link_in_bio_link = LinkInBio.objects.get(id=pk)
@@ -666,7 +668,7 @@ class LinkinbioDetaileJsonView(View):
         
 
 # UpdateForm LinkInBio Singel
-class UpdateFormLinkInBioSingel(View):
+class UpdateFormLinkInBioSingel(LoginRequiredMixin, View):
     def post(self, request, pk):
         
         if request.method == 'POST':
@@ -684,7 +686,7 @@ class UpdateFormLinkInBioSingel(View):
        
  
 # Crate Image Profile Adjustment
-class ImageSaveAdjustmentView(View):
+class ImageSaveAdjustmentView(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         try:
             image_data = request.FILES['image']
@@ -698,7 +700,7 @@ class ImageSaveAdjustmentView(View):
             return JsonResponse({'error': str(e)}, status=400)
 
 
-class BackgroundImageJson(View):
+class BackgroundImageJson(LoginRequiredMixin, View):
     def get(self, request, pk):
         try:
             link_in_bio = LinkInBio.objects.get(id=pk)
@@ -738,7 +740,7 @@ class BackgroundImageJson(View):
 
 
 #DelteImageProfile
-class DeleteImageAdjustmentView(View):
+class DeleteImageAdjustmentView(LoginRequiredMixin, View):
     def post(self, request, pk):
         try:
             print(pk)
@@ -769,7 +771,7 @@ class ProfileImageDetailView(LoginRequiredMixin, View):
        
  
 # Ceate Texte Adjustment
-class TexteCreateAdjustmentView(View):
+class TexteCreateAdjustmentView(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         try:
             title = request.POST.get('title')
@@ -807,7 +809,7 @@ class TexteDeatileAdjustmentView(LoginRequiredMixin, View):
             return JsonResponse({'error': 'LinkInBio not found'}, status=404)
 
 
-class CustomSettingsView(View):
+class CustomSettingsView(LoginRequiredMixin, View):
     def get(self, request, pk):        
         link_in_bio_instance = LinkInBio.objects.get(id=pk)
 
@@ -822,7 +824,7 @@ class CustomSettingsView(View):
         
 
 
-class CustomSettingsUpdateView(View):
+class CustomSettingsUpdateView(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         try:
             class_name = request.POST.get('class_name')

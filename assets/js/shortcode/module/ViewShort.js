@@ -147,14 +147,14 @@ class ViewShort{
                 console.log(data)
                 if (data[0].data === 'true') {
 
-                    $("#id_url_destination").after('<div class="text-success">Deine Website ist erreichbar!</div>');
+                    $("#id_url_destination").after('<div class="text-success">Your website is accessible!</div>');
                     setTimeout(()=>{
                         $("#id_url_destination").next().remove();
                     }, 2000);
 
                 } else {
    
-                    $("#id_url_destination").after('<div class="text-danger">Deine Website ist erreichbar!</div>');
+                    $("#id_url_destination").after('<div class="text-danger">Your website is not accessible!</div>');
                     setTimeout(()=>{
                         $("#id_url_destination").next().remove();
                     }, 2000);
