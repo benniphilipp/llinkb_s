@@ -1,5 +1,6 @@
 {% extends "basic.html" %}
 {% load static %}
+{% load i18n %}
 
 {% load crispy_forms_tags %}
 
@@ -24,9 +25,9 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="d-flex flex-row align-items-center">
-                                <h3 class="p-1" style="margin-top: 10px;">Website Trecker</h3>
+                                <h3 class="p-1" style="margin-top: 10px;">{% trans "Website trackers" %}</h3>
                                 <div class="p-1 ms-auto">
-                                    <button id="openWebsiteModel" class="btn btn-primary mt-1 disabled" type="button">Webseite anlegen</button>
+                                    <button id="openWebsiteModel" class="btn btn-primary mt-1 disabled" type="button">{% trans "Create website" %}</button>
                                     <!-- <button id="removeDuplicatesBtn" class="btn btn-secondary p-2 mt-1 disabled" type="button" >Doppelte Seiten entfernen</button> -->
                                 </div>
                             </div>
@@ -40,7 +41,7 @@
                         <div class="col-12">
                             <div id="website-list">
                                 <div class="alert alert-primary" role="alert">
-                                    This is where the website tractor is created as a tool for creating shortcodes.
+                                    {% trans "This is where the website tractor is created as a tool for creating shortcodes." %}
                                   </div>
                             </div>
                         </div>

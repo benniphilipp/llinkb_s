@@ -120,10 +120,6 @@ TqXRm5ikowzmYtZVyCMC
     - Clicks Referrer
     - clicks Device
 
-- Übersezung Crate Shortcode Erfolgsmeldeung Website erreichbar --erleding
-- Produkt seite Button Style Tauschen --erleding
-- Stripe URL und Stipe englisch anpassen --erleding
-- favicon LinkInBioPage --erleding
 
 - Cookie Banner
     - Cookie Banner für normale Seiten Desing erstellt. --erleding
@@ -178,12 +174,12 @@ TqXRm5ikowzmYtZVyCMC
             - Datum wie lange Verfühgbar
 
         + Crate neuen link
-            - Datum wie lange Verfügbar --erledigt
+            - Datum wie lange Verfügbar
 
         + Style
             color --erledigt
             font 
-        - LinkInBio mit Shorcode Vergnüpfen --erledigt
+        - LinkInBio mit Shorcode Vergnüpfen
 
 
 - Qr-Code Pages Crator
@@ -195,6 +191,10 @@ TqXRm5ikowzmYtZVyCMC
 - Fonts * adjustmentFonts.js 
 
 # BUG ERLEDIGT
+- Übersezung Crate Shortcode Erfolgsmeldeung Website erreichbar --erleding
+- Produkt seite Button Style Tauschen --erleding
+- Stripe URL und Stipe englisch anpassen --erleding
+- favicon LinkInBioPage --erleding
 - Automasticher Tags bei link in bio Seite und in Shorcode Extra Makieren --erledigt
 - Text Bustaben Zählung bei LinkInBio Seite Abrufen auch nicht nur bei Tippen --erldeigt
 - Bug Shorcode hinzufühgen LinkInBio Page --erldeigt

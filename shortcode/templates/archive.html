@@ -1,6 +1,6 @@
 {% extends "basic.html" %}
 {% load static %}
-
+{% load i18n %}
 {% load crispy_forms_tags %}
 
 {% block css %}
@@ -29,10 +29,10 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="d-md-flex flex-row align-items-center">
-                                <h3 class="p-1" style="margin-top: 10px;">Links Archiviert</h3>
+                                <h3 class="p-1" style="margin-top: 10px;">{% trans "Links Archived" %}</h3>
                                 <div class="p-1 ms-auto">
-                                    <button id="archive-button" class="btn btn-primary mt-1" type="button">Entarchivieren</button>
-                                    <button id="delete-button" class="btn btn-danger mt-1" type="button">Shortcode Löschen</button>
+                                    <button id="archive-button" class="btn btn-primary mt-1" type="button">{% trans "Unarchive" %}</button>
+                                    <button id="delete-button" class="btn btn-danger mt-1" type="button">{% trans "Delete shortcode" %}</button>
                                 </div>
                             </div>
                         </div>
@@ -43,16 +43,16 @@
                 <div class="container-fluid mt-5 px-4">
                     <div class="row">
                         <div class="col-12">
-                            <div class="card">
+                            <div class="card border-0 shadow-sm">
                             <!--Datatable-->
                             <div id="archived-shortcode-table-container">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Auswahl</th>
-                                            <th scope="col">Titel</th>
-                                            <th scope="col">Ziel</th>
-                                            <th scope="col">Datum</th>
+                                            <th>{% trans "Selection" %}</th>
+                                            <th scope="col">{% trans "title" %}</th>
+                                            <th scope="col">{% trans "goal" %}</th>
+                                            <th scope="col">{% trans "date" %}</th>
                                         </tr>
                                     </thead>
                                     <tbody id="archived-shortcode-table">
