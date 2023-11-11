@@ -1,6 +1,8 @@
 import { getCookie } from './getCookie';
 import { clearContent, lsToast } from './lsToast';
 import linkListe from './linkListe';
+import adjustmentSocial from './adjustmentSocial';
+import adjustmentColor from './adjustmentColor';
 
 class createFormLinks {
 
@@ -55,7 +57,7 @@ class createFormLinks {
                 'X-CSRFToken': this.csrftoken
             },
             success: function(data) {
-                console.log(data);
+                //console.log(data);
                 buttonLabelId.value = data.button_label;
                 urlDestinationUpdateId.value = data.url_destination;
                 updateformlinkId.dataset.urlUpdateFormId = data.id;
@@ -77,6 +79,10 @@ class createFormLinks {
     // Update Aktive Swicht
     updateSwicht(dataLinkinbioSwitch){
 
+        const self = this;
+        this.adjustmentSocial = new adjustmentSocial();
+        this.adjustmentColor = new adjustmentColor();
+
         const swichtUpdateUrl = document.getElementById('swichtupdate').value.replace(/0/g, dataLinkinbioSwitch);
 
         $.ajax({
@@ -87,8 +93,10 @@ class createFormLinks {
                 'X-CSRFToken': this.csrftoken
             },
             success: (data) => {
-            //   console.log(data.message)
-              lsToast(data.message);
+                //   console.log(data.message)
+                lsToast(data.message);
+                self.adjustmentSocial.linkinbioEditScrenn();
+                self.adjustmentColor.customeSetitngsAjax();
             },
             error: (xhr, textStatus, errorThrown) => {
               console.error('Fehler:', errorThrown);

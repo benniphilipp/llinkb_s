@@ -39,30 +39,31 @@ class linkDelete{
     handlerOpenModal(event){
 
         const button = event.target.closest('.linkinbio-trash');
-
-        if (button.classList.contains('linkinbio-trash')) {
-            $('#exampleModal').modal('show');
-            const urlTrash = button.getAttribute('data-url-trash');
-            const linkinbioEditcard = button.getAttribute('data-linkinbio-editcard');
-            const linkinbioTitel = button.getAttribute('data-linkinbio-titel');
-
-
-            //Transpalte
-            const ModelDoyouwantto = gettext('Do you want to');
-            const ModelDelte = gettext('Delete');
-
-            const exampleModalLabel = document.querySelector('#exampleModalLabel');
-            exampleModalLabel.textContent = linkinbioTitel;
-
-            const idContent = document.querySelector('#idContent');
-            const contentItem = document.createElement('p');
-            contentItem.textContent = ModelDoyouwantto + '" ' + linkinbioTitel + ' "' + ModelDelte;
-
-            $(idContent).append(contentItem);
-
-            const saveChangesButton = document.querySelector('.modal-footer .btn-trash');
-            saveChangesButton.setAttribute('data-url-trash', urlTrash);
-            saveChangesButton.setAttribute('data-linkinbio-editcard', linkinbioEditcard);   
+        if(button){
+            if (button.classList.contains('linkinbio-trash')) {
+                $('#exampleModal').modal('show');
+                const urlTrash = button.getAttribute('data-url-trash');
+                const linkinbioEditcard = button.getAttribute('data-linkinbio-editcard');
+                const linkinbioTitel = button.getAttribute('data-linkinbio-titel');
+    
+    
+                //Transpalte
+                const ModelDoyouwantto = gettext('Do you want to');
+                const ModelDelte = gettext('Delete');
+    
+                const exampleModalLabel = document.querySelector('#exampleModalLabel');
+                exampleModalLabel.textContent = linkinbioTitel;
+    
+                const idContent = document.querySelector('#idContent');
+                const contentItem = document.createElement('p');
+                contentItem.textContent = ModelDoyouwantto + '" ' + linkinbioTitel + ' "' + ModelDelte;
+    
+                $(idContent).append(contentItem);
+    
+                const saveChangesButton = document.querySelector('.modal-footer .btn-trash');
+                saveChangesButton.setAttribute('data-url-trash', urlTrash);
+                saveChangesButton.setAttribute('data-linkinbio-editcard', linkinbioEditcard);   
+            }
         }
     }
     
@@ -94,7 +95,7 @@ class linkDelete{
         if (button.classList.contains('btn-trash')) {
             const ulrTrash = button.getAttribute('data-url-trash');
 
-            console.log(ulrTrash)
+            //console.log(ulrTrash)
             $.ajax({
                 url: ulrTrash,
                 type: 'POST',

@@ -3,6 +3,7 @@ import linkListe from './linkListe';
 import adjustmentSocial from './adjustmentSocial';
 import adjustmentColor from './adjustmentColor';
 
+
 import { clearContent, lsToast } from './lsToast';
 
 class crateFormLink{
@@ -78,7 +79,7 @@ class crateFormLink{
             type:'GET',
             dataType: 'json',
             success: (response) => {
-                console.log(response);
+                //console.log(response);
 
                 const alertUser = document.getElementById('alertUser');
                 const existingAlert = alertUser.querySelector('.alert');
@@ -105,12 +106,19 @@ class crateFormLink{
         const linkUrlInput = document.querySelector('#linkUrlSubmit');
         const linkInBioPageIDInput = document.querySelector('#linkInBioPageID');
         const actionAttribute = this.formCreateShorcode.getAttribute('action');
+        const imageInput = document.querySelector('#formFile');
         
         const buttonLabelValue = buttonLabelInput.value;
         const linkUrlValue = linkUrlInput.value;
         const linkInBioPageIDValue = linkInBioPageIDInput.value;
         
         const formData = new FormData();
+
+        if (imageInput.files.length > 0) {
+            const imageFile = imageInput.files[0];
+            formData.append('image', imageFile);
+        }
+
         formData.append('button_label', buttonLabelValue);
         formData.append('link_url', linkUrlValue);
         formData.append('linkinbio_page', linkInBioPageIDValue);
@@ -134,7 +142,7 @@ class crateFormLink{
                 linkUrlInput.value = '';
 
                 // Success masage
-                lsToast(translations['Der Link wurde erfolgreich erstellt und mit Ihrer Link-in-Bio-Seite verknüpft.']);
+                lsToast(translations['The link has been successfully created and linked to your link in bio page.']);
 
                 document.querySelector('#buttonCrateShortcode').classList.add('disabled');
                 document.querySelector('.url-chacke-feedback').textContent = '';
@@ -151,6 +159,7 @@ class crateFormLink{
         });
     }
 
+
     // Link in Bio Selcet
     cratelinkInBioSelectSubmit(event){
         event.preventDefault();
@@ -160,12 +169,22 @@ class crateFormLink{
         const buttonLabelSelcetSubmitInput = document.querySelector('#buttonLabelSelcetSubmit');
         const linkinbioPageIdInput = document.querySelector('#linkinbio_page_id');
         const shortcodeIdInput = document.querySelector('#shortcode_id');
+        const imageInput = document.querySelector('#formFile2');
+
+
+        this.linkList = new linkListe();
+        this.adjustmentSocial = new adjustmentSocial();
+        this.adjustmentColor = new adjustmentColor();
 
         const linkinbioPageIdValue = linkinbioPageIdInput.value;
         const buttonLabelSelcetSubmitValue = buttonLabelSelcetSubmitInput.value;
         const shortcodeIdValue = shortcodeIdInput.value;
 
         const formData = new FormData();
+        if (imageInput.files.length > 0) {
+            const imageFile = imageInput.files[0];
+            formData.append('image', imageFile);
+        }
         formData.append('button_label', buttonLabelSelcetSubmitValue);
         formData.append('shortcode_id', shortcodeIdValue);
         formData.append('linkinbio_page_id', linkinbioPageIdValue);
@@ -186,15 +205,20 @@ class crateFormLink{
                 buttonLabelSelcetSubmitInput.value = '';
                 linkinbioPageIdInput.value = '';
                 shortcodeIdInput.value = '';
+                imageInput.value = '';
                 $('#selectShortcode').val('');
 
                 // Success masage
-                lsToast(translations['Der neue Shortcode wurde erfolgreich erstellt und mit Ihrer Link-in-Bio-Seite verknüpft.']);
+                lsToast(data.message);
 
                 document.querySelector('#buttonCrateSelectShortcode').classList.add('disabled');
-                // List View Load
-                self.linkList.linklistview();
 
+                // Link liste neue laden
+                self.linkList.linklistview();
+                self.adjustmentSocial.linkinbioEditScrenn();
+                self.adjustmentColor.customeSetitngsAjax();
+
+            
             },
             error: function(xhr, textStatus, errorThrown) {
                 console.log('Fehler beim Senden des Formulars: ' + errorThrown)

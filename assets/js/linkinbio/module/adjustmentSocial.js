@@ -1,9 +1,8 @@
-/*
-TODOs:
-*/
+
 
 import { getCookie } from './getCookie';
 import { clearContent, lsToast } from './lsToast';
+import adjustmentColor from './adjustmentColor';
 
 class adjustmentSocial {
 
@@ -87,6 +86,9 @@ class adjustmentSocial {
     saveData(selectedPlatform, enteredURL) {
         if (selectedPlatform && enteredURL) {
 
+            const self = this;
+            this.adjustmentColor = new adjustmentColor();
+
             var link_in_bio_id = $('#linkinbio_page_id_custome').val();
             const urlSocialForm = $('#urlSocial').val();
 
@@ -106,6 +108,8 @@ class adjustmentSocial {
 
                         lsToast(translations['URL erfolgreich gespeichert.']);                      
                         this.sozialprofilelist();
+                        self.linkinbioEditScrenn();
+                        self.adjustmentColor.customeSetitngsAjax();
 
                     } else {
                         console.error('Fehler beim Speichern der URL:', data.message);
@@ -260,6 +264,7 @@ class adjustmentSocial {
     }
 
     addSocialMediaPlatforms() {
+
         const elementContainer = document.querySelector('#elementContainer');
         const UrlDataView = document.querySelector('#getSocialMdiaPlatforms');
 
@@ -382,6 +387,8 @@ class adjustmentSocial {
 
 
     sozialprofilurlsupdate(updateId, urlSocialValue){
+        const self = this;
+        this.adjustmentColor = new adjustmentColor();
 
         const urlData = document.querySelector('#UrlSocialProfilesUpdateView');
   
@@ -402,7 +409,9 @@ class adjustmentSocial {
             success: (data) => {
 
                 lsToast(data.message);
-                this.sozialprofilelist();
+                self.linkinbioEditScrenn();
+                self.adjustmentColor.customeSetitngsAjax();
+                
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.error('Fehler bei der Ajax-Anfrage:', errorThrown);
@@ -446,7 +455,10 @@ class adjustmentSocial {
 
     // Delete function
     sozialprofilurlsdelete(updateId){
-     
+
+        const self = this;
+        this.adjustmentColor = new adjustmentColor();
+
         const dataUrl = document.querySelector('#UrlSocialProfilesDeleteView');
         
         $.ajax({
@@ -464,6 +476,9 @@ class adjustmentSocial {
                 lsToast(data.social_media_delete);
                 this.sozialprofilelist();
                 this.socialplattformEmpty();
+                self.linkinbioEditScrenn();
+                self.adjustmentColor.customeSetitngsAjax();
+
             },
             error: function(xhr, textStatus, errorThrown) {
                 console.error('Fehler beim Speichern der URL:', errorThrown);
@@ -475,6 +490,7 @@ class adjustmentSocial {
     // Edite Screnn
     linkinbioEditScrenn(){
 
+        let image;
         const urlData = document.querySelector('#LinkInBioViewEditScreen');
 
         if(urlData){
@@ -508,8 +524,25 @@ class adjustmentSocial {
                     linkInBioLinksContainer.empty();
                     
                     data.links.link_in_bio_links.forEach((link) => {
+                        
+                        if(link.image){
+                            image = `<img class="img-fluid-shortcode" src="${link.image}"
+                            style="
+                            position: absolute;
+                            left: 0.4rem;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            height: 2rem;
+                            width: 2rem;
+                            object-fit: cover;
+                            object-position: center;
+                            ">`
+                        }else{
+                            image = '';
+                        }
+
                         const linkElement = `
-                            <a class="link-page-btn link-btn-color d-none" href="http://127.0.0.1:8000/${link.lang}/${link.url}">${link.link_text}</a>
+                            <a class="link-page-btn link-btn-color d-none position-relative" href="http://127.0.0.1:8000/${link.url}">${image}${link.link_text}</a>
                         `;
                         linkInBioLinksContainer.append(linkElement);
                     });
@@ -524,7 +557,7 @@ class adjustmentSocial {
                     linkPageDisplay.forEach(function(linkPageElement){
                         setTimeout(() => {
                             linkPageElement.classList.remove('d-none');
-                        }, 1500);
+                        }, 1000);
                     })
 
     
@@ -557,6 +590,9 @@ class adjustmentSocial {
     }
 
     sorttabelSaveUrlSocial(sortedLinks){
+        const self = this;
+        this.adjustmentColor = new adjustmentColor();
+
         const dataFrom = document.querySelector('#SocialMediaProfilesOrderSaveView').value;
         if(dataFrom){
             $.ajax({
@@ -568,6 +604,9 @@ class adjustmentSocial {
                 },
                 success: function (data) {
                     console.log('Reihenfolge erfolgreich gespeichert.'+ data.sorted_links);
+                    self.adjustmentColor.customeSetitngsAjax();
+                    self.linkinbioEditScrenn();
+                    
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.error('Fehler beim Speichern der Reihenfolge:', errorThrown);

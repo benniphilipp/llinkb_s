@@ -1,4 +1,6 @@
 import { getCookie } from './getCookie';
+import adjustmentSocial from './adjustmentSocial';
+import adjustmentColor from './adjustmentColor';
 
 class linkListe{
 
@@ -112,6 +114,10 @@ class linkListe{
     }
 
     saveSortOrder(sortedLinks) {
+        const self = this;
+        this.adjustmentSocial = new adjustmentSocial();
+        this.adjustmentColor = new adjustmentColor();
+
         $.ajax({
             url: this.urlForm,
             type: 'POST',
@@ -120,7 +126,11 @@ class linkListe{
                 'X-CSRFToken': this.csrftoken,
             },
             success: function (data) {
-                console.log('Reihenfolge erfolgreich gespeichert.');
+                //console.log('Reihenfolge erfolgreich gespeichert.');
+                // Link liste neue laden
+                self.adjustmentSocial.linkinbioEditScrenn();
+                self.adjustmentColor.customeSetitngsAjax();
+
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.error('Fehler beim Speichern der Reihenfolge:', errorThrown);

@@ -38,6 +38,28 @@ const adjustmentsocial = new adjustmentSocial();
 const adjustmentcolor = new adjustmentColor();
 const adjustmentfonts = new adjustmentFonts();
 
+
+// Handle Titel Länge
+
+
+const inputTitel = document.querySelector('#id_title');
+if(inputTitel){
+    inputTitel.addEventListener('input', () => {
+        const titel = inputTitel.value;
+        const Characters = 34 - titel.length;
+        const characterCountElement = document.querySelector('.character-count');
+
+        if(Characters < 0){
+            inputTitel.value = titel.slice(0, 34);
+            characterCountElement.textContent = `${Characters} / 34 characters`;
+        }else{
+            characterCountElement.textContent = `${Characters} / 34 characters`;
+        }
+})
+}
+
+
+
 // Sidebar Open & Close
 const openFormButton = document.querySelector("#openForm");
 const closeFormButton = document.querySelector("#closeForm");

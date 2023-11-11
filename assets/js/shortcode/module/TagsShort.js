@@ -201,9 +201,10 @@ class ShortcodeTags {
                 success: (response) => {
                     const tags = response.tags;
                     const tagFilter = document.querySelector('#tag-filter');
-    
+                    const SelectTagsTrans = gettext('Select Tags...');
+
                     const emptyOption = document.createElement('option');
-                    emptyOption.text = 'Tag Wählen...';
+                    emptyOption.text = SelectTagsTrans;
                     emptyOption.value = '';
                     tagFilter.innerHTML = '';
                     tagFilter.appendChild(emptyOption);

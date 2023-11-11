@@ -21,17 +21,6 @@ from shortcode.models import ShortcodeClass, Tag
 from .models import LinkInBio, LinkInBioLink, CustomSettings, SocialMediaPlatform, UrlSocialProfiles
 from .forms import LinkInBioDashboardForm
 
-#
-def get_language_from_url(request):
-    # Holen Sie sich die vollständige URL mit Sprachparameter
-    full_url = request.get_full_path()
-    
-    url_segments = full_url.split('/')
-    
-    language = url_segments[1]
-
-    
-    return language
 
 
 # View Edit Screen
@@ -41,11 +30,11 @@ class LinkInBioViewEditScreen(View):
                 linkinbio = LinkInBio.objects.get(pk=pk)
                 
                 # Alle UrlSocialProfiles für diese LinkInBio-Seite abrufen
-                url_social_profiles = UrlSocialProfiles.objects.filter(link_in_bio=linkinbio)
+                url_social_profiles = UrlSocialProfiles.objects.filter(link_in_bio=linkinbio).order_by('order')
                 
                 # Alle LinkInBioLink-Einträge für diese LinkInBio-Seite abrufen
-                link_in_bio_links = LinkInBioLink.objects.filter(link_in_bio=linkinbio)
-                sprache = get_language_from_url(request)
+                link_in_bio_links = LinkInBioLink.objects.filter(link_in_bio=linkinbio, is_aktiv=True).order_by('order')
+
                 
                 # Daten für die Antwort erstellen
                 data = {
@@ -58,8 +47,7 @@ class LinkInBioViewEditScreen(View):
                         for profile in url_social_profiles
                     ],
                     'link_in_bio_links': [
-                        {
-                            'lang': sprache,
+                        {   'image': link.image.url if link.image else None,
                             'link_text': link.shortcode.button_label,
                             'url': link.shortcode.shortcode
                         }
@@ -259,6 +247,7 @@ class CreateLinkView(View):
             shortcode_id = request.POST.get('shortcode_id')
             linkinbio_page_id = request.POST.get('linkinbio_page_id')
             button_label = request.POST.get('button_label')
+            image = request.FILES.get('image', '')
 
             try:
                 shortcode = ShortcodeClass.objects.get(id=shortcode_id)
@@ -270,12 +259,11 @@ class CreateLinkView(View):
             shortcode.button_label = button_label
             shortcode.save()
 
-
-            linkinbio_page.links.add(shortcode)
+            # linkinbio_page.links.add(shortcode)
 
             current_order = LinkInBioLink.objects.filter(link_in_bio=linkinbio_page_id).aggregate(max_order=models.Max('order'))['max_order'] or 0
             new_order = current_order + 1
-            LinkInBioLink.objects.create(link_in_bio=linkinbio_page, shortcode=shortcode, order=new_order)
+            LinkInBioLink.objects.create(link_in_bio=linkinbio_page, image=image, shortcode=shortcode, order=new_order)
 
             response_data = {'success': True, 'message': _('Shortcode linked to LinkInBio.')}
             return JsonResponse(response_data)
@@ -296,6 +284,8 @@ class CreateShortcodeView(View):
             button_label = request.POST.get('button_label', '')
             link_url = request.POST.get('link_url', '')
             linkinbio_page_id = request.POST.get('linkinbio_page')
+            image = request.FILES.get('image', '')
+
             
             current_user = request.user
 
@@ -335,7 +325,7 @@ class CreateShortcodeView(View):
             current_order = LinkInBioLink.objects.filter(link_in_bio=selected_linkinbio_page).aggregate(max_order=models.Max('order'))['max_order'] or 0
             new_order = current_order + 1
             
-            LinkInBioLink.objects.create(link_in_bio=selected_linkinbio_page, shortcode=shortcode, order=new_order)
+            LinkInBioLink.objects.create(link_in_bio=selected_linkinbio_page, shortcode=shortcode, image=image, order=new_order)
 
             response_data = {'success': True, 'message': _('Shortcode created and added to LinkInBio.')}
             return JsonResponse(response_data)
@@ -446,10 +436,12 @@ class LinkInBioListView(LoginRequiredMixin, View):
             )
             shortcode_instance.save()
             
-
+            # Shortcode ForeignKey Save
+            link_in_bio_instance.shortcode = shortcode_instance
+            link_in_bio_instance.save()
+            
             tag, created = Tag.objects.get_or_create(name='LinkInBio', user=request.user)
             shortcode_instance.tags.add(tag)
-            
             
 
             BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -605,7 +597,7 @@ class LinkInBioDeatilePage(View):
             image_bg = [{'profile_image': None}]
 
         social_media_profiles = UrlSocialProfiles.objects.filter(link_in_bio=linkinbio).order_by('order')
-        links = LinkInBioLink.objects.filter(link_in_bio=linkinbio).order_by('order')
+        links = LinkInBioLink.objects.filter(link_in_bio=linkinbio, is_aktiv=True).order_by('order')
         
         custom_settings = CustomSettings.objects.get(link_in_bio=linkinbio)
         settings_json_data = custom_settings.settings_json
@@ -620,6 +612,7 @@ class LinkInBioDeatilePage(View):
                 'link_in_bio_page': link.link_in_bio.id,
                 'shortcode_id': link.shortcode.id,
                 'is_aktiv': link.is_aktiv,
+                'image': link.image.url if link.image else None
             }
             for link in links
         ]

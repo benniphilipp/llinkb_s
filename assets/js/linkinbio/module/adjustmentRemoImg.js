@@ -25,7 +25,7 @@ class adjustmentRemoImg {
     }
 
     openDeleteModalImage(){
-        console.log('Run Model');
+        //console.log('Run Model');
         $('#exampleModalImageDelete').modal('show');
     }
 

@@ -67,7 +67,7 @@ class adjustmentTexDesc{
     // Detaile View Text
     detaileViewText(){
         const UrlDatile = document.querySelector('#TexteDeatileAdjustmentView');
-
+        let descriptionCharacters;
         $.ajax({
             url: UrlDatile.value,
             type: 'GET',
@@ -78,6 +78,16 @@ class adjustmentTexDesc{
                 this.inputFieldTitel.value = data[0].title;
                 this.inputFieldDescription.value = data[0].description;
                 this.descriptionPageValue.textContent = data[0].description;
+
+                const titelCharacters = 34 - data[0].title.length;
+                const descriptionCharacters = 80 - data[0].description.length;
+
+                if (titelCharacters) {
+                    this.charCountTitel.textContent = `${titelCharacters} / 34 characters`;
+                }
+                if (descriptionCharacters) {
+                    this.charCount.textContent = `${descriptionCharacters} / 80 characters`;
+                }
                 
             },
             error: (xhr, textStatus, errorThrown) => {
@@ -108,7 +118,7 @@ class adjustmentTexDesc{
                 'X-CSRFToken': this.csrftoken 
             },
             success: function (data) {
-                console.log(data);
+                // console.log(data);
                 lsToast(data.message);
             },
             error: function (xhr, status, error) {
@@ -131,6 +141,7 @@ class adjustmentTexDesc{
             this.charCountTitel.textContent = text.length + ' / 34 characters';
         }
     }
+
 
     // Description
     typingLengthDescription(){

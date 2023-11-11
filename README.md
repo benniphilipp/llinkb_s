@@ -112,14 +112,13 @@ TqXRm5ikowzmYtZVyCMC
     git commit -m '_text'
     git push origin 
 
+- Automasticher Tags bei link in bio Seite und in Shorcode Extra Makieren --erledigt
+- Text Bustaben Zählung bei LinkInBio Seite Abrufen auch nicht nur bei Tippen --erldeigt
+- Bug Shorcode hinzufühgen LinkInBio Page --erldeigt
+- Sozial Medai Links Sortierung Backend und Frontad --erldeigt
+- Button Image --erldeigt
 
-- Einzelansicht LinkInBio Page --erledigt
-- Mobile Ansicht LinkInBio Page User --erledigt
 
-- Automasticher Tags bei link in bio Seite und in Shorcode Extra Makieren --
-- Text Bustaben Zählung bei LinkInBio Seite Abrufen auch nicht nur bei Tippen
-
-- Button Icon dazu machen
 - Link Analyse bei LinkInBio Page
 - Add Youtube Video Iframe
 - Podcast Irame
@@ -135,6 +134,8 @@ TqXRm5ikowzmYtZVyCMC
 - Fonts * adjustmentFonts.js 
 
 # BUG ERLEDIGT
+- Einzelansicht LinkInBio Page --erledigt
+- Mobile Ansicht LinkInBio Page User --erledigt
 - Zahlung Funktion Prüfen erledigt
 - Danke Seite nach Zahlung erledigt
 - E-Mail-Benachrichtigungen Zahlung erledigt

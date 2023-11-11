@@ -24,6 +24,7 @@ class LinkInBio(models.Model):
     selected_template = models.TextField(null=True, blank=True)
     is_aktiv = models.BooleanField(default=True)
     crate_date = models.DateTimeField(auto_now_add=True)
+    shortcode = models.ForeignKey(ShortcodeClass, on_delete=models.CASCADE, null=True, blank=True)
     
     def __str__(self):
         return self.title
@@ -50,6 +51,7 @@ class LinkInBioLink(models.Model):
     shortcode = models.ForeignKey(ShortcodeClass, on_delete=models.CASCADE)
     order = models.PositiveIntegerField(default=0)
     is_aktiv = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='images/', null=True, blank=True) 
     
     class Meta:
         unique_together = ('link_in_bio', 'shortcode')

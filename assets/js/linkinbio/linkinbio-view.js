@@ -10,13 +10,14 @@ class LinkInBioView {
 
 
     ajaxView(dataUrl){
+        let image;
         const self = this;
         $.ajax({
             url: dataUrl.value,
             type: 'GET',
             dataType: 'json',
             success: function(data) {
-            console.log(data)
+            //console.log(data)
             
             $('#descriptionPageValue').text(data.context_json.description);
             $('#titelpageValue').text(data.context_json.title);
@@ -42,8 +43,25 @@ class LinkInBioView {
             linkInBioLinksContainer.empty();
             
             data.links.forEach((link) => {
+
+                if(link.image){
+                    image = `<img class="img-fluid-shortcode" src="${link.image}"
+                    style="
+                    position: absolute;
+                    left: 0.4rem;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    height: 2rem;
+                    width: 2rem;
+                    object-fit: cover;
+                    object-position: center;
+                    ">`
+                }else{
+                    image = '';
+                }
+
                 const linkElement = `
-                    <a class="link-page-btn link-btn-color" href="${link.url_destination}">${link.button_label}</a>
+                    <a class="link-page-btn link-btn-color position-relative" href="${link.url_destination}">${image}${link.button_label}</a>
                 `;
                 linkInBioLinksContainer.append(linkElement);
             });
@@ -121,36 +139,6 @@ class LinkInBioView {
                     }
                 }
             }
-
-            // for (const className in cssStyles) {
-            //     const elementInfo = cssStyles[className];
-            //     const elements = document.getElementsByClassName(className);
-        
-            //     for (const element of elements) {
-            //         const defaultStyles = elementInfo.default;
-            //         for (const styleName in defaultStyles) {
-            //             element.style[styleName] = defaultStyles[styleName];
-            //         }
-        
-            //         // Fügen Sie den Hover-Effekt hinzu
-            //         element.addEventListener('mouseenter', () => {
-            //             const hoverStyles = elementInfo.hover;
-            //             if (hoverStyles) {
-            //                 for (const styleName in hoverStyles) {
-            //                     element.style[styleName] = hoverStyles[styleName];
-            //                 }
-            //             }
-            //         });
-        
-            //         // Entfernen Sie den Hover-Effekt
-            //         element.addEventListener('mouseleave', () => {
-            //             for (const styleName in defaultStyles) {
-            //                 element.style[styleName] = defaultStyles[styleName];
-            //             }
-            //         });
-            //     }
-            // }
-
 
             },
             error: function(error) {

@@ -58,6 +58,24 @@ class linkPageUpdate {
                     document.querySelector('#aside-form').classList.add("toggle");
                     document.querySelector('#overlay-open').classList.add("overlay-open");
 
+
+   
+                    if (event.target && event.target.classList.contains('update-linkinbio-page')) {
+                        const inputTitel = document.querySelector('#id_title');
+                        const characterCountElement = document.querySelector('.character-count');
+                
+                        const titel = inputTitel.value;
+                        const Characters = 34 - titel.length;
+                
+                        if (Characters < 0) {
+                            characterCountElement.textContent = `${Characters} / 34 characters`;
+                        } else {
+                            characterCountElement.textContent = `${Characters} / 34 characters`;
+                        }
+                        //console.log(titel);
+                    }
+                  
+
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.error('Fehler bei der Ajax-Anfrage:', errorThrown);

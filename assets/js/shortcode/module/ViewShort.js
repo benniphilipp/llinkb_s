@@ -200,6 +200,8 @@ class ViewShort{
             url: urlData,
             success: (response) => {
 
+                const CopyTrans = gettext('Copy');
+
                 const data = response.data
 
                 url_destination.value = data.url_destination;
@@ -217,7 +219,7 @@ class ViewShort{
 
                 tagsCheckboxes.trigger('change');
 
-                shortcodeId.innerHTML = `<button data-button="short${data.id}" type="button" class="btn btn-secondary btn-copy colorshort${data.id} btn-sm"><i class="fa-solid fa-link"></i> Kopieren</button>`;
+                shortcodeId.innerHTML = `<button data-button="short${data.id}" type="button" class="btn btn-secondary btn-copy colorshort${data.id} btn-sm"><i class="fa-solid fa-link"></i> ${CopyTrans}</button>`;
 
             },
             error: (error) => {
@@ -383,7 +385,8 @@ class ViewShort{
 
     // View
     ShortcodeAjaxView(currentPage){
-  
+        let icon = '';
+        let pageIcon = '';
         const dataInput = document.querySelector('input[name="data"]');
         if(dataInput){
             const gifLoad = document.querySelector('#gif-load');
@@ -408,6 +411,7 @@ class ViewShort{
                     q: ValuesearchQuery
                 },
                 success: (response) => {
+
     
                     const alertUser = document.getElementById('alertUser');
                     const existingAlert = alertUser.querySelector('.alert');
@@ -429,6 +433,7 @@ class ViewShort{
                     gifLoad.classList.remove('d-none');
     
     
+
                     setTimeout(function(){
     
                         serialized_data.forEach(function(item) {
@@ -444,6 +449,20 @@ class ViewShort{
                             const shortcode = item.shortcode;
                             const tags = item.tags;
                             const url_titel = item.url_titel;
+                            const page = item.linkinbio;
+                            const linkoage = item.linkinbiopgaelinks;
+
+                            if(linkoage){
+                                pageIcon = '<i class="fa-solid fa-square-up-right"></i>'
+                            }else{
+                                pageIcon = '';
+                            }
+
+                            if(page){
+                                 icon = '<i class="fa-regular fa-newspaper"></i>';
+                            }else{
+                                 icon = '';
+                            }
                             
                             let faviconPath = item.favicon_path;
                             if (faviconPath === 'null' || faviconPath === null) {
@@ -484,7 +503,9 @@ class ViewShort{
                                             <span class="short-chart" data-anaylyse="${short_id}">
                                                 <i class="fa-solid fa-chart-line orb-icon"></i> ${click_count} ${clicksTrans}
                                             </span>
-                                            <span class="short-tags"><i class="fa-solid fa-tag orb-icon"></i> ${tags.join(', ')} Tags</span>
+                                            <span class="short-tags"><i class="fa-solid fa-tag orb-icon"></i> Tags: <b>${tags.join(', ')}</b> </span>
+                                            <span class="d-flex align-items-center">${pageIcon}</span>
+                                            <span class="d-flex align-items-center">${icon}</span>
                                         </small>
                                     </div>
                                 </div>

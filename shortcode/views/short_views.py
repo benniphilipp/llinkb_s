@@ -27,7 +27,7 @@ from shortcode.forms import (
 from accounts.models import CustomUser
 from shortcode.models import ShortcodeClass, Tag
 from analytics.models import ClickEvent, DailyClick, IPGeolocation
-
+from linkinbio.models import LinkInBio
 
 
 
@@ -93,6 +93,17 @@ class ShortcodeListeCreateView(View, LoginRequiredMixin):
                     except ClickEvent.DoesNotExist:
                         click_count = 0
                         
+                        
+                    if shortcode.linkinbiopage:
+                        connection_exists_link_bio_page = True
+                    else:
+                        connection_exists_link_bio_page = False
+                    
+                    if LinkInBio.objects.filter(shortcode=shortcode).exists():
+                        connection_exists = True
+                    else:
+                        connection_exists = False
+                        
                     tags = [tag.name for tag in shortcode.tags.all()]
                     item = {
                         'short_id': shortcode.pk,
@@ -104,7 +115,9 @@ class ShortcodeListeCreateView(View, LoginRequiredMixin):
                         'shortcode': shortcode.shortcode,
                         'favicon_path': shortcode.favicon_path,
                         'archivate': shortcode.url_archivate,
-                        'tags': tags
+                        'tags': tags,
+                        'linkinbio': connection_exists,
+                        'linkinbiopgaelinks': connection_exists_link_bio_page
                     }
                     data.append(item)
 

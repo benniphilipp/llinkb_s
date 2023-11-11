@@ -241,15 +241,6 @@ img.loader-image {
   width: 21rem;
   height: 3rem; }
 
-.form-check-input {
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  opacity: 0;
-  height: 0;
-  width: 0;
-  pointer-events: none; }
-
 /* Shodow */
 .wrapper-shadow {
   display: flex;

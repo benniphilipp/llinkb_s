@@ -23,9 +23,13 @@
                         <input type="text" class="form-control mt-3 mb-3" id="linkUrlSubmit" placeholder="Create a new Llinkb link">
                         <input type="hidden" id="linkInBioPageID" value="{{link_in_bio_instance.id}}">
 
+                        <input class="form-control mt-3 mb-3" type="file" id="formFile">
+                        
                         <button type="submit" id="buttonCrateShortcode" class="btn btn-primary btn-sm disabled">Create</button>
                     </div>
                 </form>
+
+                
 
                 <!-- Formular 2 (Auswählen) -->
                 <form id="form-create-link-select" class="d-none" action="{% url 'linkinbio:create_link' %}" method="POST">
@@ -33,8 +37,12 @@
                         <input type="text" class="form-control mt-3 mb-3" id="buttonLabelSelcetSubmit" placeholder="Button label">
                         <input type="text" class="form-control mt-3 mb-3" id="selectShortcode" placeholder="Select an existing Llinkb link">
                         <ul id="search-results"></ul>
+                        
+                        <input class="form-control mt-3 mb-3" type="file" id="formFile2">
+
                         <input type="hidden" id="linkinbio_page_id" value="{{link_in_bio_instance.id}}">
                         <input type="hidden" id="shortcode_id" value="">
+
                         <button type="submit" id="buttonCrateSelectShortcode" class="btn btn-primary btn-sm disabled">Create</button>
                     </div>
                 </form>

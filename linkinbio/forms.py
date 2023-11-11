@@ -19,12 +19,13 @@ class LinkInBioDashboardForm(forms.ModelForm):
         self.helper.layout = Layout(
             Row(
                 Column('title', css_class='form-group col-12 my-2'),
-                css_class='row'
+                css_class='row',
             ),
             # Row(
             #     Column('description', css_class='form-group col-12 my-2'),
             #     css_class='row'
             # ),
+            HTML('<div class="character-count"></div>'),
             Hidden('user', '{{ admin }}'),
             HTML('<input id="saveBtn" class="btn btn-primary mt-3" type="submit" value="{}">'.format(self.submit_text)),
             HTML('<input id="updateBtnJson" class="btn btn-primary mt-3 d-none" value="{}">'.format(self.submit_text)),
