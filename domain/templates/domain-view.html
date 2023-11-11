@@ -31,9 +31,7 @@
                 </div>
                 <div class="row mt-5">
                     <div class="col-12">
-                        <div class="alert alert-primary" role="alert">
-                            {% trans "The domains are created here, the function is still under development." %}
-                        </div>
+                        <div id="domainContainer"></div>
                     </div>
                 </div>
             </div>
@@ -45,4 +43,7 @@
 
 <!--Javasript-->
 {% block javasript %}
+<script defer src="{% static '/js/domainJs.bundle.js' %}"></script>
+
+
 {% endblock %}
