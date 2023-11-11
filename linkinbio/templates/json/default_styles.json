@@ -8,12 +8,19 @@
             "margin": "0 auto",
             "padding-bottom": ".1rem",
             "background-color": "#ffffff"
+        },
+        "mobile": {
+            "width": "100%",
+            "max-width": "100%",
+            "min-height": "100vh",
+            "border-radius": "0",
+            "margin": "0"
         }
     },
     "titel":{
         "default":{
             "margin-top": "10px",
-            "color": "#000"
+            "color": "#000000"
         } 
     },
     "header-page": {
@@ -57,7 +64,7 @@
     "description": {
         "default": {
             "text-align": "center",
-            "color": "#000"
+            "color": "#000000"
         }
     },
     "sozial": {

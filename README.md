@@ -112,11 +112,22 @@ TqXRm5ikowzmYtZVyCMC
     git commit -m '_text'
     git push origin 
 
+
+- Einzelansicht LinkInBio Page --erledigt
+- Mobile Ansicht LinkInBio Page User --erledigt
+
+- Automasticher Tags bei link in bio Seite und in Shorcode Extra Makieren --
+- Text Bustaben Zählung bei LinkInBio Seite Abrufen auch nicht nur bei Tippen
+
+- Button Icon dazu machen
+- Link Analyse bei LinkInBio Page
+- Add Youtube Video Iframe
+- Podcast Irame
+
+
 - Stripe URL und Stipe englisch anpassen
 - Produkt seite Button Style Tauschen
 - Analytics Dahboard Anpssen 
-- Einzelansicht LinkInBio Page
-- Automasticher Tags bei link in bio Seite und in Shorcode Extra Makieren
 - Qr-Code Pages Crator
 - limitation, Android Targeting, Ios Targeting BETA Version GEO Targeting
 - Menü Shorcode

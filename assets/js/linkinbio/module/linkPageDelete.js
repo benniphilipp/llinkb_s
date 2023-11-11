@@ -66,13 +66,13 @@ class linkPageDelete{
 
             $.ajax({
                 url: ulrTrash,
-                type: 'POST',
+                type: 'DELETE',
                 dataType: 'json',
                 headers: {
                     'X-CSRFToken': this.csrftoken, 
                 },
                 success: function (data) {
-                    console.log('Antwort von Server:', data);
+                    // console.log('Antwort von Server:', data);
 
                     $('#exampleModal').modal('hide');
 

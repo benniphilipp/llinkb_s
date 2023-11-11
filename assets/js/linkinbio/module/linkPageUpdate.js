@@ -50,7 +50,7 @@ class linkPageUpdate {
                 success: function (data) {
 
                     idTitle.value = data.id_title;
-                    idDescription.value = data.id_description;
+                    // idDescription.value = data.id_description;
                     linkinbioUpdateId.value = data.id
 
                     document.querySelector('#updateBtnJson').classList.remove('d-none')
@@ -75,10 +75,6 @@ class linkPageUpdate {
         const linkinbioUpdateIdValue = document.querySelector('#linkinbioUpdateId').value;
 
         const urlData = document.getElementById('linkinbioUpdateJson').value.replace(/0/g, linkinbioUpdateIdValue);
-
-        console.log('url ', urlData);
-        console.log('Bes ', idDescriptionValue);
-        console.log('Tite ', idTitleValue);
 
         const formData = new FormData();
         formData.append('id_title', idTitleValue);

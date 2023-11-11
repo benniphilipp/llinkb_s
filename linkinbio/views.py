@@ -17,7 +17,7 @@ from django.http import HttpResponse
 from django.views import View
 from django.http import Http404
 from django.contrib.auth.mixins import LoginRequiredMixin
-from shortcode.models import ShortcodeClass
+from shortcode.models import ShortcodeClass, Tag
 from .models import LinkInBio, LinkInBioLink, CustomSettings, SocialMediaPlatform, UrlSocialProfiles
 from .forms import LinkInBioDashboardForm
 
@@ -71,7 +71,7 @@ class LinkInBioViewEditScreen(View):
                 
                 return JsonResponse({'links': data})
             except LinkInBio.DoesNotExist:
-                return JsonResponse({'error': 'LinkInBio nicht gefunden.'}, status=404)
+                return JsonResponse({'error': _('LinkInBio not found.')}, status=404)
             
 
 # Delete Social Media
@@ -84,7 +84,7 @@ class UrlSocialProfilesDeleteView(View):
             url_social_profile = UrlSocialProfiles.objects.get(id=url_social_id)
             url_social_profile.delete()
             
-            return JsonResponse({'social_media_delete': 'URL erfolgreich gelöscht.'})
+            return JsonResponse({'social_media_delete': _('URL deleted successfully.')})
         except UrlSocialProfiles.DoesNotExist:
             return JsonResponse({'error': 'UrlSocialProfiles nicht gefunden.'}, status=404)
 
@@ -101,7 +101,7 @@ class UrlSocialProfilesUpdateView(View):
             url_social_profile.url_social = new_url
             url_social_profile.save()
             
-            return JsonResponse({'message': 'URL erfolgreich aktualisiert.'})
+            return JsonResponse({'message': _('URL updated successfully.')})
         except UrlSocialProfiles.DoesNotExist:
             return JsonResponse({'error': 'UrlSocialProfiles nicht gefunden.'}, status=404)
         
@@ -124,7 +124,7 @@ class UrlSocialProfilesViewList(View):
                     'order': profile.order
                 })
             
-            return JsonResponse({'social_media': social_media_data, 'message': 'Erfolgreich gespeichert.'})
+            return JsonResponse({'social_media': social_media_data, 'message': _('Saved successfully.')})
         except LinkInBio.DoesNotExist:
             return JsonResponse({'error': 'LinkInBio not found'}, status=404)
 
@@ -162,11 +162,11 @@ class SaveUrlSocialView(View):
             url_social_profile = UrlSocialProfiles(url_social=url_social, link_in_bio=link_in_bio, social_media_platform=platform_instance)
             url_social_profile.save()
 
-            response_data = {'success': True, 'message': 'URL erfolgreich gespeichert.'}
+            response_data = {'success': True, 'message': _('URL saved successfully.')}
             return JsonResponse(response_data)
 
         except LinkInBio.DoesNotExist:
-            response_data = {'success': False, 'message': 'LinkInBio-Seite nicht gefunden.'}
+            response_data = {'success': False, 'message': _('LinkInBio-Seite nicht gefunden.')}
             return JsonResponse(response_data, status=404)
 
 
@@ -192,7 +192,7 @@ class UpdateLinksOrderView(View):
                 link.order = index + 1
                 link.save()
 
-            response_data = {'success': True, 'message': 'Reihenfolge erfolgreich gespeichert.'}
+            response_data = {'success': True, 'message': _('Order saved successfully.')}
             return JsonResponse(response_data)
         except Exception as e:
             response_data = {'success': False, 'message': str(e)}
@@ -240,7 +240,7 @@ class updateSwichtLinkinbioAtive(View):
 
             linkinbio.save()
 
-            response_data = {'success': True, 'message': 'Link erfolgreich aktualisiert.'}
+            response_data = {'success': True, 'message': _('Link updated successfully.')}
             return JsonResponse(response_data)
             
             
@@ -414,12 +414,12 @@ class LinkInBioListView(LoginRequiredMixin, View):
 
             link_in_bio_objects = LinkInBio.objects.filter(user=request.user)
             link_in_bio_form = LinkInBioDashboardForm()
-            aktuelle_url = request.build_absolute_uri()
+            domain_url = f"{request.scheme}://{request.META['HTTP_HOST']}"
             
             context = {
                 'link_in_bio_form': link_in_bio_form,
                 'link_in_bio_objects': link_in_bio_objects,
-                'aktuelle_url': aktuelle_url
+                'aktuelle_url': domain_url
             }
 
         return render(request, 'linkinbio_list.html', context)
@@ -435,20 +435,26 @@ class LinkInBioListView(LoginRequiredMixin, View):
             link_in_bio_instance.user = request.user
             link_in_bio_instance.save()
             
-            detail_url = reverse('linkinbio:linkinbio_detail', args=[link_in_bio_instance.pk])
-            full_detail_url = request.build_absolute_uri(detail_url)
-            
+            shortfull_url = reverse('detail_page', args=[link_in_bio_instance.pk])
+            full_detail_url_new = request.build_absolute_uri(shortfull_url)
+
             shortcode_instance = ShortcodeClass(
                 url_creator=request.user,
                 url_titel=link_in_bio_instance.title,
-                url_destination=full_detail_url,
+                url_destination=full_detail_url_new,
                 linkinbiopage=link_in_bio_instance
             )
             shortcode_instance.save()
             
 
+            tag, created = Tag.objects.get_or_create(name='LinkInBio', user=request.user)
+            shortcode_instance.tags.add(tag)
+            
+            
+
             BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            json_file_path = BASE_DIR + '/src/linkinbio/templates/json/default_styles.json' 
+            # /Users/benjaminphilipp/Documents/GitHub/llinkb_s/linkinbio/templates/json/default_styles.json
+            json_file_path = BASE_DIR + '/linkinbio/templates/json/default_styles.json' 
                 
             # JSON-Datei einlesen
             with open(json_file_path, 'r') as json_file:
@@ -566,6 +572,16 @@ class LinkinbiolinkDeleteView(View):
             return JsonResponse({'message': _('Data record not found')}, status=404)
         except Exception as e:
             return JsonResponse({'message': str(e)}, status=500)
+    
+    def delete(self, request, pk):
+        try:
+            link = LinkInBio.objects.get(pk=pk)
+            print('run')
+            link.delete()
+                
+            return JsonResponse({'message': _('Record deleted successfully')})
+        except LinkInBio.DoesNotExist:
+            return JsonResponse({'message': _('Data record not found')}, status=404)
 
 
 # LinkinBio Page User View
@@ -576,7 +592,7 @@ class LinkInBioDeatilePage(View):
         except LinkInBio.DoesNotExist:
             return JsonResponse({'error': _('entry not found')}, status=404)
         
-        profileimage = get_object_or_404(LinkInBio, pk=pk, user=request.user)
+        profileimage = get_object_or_404(LinkInBio, pk=pk)
 
         if profileimage.profile_image:
             image = [{'profile_image': profileimage.profile_image.url}]
