@@ -79,11 +79,16 @@ class crateFormLink{
             type:'GET',
             dataType: 'json',
             success: (response) => {
-                //console.log(response);
+            ///console.log(response);
 
                 const alertUser = document.getElementById('alertUser');
                 const existingAlert = alertUser.querySelector('.alert');
                 if (!existingAlert) {
+                    const openForm = document.querySelector('#openForm');
+                    if(response.user_date.alert == 'warning'){
+                        openForm.classList.add('d-none');
+                    }
+
                     alertUser.innerHTML += `
                         <div class="alert alert-${response.user_date.alert} d-inline-flex p-2" role="alert">
                             ${response.user_date.message}
