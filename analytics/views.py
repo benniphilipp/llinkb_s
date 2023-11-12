@@ -13,6 +13,8 @@ from .models import ClickEvent, DailyClick, IPGeolocation, ClickEvent
 from shortcode.models import ShortcodeClass
 
 from recommendation.models import Recommendation
+from accounts.models import CustomUser
+
 '''
 @ToDo
     - 1.    Automatisches Versenden von Analyseberichten.
@@ -33,7 +35,11 @@ class AnalyticsView(View):
             if recommended_user.status_change == False:
                 recommended_user.status_change = True
                 recommended_user.save()
-        
+                
+            user = CustomUser.objects.get(pk=recommended_user.referred_by.id)
+            user.free_user = False
+            user.save()
+    
         else:
             pass
         return render(request, "analytics.html")

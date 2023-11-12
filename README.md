@@ -117,8 +117,15 @@ TqXRm5ikowzmYtZVyCMC
     git commit -m '_text'
     git push origin 
 
-- Formular für weiterempelung
-- 
+
+
+- Live einrichten
+    - Preise hinterlegen --erleding
+    - Soziale Media Hinterlgen Icons
+    - E-Mail Testen Empfelungs User
+    - LinkInBio Seite erstellen
+
+
 
 - Analytics Dahboard Anpssen 
     - Clicks nach Buttton Label
@@ -198,6 +205,7 @@ TqXRm5ikowzmYtZVyCMC
 - Fonts * adjustmentFonts.js 
 
 # BUG ERLEDIGT
+- Formular für weiterempelung --erledigt
 - Übersezung Crate Shortcode Erfolgsmeldeung Website erreichbar --erleding
 - Produkt seite Button Style Tauschen --erleding
 - Stripe URL und Stipe englisch anpassen --erleding
