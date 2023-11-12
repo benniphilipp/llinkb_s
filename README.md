@@ -32,6 +32,8 @@ python manage.py startapp linkinbio
 # Domain 
 python manage.py startapp domain
 
+# Recommendation
+python3 manage.py startapp recommendation
 
 # Campaign
 https://support.bitly.com/hc/en-us/articles/115001195167
@@ -96,6 +98,9 @@ python -m smtpd -n -c DebuggingServer localhost:1025
 ben@mail.de
 &2NNe%qy^vIjtjy6 
 
+ben@web05.com
+&2NNe%qy^vIjtjy6
+
 1ben@web.de
 &2NNe%qy^vIjtjy6
 
@@ -112,6 +117,8 @@ TqXRm5ikowzmYtZVyCMC
     git commit -m '_text'
     git push origin 
 
+- Formular für weiterempelung
+- 
 
 - Analytics Dahboard Anpssen 
     - Clicks nach Buttton Label

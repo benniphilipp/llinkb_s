@@ -3,6 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 from bs4 import BeautifulSoup
 import re
 
+from django.views import View
+
 from .models import WebsitePages, Link, Button, Website, Subpage
 from accounts.models import CustomUser
 from .forms import WebsiteForm
@@ -25,6 +27,13 @@ from urllib.parse import urljoin, urlparse, urlunparse
 - 3. Danch sollen die Daten die der Trecking Code oder das Plugin aufnimmt an die Passenen Page und und an die Links und Buttons übergeben werden.
 - 4. Prüfung der Websiten links ob noch erreichbar, über Selery.
 '''
+
+
+class WebsiteCrawlerView(View):
+    def post(self, request):
+        url = request.POST.get('url')
+        pass
+
 
 # HTML View
 def website_click_view(request):
@@ -363,6 +372,7 @@ def save_website_click_recursive(url, user, website_instance, visited_links=None
 
     # Holen des aktuellen Seitentitels
     
+
 
     # Heade links holen
     header_links = save_header_links(url)

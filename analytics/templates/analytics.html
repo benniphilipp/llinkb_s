@@ -28,11 +28,12 @@
             </div>
 
             <div class="container-fluid mt-5">
+
                 <div class="row px-2">
                     <div class="car-12 col-6">
                         <div class="card border-0 shadow-sm">
                             <div class="card-body">
-                                <div class="row p-2">
+                                <div class="row">
                                     <div class="col-12 col-md-5">
                                         <img src="{% static 'images/influencer.webp' %}" class="img-fluid">
                                     </div>
@@ -48,7 +49,7 @@
                     <div class="car-12 col-6">
                         <div class="card border-0 shadow-sm">
                             <div class="card-body">
-                                <div class="row p-2">
+                                <div class="row">
                                     <div class="col-12 col-md-5">
                                         <img src="{% static 'images/agenturen.webp' %}" class="img-fluid">
                                     </div>
@@ -62,6 +63,30 @@
                         </div>
                     </div>
                 </div>
+
+
+                <div class="row px-2 mt-3">
+                    <div class="col-12">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body">
+                                <div class="row p-2">
+                                    <div class="col-12 p-2">
+                                        <span id="openModelInfo" style="right: 30px; top:30px; color:#0c3ebb; cursor:pointer;" class="position-absolute"><i class="fa-solid fa-circle-info"></i></span>
+                                        <form id="recommendedForm">
+                                            <div class="form-group">
+                                              <label for="exampleInputEmail1" class="mb-1">Email address</label>
+                                              <input type="email" class="form-control" id="UserRecommend" aria-describedby="emailHelp" placeholder="Who would you like to recommend to us?">
+                                              <small id="emailHelp" class="form-text text-muted">Recommend us and you will receive all functions free of charge for 1 year.</small>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary mt-3">Recommend us</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row px-2 mt-3">
                     <div class="col-12">
                         <div class="card border-0 shadow-sm">
@@ -84,7 +109,47 @@
         </div>
     </div>
 
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Information about your recommendations</h5>
+            </div>
+            <div class="modal-body">
+            <table id="RecommendedInfo" style="width: 100%;">
+                <thead>
+                  <tr>
+                    <th>e-mail address</th>
+                    <th>Confirmation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Hier werden die Zeilen dynamisch hinzugefügt -->
+                </tbody>
+            </table>
+            
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="CloseInfo">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+
+
+    <input type="hidden" id="RecommendationSend" value="{% url 'recommendation:recommendation_send' %}">
+    <input type="hidden" id="RecommendationView" value="{% url 'recommendation:recommendation_list' %}">
+
 {% endblock body %}
 
-{% block javasript %}{% endblock %}
+{% block javasript %}
+<script type="module" src="{% static '/js/recommended.bundle.js' %}" defer></script>
+{% endblock %}
 

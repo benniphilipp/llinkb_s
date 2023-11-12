@@ -51,10 +51,14 @@ class CustomUserManager(BaseUserManager):
 
 
 # User Model
-
 LANGUAGE_CHOICES = [
     ('en', _('English')),
     ('de', _('German')),
+]
+
+STATUS_CHOICES = [
+    ('recommended', _('Recommended')),
+    ('registration', _('Registration')),
 ]
 
 class CustomUser(AbstractUser):
@@ -69,7 +73,11 @@ class CustomUser(AbstractUser):
     city = models.CharField(max_length=20, blank=True, null=True)
     payment_code = models.CharField(max_length=20, blank=True, null=True)
         
-    language = models.CharField(max_length=2,choices=LANGUAGE_CHOICES, default='en', verbose_name=_('Sprache'))
+    language = models.CharField(max_length=2,choices=LANGUAGE_CHOICES, default='en', verbose_name=_('Language'))
+    
+    recommended = models.CharField(max_length=12,choices=STATUS_CHOICES, default='registration')
+    
+    recommended_user = models.ManyToManyField('recommendation.Recommendation', blank=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
