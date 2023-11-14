@@ -17,6 +17,7 @@ __pycache__/
 ./media/link_bio_images/
 ./src/__pycache__/
 ./geotargeting/__pycache__/
+./recommendation/__pycache__/
 ./contentpages/__pycache__/
 ./analytics/__pycache__/
 ./accounts/__pycache__/
@@ -27,6 +28,7 @@ __pycache__/
 ./shortcode/views/__pycache__/
 ./accounts/templatetags/__pycache__/
 
+./recommendation/migrations/__pycache__/
 ./geotargeting/migrations/__pycache__/
 ./contentpages/migrations/__pycache__/
 ./analytics/migrations/__pycache__/

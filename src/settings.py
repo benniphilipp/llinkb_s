@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'geotargeting',
     'products',
     'domain',
+    'recommendation',
     # 'contentpages',Delete
 ]
 

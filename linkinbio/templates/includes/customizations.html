@@ -1,4 +1,6 @@
+
 {% load static %}
+{% load i18n %}
 
         <div class="row mt-5">
             <div class="col-sm-3">
@@ -7,8 +9,8 @@
                 </div>
             </div>
             <div class="col-sm-9 d-flex align-items-center">
-                <button type="button" id="openMoadlImage" class="btn btn-outline-primary">Add Image</button>
-                <button type="button" id="openModelDelte" class="btn btn-outline-danger mx-3">Remove Image</button>
+                <button type="button" id="openMoadlImage" class="btn btn-outline-primary">{% trans "Add Image" %}</button>
+                <button type="button" id="openModelDelte" class="btn btn-outline-danger mx-3">{% trans "Remove Image" %}</button>
             </div>
         </div>         
        
@@ -24,7 +26,7 @@
                         <div id="charCount" class="form-text mb-4">
                             0 / 80 characters
                         </div>
-                        <button type="button" id="textSaveBtn" class="btn btn-primary">Speichern</button>
+                        <button type="button" id="textSaveBtn" class="btn btn-primary">{% trans "Save" %}</button>
                     </div>
                 </div>
             </div>
@@ -36,7 +38,7 @@
 
         </div>
 
-        <button type="button" id="addElementButton" class="btn btn-outline-primary mt-4 mb-3">Connect another profile</button>
+        <button type="button" id="addElementButton" class="btn btn-outline-primary mt-4 mb-3">{% trans "Connect another profile" %}</button>
 
         <div class="row">
             <div class="col-12">
@@ -50,7 +52,7 @@
                     <div class="card-body">
                         <div class="card border-0">
                                 <div class="card-body">
-                                    <h5>Background Image</h5>
+                                    <h5>{% trans "Background Image" %}</h5>
 
                                     <div class="d-flex">
                                         <div class="mt-4">
@@ -59,8 +61,8 @@
                                             </div>
                                         </div>
                                         <div class="align-self-center mx-3">
-                                            <button data-crate-image="create" type="button" class="btn btn-outline-primary btn-sm backgroundImage btnBgImageAdd">Add Image</button>
-                                            <button data-crate-image="delete" type="button" class="btn btn-outline-danger btn-sm backgroundImage btnBgImageRemove">Remove Image</button>     
+                                            <button data-crate-image="create" type="button" class="btn btn-outline-primary btn-sm backgroundImage btnBgImageAdd">{% trans "Add Image" %}</button>
+                                            <button data-crate-image="delete" type="button" class="btn btn-outline-danger btn-sm backgroundImage btnBgImageRemove">{% trans "Remove Image" %}</button>     
                                         </div>
                                     </div>
                                            
@@ -72,7 +74,7 @@
 
                                 <div class="wrapper-color">
                                     <div class="color-group">
-                                        <label class="label" id="colorTextLabel" for="">Title color</label>
+                                        <label class="label" id="colorTextLabel" for="">{% trans "Title color" %}</label>
                                         <div class="wrapper">
                                             <div class="color-input-wrapper">
                                                 <input type="color" id="colorTextTitel" name="colorPicker" class="color-input">
@@ -81,7 +83,7 @@
                                         </div>
                                     </div>
                                     <div class="color-group">
-                                        <label class="label" id="colorTextLabel" for="">Beschreibung color</label>
+                                        <label class="label" id="colorTextLabel" for="">{% trans "Description color" %}</label>
                                         <div class="wrapper">
                                             <div class="color-input-wrapper">
                                                 <input type="color" id="colorDescriptionTitel" name="colorPicker" class="color-input">
@@ -93,7 +95,7 @@
 
                                 <div class="wrapper-color mt-2">
                                     <div class="color-group">
-                                        <label class="label" id="colorButtonLabel" for="">Button color</label>
+                                        <label class="label" id="colorButtonLabel" for="">{% trans "Button color" %}</label>
                                         <div class="wrapper">
                                             <div class="color-input-wrapper">
                                                 <input type="color" id="colorButton" name="colorPicker" class="color-input">
@@ -102,7 +104,7 @@
                                         </div>
                                     </div>
                                     <div class="color-group">
-                                        <label class="label" id="colorButtonLabel" for="">Button Text color</label>
+                                        <label class="label" id="colorButtonLabel" for="">{% trans "Button Text color" %}</label>
                                         <div class="wrapper">
                                             <div class="color-input-wrapper">
                                                 <input type="color" id="colorButtonText" name="colorPicker" class="color-input">
@@ -111,7 +113,7 @@
                                         </div>
                                     </div>
                                     <div class="color-group">
-                                        <label class="label" id="colorButtonLabel" for="">Button Hover color</label>
+                                        <label class="label" id="colorButtonLabel" for="">{% trans "Button Hover color" %}</label>
                                         <div class="wrapper">
                                             <div class="color-input-wrapper">
                                                 <input type="color" id="colorButtonHover" name="colorPicker" class="color-input">
@@ -120,7 +122,7 @@
                                         </div>
                                     </div>
                                     <div class="color-group">
-                                        <label class="label" id="colorButtonLabel" for="">Button Hover Text</label>
+                                        <label class="label" id="colorButtonLabel" for="">{% trans "Button Hover Text" %}</label>
                                         <div class="wrapper">
                                             <div class="color-input-wrapper">
                                                 <input type="color" id="colorButtonHoverText" name="colorPicker" class="color-input">
@@ -132,7 +134,7 @@
 
                                 <div class="wrapper-color mt-3">
                                     <div class="color-group">
-                                        <label class="label" id="colorButtonLabel" for="">Icon color</label>
+                                        <label class="label" id="colorButtonLabel" for="">{% trans "Icon color" %}</label>
                                         <div class="wrapper">
                                             <div class="color-input-wrapper">
                                                 <input type="color" id="colorIcon" name="colorPicker" class="color-input">
@@ -141,7 +143,7 @@
                                         </div>
                                     </div>
                                     <div class="color-group">
-                                        <label class="label" id="colorButtonLabel" for="">Icon color Hover</label>
+                                        <label class="label" id="colorButtonLabel" for="">{% trans "Icon color Hover" %}</label>
                                         <div class="wrapper">
                                             <div class="color-input-wrapper">
                                                 <input type="color" id="colorIconHover" name="colorPicker" class="color-input">

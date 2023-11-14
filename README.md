@@ -32,6 +32,11 @@ python manage.py startapp linkinbio
 # Domain 
 python manage.py startapp domain
 
+# Recommendation
+python3 manage.py startapp recommendation
+
+# QR-Code
+    Neues Module
 
 # Campaign
 https://support.bitly.com/hc/en-us/articles/115001195167
@@ -96,6 +101,9 @@ python -m smtpd -n -c DebuggingServer localhost:1025
 ben@mail.de
 &2NNe%qy^vIjtjy6 
 
+ben@web05.com
+&2NNe%qy^vIjtjy6
+
 1ben@web.de
 &2NNe%qy^vIjtjy6
 
@@ -124,18 +132,8 @@ TqXRm5ikowzmYtZVyCMC
     - clicks Device
 
 
-- Cookie Banner
-    - Cookie Banner für normale Seiten Desing erstellt. --erleding
-    - Definition der Cookie-Einstellungen --erleding
-        Notwendige Cookies erleding
-        Analyse-Cookies erleding
-        Marketing-Cookies erleding
-
-- Cookie Model 
-    Speichern nach User das Jeder User sein Cookie einstellung erstellen kann.
-
-    -  Cookie-Präferenzen speichern
-        Banner Cookie-Typen sie akzeptieren oder ablehnen möchten
+- Cookie Banner DSGVO
+    - Cookie Banner für LinkInBio Page
 
     - Abrufen von JavaScript-Dateien serverseitig oder normal
         Facebook Script
@@ -145,55 +143,67 @@ TqXRm5ikowzmYtZVyCMC
     - Design und Funktion
         Normales Banner zum auswälen welche daten man speichern kann.
 
-    - @ToDo Link in Bio
-        * Link in Bio Module erleding
-            - user
-            - Links erstellen und verbinden erledigt
-            - Link liste anzeigen und sortieren erledigt
-            - sozialen Crate und View erledigt
-                Facebook
-                Instagram
-                YouTube
-                Vimeo
-                Xing
-                LinkedIn
-                Pinterest
-                Twitter
-                Twitch
-                TikTok
-                Reddit
-                Tumblr
-                Snapchat
-                Discord
-            - sozialen löschen --erledigt
-            - Image Profile --erledigt
-            - Image Hinteregund --erledigt
-            - Titel --erledigt
-            - Beschreibung --erledigt
-
-        + links
-            - Name link --erledigt
-            - selection links --erledigt
-            - Datum wie lange Verfühgbar
-
         + Crate neuen link
             - Datum wie lange Verfügbar
 
         + Style
-            color --erledigt
             font 
-        - LinkInBio mit Shorcode Vergnüpfen
-
+        
 
 - Qr-Code Pages Crator
-- limitation, Android Targeting, Ios Targeting BETA Version GEO Targeting
-- Menü Shorcode
+- limitation, 
+- Android Targeting
+- Ios Targeting BETA 
+- Version GEO Targeting
+- Eigene Domain kaufen für Branding
 - Verwaltung von Abonnements Abmelden
 - Add Youtube Video Iframe
 - Podcast Irame
-- Fonts * adjustmentFonts.js 
+- Gefärdete Domains Abfrage und Sperrung
+- Kampannien Manger
+- Fonts * adjustmentFonts.js
+- Zahlungs Anbiter Paypal
+- Google Sheets Einbindung
 
 # BUG ERLEDIGT
+- @ToDo Link in Bio
+* Link in Bio Module erleding
+    - user
+    - Links erstellen und verbinden erledigt
+    - Link liste anzeigen und sortieren erledigt
+    - sozialen Crate und View erledigt
+        Facebook -
+        Instagram -
+        YouTube -
+        Vimeo -
+        Xing -
+        LinkedIn -
+        Pinterest -
+        Twitter -
+        Twitch -
+        TikTok -
+        Reddit -
+        Tumblr -
+        Snapchat -
+        Discord -
+    - sozialen löschen --erledigt
+    - Image Profile --erledigt
+    - Image Hinteregund --erledigt
+    - Titel --erledigt
+    - Beschreibung --erledigt
++ links
+    - Name link --erledigt
+    - selection links --erledigt
+
++ Style
+    color --erledigt
+- LinkInBio mit Shorcode Vergnüpfen --erleding
+- Live einrichten --erleding
+    - Preise hinterlegen --erleding
+    - Soziale Media Hinterlgen Icons --erledigt
+    - E-Mail Testen Empfelungs User --erleding
+    - LinkInBio Seite erstellen --erleding
+- Formular für weiterempelung --erledigt
 - Übersezung Crate Shortcode Erfolgsmeldeung Website erreichbar --erleding
 - Produkt seite Button Style Tauschen --erleding
 - Stripe URL und Stipe englisch anpassen --erleding
@@ -236,15 +246,11 @@ TqXRm5ikowzmYtZVyCMC
 - Crate and titel, description !erledingt
 - Add Social media and Remove Social media * adjustmentSocial.js --> !erledingt
 - Color Button * adjustmentColor.js !erldeigt
-
-- Stripe Verkaufsseiten 1 Preis und keine Monadliche Zahlung maximal 90 Euro im Jahr.
-- @https://stripe.com/docs/checkout/quickstart
-- Payment Intigrieren 
-Stipe einbinden und alle Formular bereistellen. !erldeigt
-Frontend-Anpassungen !erldeigt
-Stripe-Zahlungsverarbeitung !erldeigt
-Erstellen Sie Abonnements !erldeigt
-Benutzerprofil aktualisieren !erldeigt
+- Stipe einbinden und alle Formular bereistellen. !erldeigt
+- Frontend-Anpassungen !erldeigt
+- Stripe-Zahlungsverarbeitung !erldeigt
+- Erstellen Sie Abonnements !erldeigt
+- Benutzerprofil aktualisieren !erldeigt
 - Neues Module Pages
 - Update Anpassungen Header !erledigt
 - Update Header Menü erstellen !erledigt --> https://codingyaar.com/bootstrap-navbar-button-right/
@@ -253,7 +259,6 @@ Benutzerprofil aktualisieren !erldeigt
 - Hero Pages !erledigt
 - Marketing Section Pages !erledigt
 - Django's Flatpages App !erldeigt
-    
 - Home Page und Pages HTML, css zusammen fühgen !erleding
 - Menus auf Home seite einbinden !erleding
 - Bilder Verkleinern auf Home !erleding
@@ -265,9 +270,6 @@ Benutzerprofil aktualisieren !erldeigt
 
 # Google Sheets
 - https://pypi.org/project/django-gsheets/
-
-# QR-Code
-    Neues Module
 
 # Neue Ideen
 - IP Gefärliche IP Sicherung einbauen --> https://chat.openai.com/c/f6d2978c-6cb7-44ba-9c1b-918ee67a37b0
@@ -324,6 +326,8 @@ https://saasmantra.com/partners
 # APIs
 https://www.geonames.org/export/web-services.html
 https://urlhaus.abuse.ch/api/#submit
+https://developer.godaddy.com/doc
+
 
 #  Google Suche
 https://www.google.com/search?q=kurzlinks+erstellen&sca_esv=561558033&sxsrf=AB5stBhFKA56I66QGdIKmpFzQw_tkpVo2w:1693472575130&ei=P1fwZPq2B4eFxc8P3tGB8Aw&start=0&sa=N&ved=2ahUKEwi60pv6xIaBAxWHQvEDHd5oAM44ChDy0wN6BAgKEAQ&biw=2216&bih=1125&dpr=2
@@ -341,20 +345,6 @@ https://apalfrey.github.io/select2-bootstrap-5-theme/examples/single-select/
 # Coding Guidelines
 
 
-# Produkt Anlegen
-
-- Short Free
-    - Nichts eintragen 
-    - auch keine IDs
-
-- Short Month
-    - price_1O6ZIkFJc5Umrifwi3hxGJ74
-    - checkout-button-subscription
-
-- Short
-    - checkout-button
-
-
 # Live Server
 
     git status
@@ -367,12 +357,7 @@ https://apalfrey.github.io/select2-bootstrap-5-theme/examples/single-select/
     python3 manage.py migrate
     python3 manage.py collectstatic
 
-
-
     sudo ls -l /etc/postgresql/11/second
-
-
-
 
     sudo systemctl daemon-reload
     sudo systemctl restart gunicorn

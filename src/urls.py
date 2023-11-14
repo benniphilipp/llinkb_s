@@ -30,6 +30,7 @@ urlpatterns += i18n_patterns(
     path('products/', include('products.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
     path('domain/', include('domain.urls')),
+    path('recommendation/', include('recommendation.urls')),
     path('', include('accounts.urls')),
     url(r'^(?P<shortcode>[\w-]+)/$', URLRedirectView.as_view(), name='scode'), 
 )
