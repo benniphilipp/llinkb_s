@@ -2,8 +2,9 @@
 {% load static %}
 {% load i18n %}
 
-<!--Css-->
+<!--CSS-->
 {% block css %}
+<link rel="stylesheet" type="text/css" href="{% static '/css/domainStyle.css' %}">
 {% endblock %}
 
 <!--Body-->
@@ -22,18 +23,122 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="d-flex flex-row align-items-center">
-                            <h3 class="p-1" style="margin-top: 10px;">Domains</h3>
-                            <div class="p-1 ms-auto">
+                            <h3 class="p-1" style="margin-top: 10px;">{% trans "Domains" %}</h3>
+                            <!-- <div class="p-1 ms-auto">
                                 <button class="btn btn-primary mt-1" type="button">{% trans "Crate Domain" %}</button>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
-                <div class="row mt-5">
-                    <div class="col-12">
-                        <div id="domainContainer"></div>
+
+
+                <div class="row">
+
+                    <div class="col-xl-8 col-md-12 col-12 mt-3">
+                        <div class="card border-0 shadow-sm p-2 mb-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 col-md-9">
+                                        <input type="password" class="form-control" id="inputPassword2" placeholder='{% trans "Search your domain" %}'>
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <div class="d-flex justify-content-end">
+                                            <button style="width:100%;" type="button" class="btn btn-primary btn-block">{% trans "Search Domain" %}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="domainContainer" class="">
+                            <div class="card border-0 shadow-sm p-2">
+                                <div class="card-body">
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="domain-div d-flex flex-column">
+                                            <span class="premium">PREMIUM</span>
+                                            <span class="domain">Domain</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="domain-price d-flex flex-column">
+                                                <span class="price">16,00 Euro</span>
+                                                <span class="time">for first year</span>
+                                            </div>
+                                            <div class="domain-shop d-flex align-items-center">
+                                                <i class="fa-solid fa-cart-plus"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+
+                    <div class="col-xl-4 col-md-12 col-12 mt-3">
+                        <div class="card border-0 shadow-sm p-2">
+                            <div class="card-header bg-white">
+                                <h5>{% trans 'Your Shopping Cart' %}</h5>
+                            </div>
+                            <div class="card-body">
+
+
+                                <div class="shopping-card d-flex w-100">
+                                    <div class="domain-icon d-flex align-items-center">
+                                        <i class="fa-solid fa-globe"></i>
+                                    </div>
+                                    <div class="domain-card d-flex flex-column w-100 mx-3">
+                                        <span><h5>testmart.at</h5></span>
+                                        <span><small>.AT Domain Registration</small></span>
+                                        <span><small>1 Year</small></span>
+                                        <div class="price d-flex justify-content-between w-100 align-items-center">
+                                            <small>Renews November 2024 for</small>
+                                            <span class="price_normal">€16.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid gap-2 mt-3 chackout-btn">
+                                    <a href="{% url 'domain:checkout_list' %}" class="btn btn-primary btn-lg d-flex align-self-center" type="button">
+                                        <span class="flex-grow-1">Looks Good, Keep Going</span>
+                                        <i class="fa-solid fa-arrow-right mr-auto align-self-center"></i>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
+
+                <!--
+                    Domain Siedbar:
+                    Die Domain wird ausgwählt gleich Zeitig wird der Preis geholt und noch mal gepüft ob man die Domain Kaufen kann.
+                    Dann wird die Abfrage gemacht und Zum verkauf weitergelitet.
+
+                    Rechtlichen Vereinbarung
+                    https://api.ote-godaddy.com/v1/domains/agreements?tlds=string&privacy=false
+
+                    Preis Abfrage
+                    https://api.ote-godaddy.com/v1/domains/available?domain=ben.com&checkType=FAST&forTransfer=false
+
+                    
+                    Stripe Kauf abwicklung
+                    
+
+                    Kauf und eintag bei Server
+                    https://api.ote-godaddy.com/v1/domains/purchase
+
+
+                        <div class="d-flex align-items-center flex-column">
+                            <img id="waitImage" style="width:50px" class="mt-3" src="{% static '/gif/load-38_256.gif' %}">
+                            <h4 id="domainText">Please be patient for a moment as we are currently looking for a domain for you.</h4>
+                        </div>
+
+                -->
+
             </div>
         </div>
 
@@ -43,7 +148,7 @@
 
 <!--Javasript-->
 {% block javasript %}
-<script defer src="{% static '/js/domainJs.bundle.js' %}"></script>
+<!-- <script defer src="{% static '/js/domainJs.bundle.js' %}"></script> -->
 
 
 {% endblock %}

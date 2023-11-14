@@ -13,6 +13,7 @@ module.exports = {
       styles: './assets/css/main.scss',
       stylesshort: './assets/css/shortcode.scss',
       customLinkinbio: './assets/css/linkinbio.scss',
+      domainStyle: './assets/css/domain.scss',
     },
     output: {
       filename: '[name].bundle.js',
