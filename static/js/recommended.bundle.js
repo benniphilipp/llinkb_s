@@ -8,6 +8,7 @@
  */
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
+
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./assets/js/linkinbio/module/getCookie.js":
@@ -101,6 +102,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = __webpack_require__("./assets/js/recommended/recommended.js");
+
 /******/ 	
 /******/ })()
 ;

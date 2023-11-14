@@ -121,6 +121,9 @@ TqXRm5ikowzmYtZVyCMC
     git push origin 
 
 
+- git push --set-upstream origin domain
+
+
 - Analytics Dahboard Anpssen 
     - Clicks nach Buttton Label
     - Clicks Country 
