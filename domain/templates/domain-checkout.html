@@ -9,6 +9,9 @@
 
 <!--Body-->
 {% block body %}
+
+    <script src="https://js.stripe.com/v3/"></script>   
+
     <!--Sidebar-->
     {% include "includes/sidebar.html" %}
 
@@ -52,7 +55,7 @@
                             </div>
 
 
-                            <form id="contact-form" class="p-3 mt-3 mb-0">
+                            <!-- <form id="contact-form" class="p-3 mt-3 mb-0">
                                 <div class="row mb-3">
                                     <div class="col-12 col-md-12">
                                         <label for="exampleemail_name" class="form-label">{% trans "Email Adress" %}</label>
@@ -92,7 +95,7 @@
                                     <span class="legal">{% trans "Legal Agreements" %}</span>
                                 </div>
                                 
-                              </form>
+                              </form> -->
 
                         </div>
                     </div>
@@ -103,7 +106,21 @@
                             Order
                         </div>
                         <div class="card-body">
-                            FORM
+                            
+                                <!-- Display a payment form -->
+                                <form id="payment-form">
+                                    <div id="payment-element">
+                                    <!--Stripe.js injects the Payment Element-->
+                                    </div>
+                                    <div class="d-grid mx-auto">
+                                        <button class="btn btn-primary mt-3 btn-lg" id="submit">
+                                            <div class="spinner hidden" id="spinner"></div>
+                                            <span id="button-text">Pay now</span>
+                                        </button>
+                                    </div>
+                                    <div id="payment-message" class="hidden"></div>
+                                </form>
+
                         </div>
                     </div>
                 </div>
@@ -112,8 +129,19 @@
 
 
     </div>
+
+
+    <input type="hidden" id="DomainCheckoutView" value="{% url 'domain:checkout_list' %}">
+
+    <script>
+        var clientSecret = Stripe("{{ publishable_key }}");
+    </script>
+
 {% endblock body %}
 
 <!--Javasript-->
 {% block javasript %}
+
+<script defer src="{% static '/js/stripe.js' %}"></script>
+
 {% endblock %}

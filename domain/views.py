@@ -6,8 +6,13 @@ from django.http import HttpRequest
 from django.http.response import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-# PW
-from django.contrib.auth.hashers import make_password
+# Stripe
+import stripe
+from django.conf import settings
+
+STRIPE_SECRET_KEY = settings.STRIPE_SECRET_KEY
+STRIPE_PUBLISHABLE_KEY = settings.STRIPE_PUBLISHABLE_KEY
+stripe.api_key = STRIPE_SECRET_KEY
 
 # import Models
 from domain.models import Domain
@@ -15,12 +20,51 @@ from shortcode.models import ShortcodeClass
 
 # https://stripe.com/docs/payments/quickstart
 
+
+def calculate_order_amount(items):
+    # Implementiere diese Funktion entsprechend deiner Logik zur Berechnung des Bestellbetrags
+    # Hier wird angenommen, dass 'items' eine Liste von Produkten mit Preisen ist
+    # Du könntest beispielsweise die Preise aller Produkte in der Liste summieren
+    item = 1111
+    return item # sum(item['price'] for item in items)
+
+
+        
+
 class DomainCheckoutView(View):
     template_name = 'domain-checkout.html'
     
-    def get(self, request):
-        return render(request, self.template_name)
+    def post(self, request):
+        try:
+            data = json.loads(request.body)
+            
+            # Erstelle eine PaymentIntent mit dem Bestellbetrag und der Währung
+            intent = stripe.PaymentIntent.create(
+                amount= 1111, #calculate_order_amount(data['items']),
+                currency='eur',
+                automatic_payment_methods={
+                    'enabled': True,
+                },
+            )
+            
+            context = {'clientSecret': intent.client_secret}
+            return JsonResponse(context)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=403)
+
     
+    def get(self, request):
+        context = {
+            'publishable_key': STRIPE_PUBLISHABLE_KEY,
+        }
+        return render(request, self.template_name, context)
+    
+
+
+
+
+
+
 
 class DomainListCrateView(View, LoginRequiredMixin):
     template_name = 'domain-view.html'
@@ -57,7 +101,7 @@ class DomainListCrateView(View, LoginRequiredMixin):
             'Authorization': f'sso-key {self.api_key}:{self.api_secret}'
             }
             response = requests.get(self.api_endpoint, headers=headers)
-            print(response.text)
+            # print(response.text)
             if response.status_code == 200:
                 data = response.json()
                 
