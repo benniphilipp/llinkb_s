@@ -4,6 +4,7 @@
 
 <!--CSS-->
 {% block css %}
+<link rel="stylesheet" href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"/>
 <link rel="stylesheet" type="text/css" href="{% static '/css/domainStyle.css' %}">
 {% endblock %}
 
@@ -24,9 +25,6 @@
                     <div class="col-12">
                         <div class="d-flex flex-row align-items-center">
                             <h3 class="p-1" style="margin-top: 10px;">{% trans "Domains" %}</h3>
-                            <!-- <div class="p-1 ms-auto">
-                                <button class="btn btn-primary mt-1" type="button">{% trans "Crate Domain" %}</button>
-                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -39,11 +37,22 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12 col-md-9">
-                                        <input type="password" class="form-control" id="inputPassword2" placeholder='{% trans "Search your domain" %}'>
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <input type="text" class="form-control form-control-lg" id="SearchValue" placeholder='{% trans "Search your domain name" %}'>
+                                            </div>
+                                            
+                                            <div class="col-3">
+                                                <div id="autocomplete" class="autocomplete">
+                                                    <input class="autocomplete-input" id="tls" placeholder="com" />
+                                                    <ul class="autocomplete-result-list"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-12 col-md-3">
                                         <div class="d-flex justify-content-end">
-                                            <button style="width:100%;" type="button" class="btn btn-primary btn-block">{% trans "Search Domain" %}</button>
+                                            <button id="SerachDomain" style="width:100%;" type="button" class="btn btn-primary btn-block btn-lg">{% trans "Search Domain" %}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -144,11 +153,16 @@
 
 
     </div>
+
+    <input type="hidden" id="SearchDomainView" value="{% url 'domain:doamin_search' %}">
+
+
 {% endblock body %}
 
 <!--Javasript-->
 {% block javasript %}
-<!-- <script defer src="{% static '/js/domainJs.bundle.js' %}"></script> -->
 
+<script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+<script defer src="{% static '/js/domainJs.bundle.js' %}"></script>
 
 {% endblock %}

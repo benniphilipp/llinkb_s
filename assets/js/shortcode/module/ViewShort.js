@@ -131,6 +131,7 @@ class ViewShort{
         }, 2000);
     }
 
+    
     // Url Accessibility
     ShortcodeUrlAccessibility(){
         const UrlDestination = document.querySelector('#id_url_destination').value;

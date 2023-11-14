@@ -115,6 +115,10 @@ TqXRm5ikowzmYtZVyCMC
 
 - git push --set-upstream origin domain
 
+- Domain 
+    - Freie Suche mit Vorschlägen
+    - Auf Wunschliste
+    - Domain Vorauswahl Auswahl
 
 - Analytics Dahboard Anpssen 
     - Clicks nach Buttton Label

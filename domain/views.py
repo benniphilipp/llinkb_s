@@ -1,6 +1,9 @@
-from django.shortcuts import render
+
 import json
 import requests
+from urllib.parse import unquote
+
+from django.shortcuts import render
 from django.views import View
 from django.http import HttpRequest
 from django.http.response import JsonResponse
@@ -14,9 +17,74 @@ STRIPE_SECRET_KEY = settings.STRIPE_SECRET_KEY
 STRIPE_PUBLISHABLE_KEY = settings.STRIPE_PUBLISHABLE_KEY
 stripe.api_key = STRIPE_SECRET_KEY
 
+# Domain 
+GODADDY_API_KEY = settings.GODADDY_API_KEY
+GODADDY_API_SECRET = settings.GODADDY_API_SECRET
+GODADDY_URL = settings.GODADDY_URL
+
 # import Models
 from domain.models import Domain
 from shortcode.models import ShortcodeClass
+
+
+# example.guru
+
+# Search Domain
+class SearchDomainView(View):
+    def post(self, request):
+        search = request.POST.get('url', '')
+        lts = request.POST.get('lts', '')
+        
+        if search and lts:
+            
+            api_endpoint = f'{GODADDY_URL}/v1/domains/available?domain={search}.{lts}&checkType=FAST&forTransfer=false'
+            
+            headers = {
+                'Authorization': f'sso-key {GODADDY_API_KEY}:{GODADDY_API_SECRET}'
+            }
+            
+            # # Führe die API-Anfrage durch
+            response = requests.get(api_endpoint, headers=headers)
+            if response.status_code == 200:
+                data = response.json()
+                return JsonResponse(data, safe=False)
+            else:
+                return JsonResponse({'error': 'Fehler beim Abrufen der Domains'}, status=500)
+        
+        else:
+            # Falls search oder lts fehlen, gib die unterstützten TLDs zurück
+            api_endpoint = f'{GODADDY_URL}/v1/domains/tlds'
+            headers = {
+                'Authorization': f'sso-key {GODADDY_API_KEY}:{GODADDY_API_SECRET}'
+            }
+            response = requests.get(api_endpoint, headers=headers)
+
+            if response.status_code == 200:
+                data = response.json()
+                return JsonResponse(data, safe=False)
+            else:
+                return JsonResponse({'error': 'Fehler beim Abrufen der unterstützten TLDs'}, status=500)
+
+
+        
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # https://stripe.com/docs/payments/quickstart
 
@@ -69,7 +137,7 @@ class DomainCheckoutView(View):
 class DomainListCrateView(View, LoginRequiredMixin):
     template_name = 'domain-view.html'
 
-    api_endpoint = 'https://api.ote-godaddy.com/v1/domains/available?domain=example.guru'
+    api_endpoint = GODADDY_URL + '/v1/domains/available?domain=example.guru'
     api_key = '3mM44UdBKEgt73_NDqvf1eNz5WvnLSxWSd4Ky'
     api_secret = 'YKg1ZA3pfu9TYtxaWXSxt9'
     

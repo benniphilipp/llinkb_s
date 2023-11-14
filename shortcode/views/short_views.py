@@ -30,7 +30,6 @@ from analytics.models import ClickEvent, DailyClick, IPGeolocation
 from linkinbio.models import LinkInBio
 
 
-
 #Shorctcode Crate
 class ShortcodeListeCreateView(View, LoginRequiredMixin):
     template_name = 'shortcode-view.html'
