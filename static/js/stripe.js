@@ -1,40 +1,52 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Die Seite ist geladen!');
 
-
+  function stipeChackOut(){
     const getCookie =(name) => {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    const csrftoken = getCookie('csrftoken');
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+  const csrftoken = getCookie('csrftoken');
 
+
+     
     // This is your test publishable API key.
-const stripe = Stripe("pk_test_51IsiJyFJc5UmrifwduovCZUK4RtJUMVxlwvpdUBkdY3FPvMbvJxKbPEltPxUVTJBZZlnexWOrtSe1Cl4QR4wyj8I00WxFYVMCP");
+    const stripe = clientSecretEnv;
 
-// The items the customer wants to buy
-const items = [{ id: "xl-tshirt" }];
+    const DomainSuccess = document.querySelector('#DomainSuccess').value;
+   
+    const meinElement = document.getElementById('dataShoppingId');
+    const dateValue = meinElement.getAttribute('data-shopping-id');
 
-const DataUrl = document.querySelector('#DomainCheckoutView');
+    const userEmailElement = document.getElementById('userEmail');
+    const emailAddress = userEmailElement.getAttribute('data-user-email');
 
-let elements;
+    const urlElement = document.getElementById('UrlData');
+    const url = urlElement.getAttribute('data-url');
 
-initialize();
-checkStatus();
+    // The items the customer wants to buy
+    const items = [{ id: dateValue }];
 
-document
-  .querySelector("#payment-form")
-  .addEventListener("submit", handleSubmit);
+    const DataUrl = document.querySelector('#DomainCheckoutView');
+
+    let elements;
+
+    initialize();
+    checkStatus();
+
+    document
+      .querySelector("#payment-form")
+      .addEventListener("submit", handleSubmit);
 
 // Fetches a payment intent and captures the client secret
 async function initialize() {
@@ -62,10 +74,9 @@ async function initialize() {
         layout: "tabs",
     };
 
-
     const paymentElement = elements.create("payment", paymentElementOptions);
         paymentElement.mount("#payment-element");
-    }
+}
 
 
 
@@ -76,17 +87,11 @@ async function handleSubmit(e) {
   const { error } = await stripe.confirmPayment({
     elements,
     confirmParams: {
-      // Make sure to change this to your payment completion page
-      return_url: "http://localhost:4242/checkout.html",
+      return_url: url, //'http://127.0.0.1:8000/en/domain/success/',
       receipt_email: emailAddress,
     },
   });
 
-  // This point will only be reached if there is an immediate error when
-  // confirming the payment. Otherwise, your customer will be redirected to
-  // your `return_url`. For some payment methods like iDEAL, your customer will
-  // be redirected to an intermediate site first to authorize the payment, then
-  // redirected to the `return_url`.
   if (error.type === "card_error" || error.type === "validation_error") {
     showMessage(error.message);
   } else {
@@ -151,5 +156,15 @@ function setLoading(isLoading) {
     document.querySelector("#button-text").classList.remove("hidden");
   }
 }
+
+} // Function end
+
+const DomainSuccess = document.querySelector('#DomainSuccess');
+if(DomainSuccess){
+  setTimeout(() => {
+    stipeChackOut();
+  }, 1000)
+}
+
 
 })

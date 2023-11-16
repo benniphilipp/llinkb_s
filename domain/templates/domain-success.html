@@ -1,0 +1,48 @@
+{% load static %}
+{% load custom_tags %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block css %}
+{% endblock %}
+
+{% block body %}
+
+Erfolg!
+
+
+{% endblock body %}
+
+{% block javasript %}
+
+<script>
+
+    function checkPaymentStatus(maxAttempts) {
+        $.ajax({
+            url: '/check-payment-status/',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                if (data.paymentStatus === 'success') {
+                    console.log('Zahlung erfolgreich verarbeitet:', data);
+                    // Führen Sie hier die weiteren Aktionen im Frontend durch
+                } else if (data.paymentStatus === 'pending' && maxAttempts > 0) {
+                    setTimeout(function() {
+                        checkPaymentStatus(maxAttempts - 1);
+                    }, 1000);
+                } else {
+                    console.error('Fehler bei der Zahlungsverarbeitung oder maximale Versuche erreicht');
+                }
+            },
+            error: function(error) {
+                console.error('Fehler beim Abrufen der Daten:', error);
+            }
+        });
+    }
+    
+    // Rufen Sie die Funktion zum Überprüfen des Zahlungsstatus auf
+    checkPaymentStatus(10);
+
+</script>
+
+{% endblock %}

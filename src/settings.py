@@ -19,6 +19,36 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'all_logs.log'),  # Überprüfen Sie den Dateinamen hier
+            'formatter': 'verbose',
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+    },
+}
+
+
+
+
+
+
 ENVIRONMENT = env('ENVIRONMENT')
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
@@ -213,9 +243,9 @@ if ENVIRONMENT == 'local':
     EMAIL_PORT = 1025 
     EMAIL_USE_TLS = False
     EMAIL_USE_SSL = False
-
-
-## Produktions 
+    
+    
+# Produktions 
 if ENVIRONMENT == 'production':
     
     ALLOWED_HOSTS = ['llinkb.com', 'www.llinkb.com', 'localhost']

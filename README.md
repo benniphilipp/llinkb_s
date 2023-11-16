@@ -113,7 +113,7 @@ TqXRm5ikowzmYtZVyCMC
     git push origin 
 
 
-- git push --set-upstream origin domain
+- git push origin domain
 
 - Domain 
     - Freie Suche mit Vorschlägen
@@ -391,3 +391,11 @@ https://apalfrey.github.io/select2-bootstrap-5-theme/examples/single-select/
 
     Server neu Starten
     sudo reboot
+
+
+
+# https://reseller.godaddy.com/docs
+# GODADDY_API_KEY='3mM44UdBKEiu54_CkNZ8mtNUf32Cw4Q3Rnrez'
+# GODADDY_API_SECRET='8zd3VopKU7BBrxEogDj56L'
+# Key UzQxLikn_B6N4aNAciZV7smWHj2d1WC
+# Secret B6N7swL5PzVCXKeh2VQyMn

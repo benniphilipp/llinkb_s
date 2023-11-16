@@ -569,7 +569,7 @@ class LinkinbiolinkDeleteView(LoginRequiredMixin, View):
     def delete(self, request, pk):
         try:
             link = LinkInBio.objects.get(pk=pk)
-            print('run')
+            # print('run')
             link.delete()
                 
             return JsonResponse({'message': _('Record deleted successfully')})

@@ -35,75 +35,23 @@
             <div class="row mt-3 px-4">
                 <div class="col-lg-6 col-md-12 col-12">
                     <div class="card border-0 shadow-sm p-2">
-                        <div class="card-header bg-white">
-                            Your Cart
+                        <div class="card-header bg-white mx-2">
+                            <h5>Your Cart</h5>
                         </div>
-                        <div class="card-body">
-                            <div class="shopping-card d-flex w-100">
-                                <div class="domain-icon d-flex align-items-center">
-                                    <i class="fa-solid fa-globe"></i>
-                                </div>
-                                <div class="domain-card d-flex flex-column w-100 mx-3">
-                                    <span><h5>testmart.at</h5></span>
-                                    <span><small>.AT Domain Registration</small></span>
-                                    <span><small>1 Year</small></span>
-                                    <div class="price d-flex justify-content-between w-100 align-items-center">
-                                        <small>Renews November 2024 for</small>
-                                        <span class="price_normal">€16.99</span>
-                                    </div>
-                                </div>
+                        <div class="card-body pt-0">
+                            <div id="shoppingCardValues"></div>
+
+                            <div id="priceCalculate" class="mt-4">
+
                             </div>
-
-
-                            <!-- <form id="contact-form" class="p-3 mt-3 mb-0">
-                                <div class="row mb-3">
-                                    <div class="col-12 col-md-12">
-                                        <label for="exampleemail_name" class="form-label">{% trans "Email Adress" %}</label>
-                                        <input type="text" class="form-control" id="email_name">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-12 col-md-6">
-                                        <label for="examplefirst_name" class="form-label">{% trans "First Name" %}</label>
-                                        <input type="text" class="form-control" id="first_name">
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <label for="examplelast_name" class="form-label">{% trans "Last Name" %}</label>
-                                        <input type="text" class="form-control" id="last_name">
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <div class="col-12">
-                                        <label for="exampleadress" class="form-label">{% trans "Adress" %}</label>
-                                        <input type="text" class="form-control" id="adress">
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <div class="col-12 col-md-6">
-                                        <label for="examplezip" class="form-label">{% trans "Zip code" %}</label>
-                                        <input type="text" class="form-control" id="zip">
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <label for="examplecity" class="form-label">{% trans "City" %}</label>
-                                        <input type="text" class="form-control" id="city">
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">{% trans "Send" %}</button>
-                                <div class="mt-3">
-                                    <span class="legal">{% trans "Legal Agreements" %}</span>
-                                </div>
-                                
-                              </form> -->
 
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-12">
                     <div class="card border-0 shadow-sm p-2">
-                        <div class="card-header bg-white">
-                            Order
+                        <div class="card-header bg-white mx-2">
+                            <h5>Order</h5>
                         </div>
                         <div class="card-body">
                             
@@ -132,9 +80,10 @@
 
 
     <input type="hidden" id="DomainCheckoutView" value="{% url 'domain:checkout_list' %}">
+    <input type="hidden" id="DomainSuccess" value="{% url 'domain:checkout_success' %}">
 
     <script>
-        var clientSecret = Stripe("{{ publishable_key }}");
+        var clientSecretEnv = Stripe("{{ publishable_key }}");
     </script>
 
 {% endblock body %}
@@ -142,6 +91,7 @@
 <!--Javasript-->
 {% block javasript %}
 
+<script defer src="{% static '/js/domainJs.bundle.js' %}"></script>
 <script defer src="{% static '/js/stripe.js' %}"></script>
 
 {% endblock %}

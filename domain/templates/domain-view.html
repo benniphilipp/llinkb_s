@@ -59,28 +59,8 @@
                             </div>
                         </div>
 
-                        <div id="domainContainer" class="">
-                            <div class="card border-0 shadow-sm p-2">
-                                <div class="card-body">
+                        <div id="domainContainer">
 
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="domain-div d-flex flex-column">
-                                            <span class="premium">PREMIUM</span>
-                                            <span class="domain">Domain</span>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="domain-price d-flex flex-column">
-                                                <span class="price">16,00 Euro</span>
-                                                <span class="time">for first year</span>
-                                            </div>
-                                            <div class="domain-shop d-flex align-items-center">
-                                                <i class="fa-solid fa-cart-plus"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
                         </div>
 
                     </div>
@@ -92,24 +72,28 @@
                             </div>
                             <div class="card-body">
 
+                                <div id="ShoppingTrash">
 
-                                <div class="shopping-card d-flex w-100">
-                                    <div class="domain-icon d-flex align-items-center">
-                                        <i class="fa-solid fa-globe"></i>
-                                    </div>
-                                    <div class="domain-card d-flex flex-column w-100 mx-3">
-                                        <span><h5>testmart.at</h5></span>
-                                        <span><small>.AT Domain Registration</small></span>
-                                        <span><small>1 Year</small></span>
-                                        <div class="price d-flex justify-content-between w-100 align-items-center">
-                                            <small>Renews November 2024 for</small>
-                                            <span class="price_normal">€16.99</span>
+                                    <div class="shopping-card d-flex w-100">
+                                        <div class="domain-icon d-flex align-items-center">
+                                            <i class="fa-solid fa-globe"></i>
+                                        </div>
+                                        <div class="domain-card d-flex flex-column w-100 mx-3">
+                                            <span><h5>testmart.at</h5></span>
+                                            <span><small>.AT Domain Registration</small></span>
+                                            <span><small>1 Year</small></span>
+                                            <div class="price d-flex justify-content-between w-100 align-items-center">
+                                                <small>Renews November 2024 for</small>
+                                                <span class="price_normal">€16.99</span>
+                                                <span><i class="fa-solid fa-trash-can trash-domain" data-trash-domain="1"></i></span>
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
 
                                 <div class="d-grid gap-2 mt-3 chackout-btn">
-                                    <a href="{% url 'domain:checkout_list' %}" class="btn btn-primary btn-lg d-flex align-self-center" type="button">
+                                    <a id="OpenShopping" href="{% url 'domain:checkout_list' %}" class="btn btn-primary btn-lg d-flex align-self-center" type="button">
                                         <span class="flex-grow-1">Looks Good, Keep Going</span>
                                         <i class="fa-solid fa-arrow-right mr-auto align-self-center"></i>
                                     </a>
@@ -154,7 +138,91 @@
 
     </div>
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleOpenShopping" tabindex="-1" aria-labelledby="exampleOpenShoppingLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleOpenShoppingLabel">{% trans "Check personal data" %}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="alert alert-danger" role="alert">
+                    {% trans "The password is incorrect" %}
+                </div>
+
+                <form id="contact-form" class="p-3 mt-3 mb-0">
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-12">
+                            <label for="exampleemail_name" class="form-label">{% trans "Email Adress" %}</label>
+                            <input type="text" class="form-control field-shop" id="email">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-6">
+                            <label for="examplefirstname" class="form-label">{% trans "First Name" %}</label>
+                            <input type="text" class="form-control field-shop" id="firstname">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="examplelastname" class="form-label">{% trans "Last Name" %}</label>
+                            <input type="text" class="form-control field-shop" id="lastname">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="exampleadress" class="form-label">{% trans "Adress" %}</label>
+                            <input type="text" class="form-control field-shop" id="address">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-6">
+                            <label for="examplezip" class="form-label">{% trans "Zip code" %}</label>
+                            <input type="text" class="form-control" id="zip_code">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="examplecity" class="form-label">{% trans "City" %}</label>
+                            <input type="text" class="form-control field-shop" id="city">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-12">
+                            <label for="examplePasswort" class="form-label" aria-describedby="passwortHelp">{% trans "Your current password" %}</label>
+                            <input type="password" name="password" class="form-control border border-primary field-shop" id="passwort">
+                            <div id="passwortHelp" class="form-text">Please confirm your data with your password.</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder='{% trans "Check sales tax" %}' aria-label='{% trans "Check sales tax" %}' aria-describedby="button-addon2">
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">{% trans "Check" %}</button>
+                        </div>
+                    </div>
+
+                    <!-- <div class="mt-3">
+                        <span class="legal">{% trans "Legal Agreements" %}</span>
+                    </div> disabled  -->
+                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button data-wishlist-id="" id="FormSubmit" type="submit" class="btn btn-primary">{% trans "Send" %}</button> 
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+
     <input type="hidden" id="SearchDomainView" value="{% url 'domain:doamin_search' %}">
+    <input type="hidden" id="AddWishlistView" value="{% url 'domain:add_wishlist' %}">
+    <input type="hidden" id="CrateSubaccountAndShoppingCard" value="{% url 'domain:check_user' %}">
 
 
 {% endblock body %}

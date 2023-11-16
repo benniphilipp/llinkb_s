@@ -40,6 +40,18 @@ $gray-ll: #f4f6fa;
     }
 }
 
+.NoShopping{
+    i{
+        padding: 0 2rem;
+        font-size: 2rem;
+        color:$icon-gray;
+        cursor: pointer;
+        &:hover{
+            color:$icon-gray;
+        }
+    }  
+}
+
 //Price Adress
 .shopping-card{
     h5{
@@ -59,6 +71,14 @@ $gray-ll: #f4f6fa;
     }
     small{
         color:$icon-gray;
+    }
+    .trash-domain{
+        font: 0.8rem;
+        cursor: pointer;
+        color:$icon-gray;
+        &:hover{
+            color:$primary-ll; 
+        }
     }
 }
 
